@@ -1,0 +1,30 @@
+CREATE TABLE GRADE
+  (
+    GRADE_ID   bigserial PRIMARY KEY,
+    RANGE INTEGER NOT NULL,
+    GRADE_VAL VARCHAR(255) NOT NULL
+  );
+CREATE TABLE EMPLOYEE
+  (
+    EMPLOYEE_ID  bigserial PRIMARY KEY,
+    FIRST_NAME   VARCHAR(255) NOT NULL UNIQUE,
+    MIDDLE_NAME  VARCHAR(255),
+    LAST_NAME    VARCHAR(255) NOT NULL,
+    SALARY   	 INTEGER NOT NULL,
+    GRADE        VARCHAR(255) NOT NULL
+  );
+
+
+GRANT INSERT ON EMPLOYEE TO POSTGRES;
+GRANT INSERT ON GRADE TO POSTGRES;
+
+
+GRANT USAGE ON SEQUENCE grade_grade_id_seq TO POSTGRES;
+GRANT USAGE ON SEQUENCE employee_employee_id_seq TO POSTGRES;
+
+
+INSERT INTO public.employee(employee_id, first_name, middle_name, last_name, salary, grade)
+	VALUES (nextval('course_course_id_seq', ?, ?, ?, ?, ?);
+
+-------------------------------------------------------------------------------------------
+GRANT ALL ON grtb.app_risk_profile TO 'root'@'localhost';
