@@ -60,11 +60,9 @@ public class ApplicationManager {
 		return applicationVO;
 	}
 	
-	public static ApplicationModel assignVo2ModelMapper(ApplicationVO applicationVO){
+	public static void assignVo2ModelMapper(ApplicationModel applicationModel, ApplicationVO applicationVO){
 
-		ApplicationModel applicationModel = new ApplicationModel();
-		
-		applicationModel.setAPP_ID(applicationVO.getAppId());
+		//applicationModel.setAPP_ID(applicationVO.getAppId());
 		applicationModel.setAPP_NAME(applicationVO.getAppName());
 		applicationModel.setAPP_CATEGORY(applicationVO.getAppCategory());
 		applicationModel.setSUPPORT_SCOPE(applicationVO.getSupportScope());
@@ -104,7 +102,6 @@ public class ApplicationManager {
 		applicationModel.setCOMP_VLNBLTS(applicationVO.getCompVlnblts());
 		applicationModel.setCONF_MGT_VLNBTY(applicationVO.getConfMgtVlnbty());
 		
-		return applicationModel;
 	}
 
 	private ApplicationVO calculateStabilityScores(ApplicationVO applicationVO){

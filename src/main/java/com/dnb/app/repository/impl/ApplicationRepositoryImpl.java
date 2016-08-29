@@ -36,7 +36,8 @@ public class ApplicationRepositoryImpl implements ApplicationRepository {
 
 	@Override
 	public void deleteApplication(ApplicationVO applicationVO) {
-		sessionFactory.getCurrentSession().delete(applicationVO);
+		ApplicationModel applicationModel = (ApplicationModel) sessionFactory.getCurrentSession().get(ApplicationModel.class, applicationVO.getAppId());
+		sessionFactory.getCurrentSession().delete(applicationModel);
 	}
 
 	@SuppressWarnings("unchecked")

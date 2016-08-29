@@ -26,7 +26,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Transactional
 	public void insertApplication(ApplicationVO applicationVO) throws ServiceException {
 
-		ApplicationModel applicationModel = ApplicationManager.assignVo2ModelMapper(applicationVO);
+		ApplicationModel applicationModel = new ApplicationModel();
+		applicationModel.setAPP_ID(applicationVO.getAppId());
+		ApplicationManager.assignVo2ModelMapper(applicationModel, applicationVO);
 		
 		try {
 			applicationRepository.insertApplication(applicationModel);
@@ -48,7 +50,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Transactional
 	public void updateApplication(ApplicationVO applicationVO) throws ServiceException {
 		ApplicationModel applicationModel = applicationRepository.selectApplication(applicationVO.getAppId());
-		applicationModel = ApplicationManager.assignVo2ModelMapper(applicationVO);
+		ApplicationManager.assignVo2ModelMapper(applicationModel, applicationVO);
 		
 		try {
 			applicationRepository.updateApplication(applicationModel);
@@ -94,6 +96,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public ApplicationVO scoreRecalculation(ApplicationVO applicationVO) throws ServiceException {
 
 		ApplicationFramework.infraScoreRecalculation(applicationVO);
+		ApplicationFramework.peopleScoreRecalculation(applicationVO);
+		ApplicationFramework.securityScoreRecalculation(applicationVO);
 		
 		return applicationVO;
 	}

@@ -62,7 +62,7 @@ public class ApplicationModel implements Serializable {
 	private String CONF_MGT_VLNBTY;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "APP_ID")
 	public Integer getAPP_ID() {
 		return APP_ID;

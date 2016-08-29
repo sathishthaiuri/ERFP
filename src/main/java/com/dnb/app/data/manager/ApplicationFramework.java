@@ -1,45 +1,36 @@
 package com.dnb.app.data.manager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.springframework.context.ApplicationContextAware;
 
 import com.dnb.app.vo.ApplicationVO;
 
 public class ApplicationFramework {
 
-	private static int infraPerformanceWeightage = 20;
-	private static int infraObsoleteInfraWeightage = 20;
-	private static int infraAvlbtOfDREnvWeightage =20;
-	private static int infraScalabilityIssuWeightage = 20;
-	private static int infraFrequencyInfraWeightage = 20;
-	
-	public static Map<String, Integer> infraPerformanceMap;
-	public static Map<String, Integer> infraObsoleteInfraMap;
-	public static Map<String, Integer> infraAvlbtOfDREnvMap;
-	public static Map<String, Integer> infraScalabilityIssuMap;
-	public static Map<String, Integer> infraFrequencyInfraMap;
-	public static Map<String, Integer> infraRiskValueRangeMap;
-	public static Map<String, String> infraRiskCategoryMap;
+	private static Map<String, Integer> infraPerformanceMap;
+	private static Map<String, Integer> infraObsoleteInfraMap;
+	private static Map<String, Integer> infraAvlbtOfDREnvMap;
+	private static Map<String, Integer> infraScalabilityIssuMap;
+	private static Map<String, Integer> infraFrequencyInfraMap;
+	private static Map<String, Integer> infraRiskValueRangeMap;
+	private static Map<String, String> infraRiskCategoryMap;
 	
 	/** -------------------------------- */
 	
-	public static Map<String, Integer> peopleSMEAvlbtMap;
-	public static Map<String, Integer> peopleVendorExpCTSMap;
-	public static Map<String, Integer> peopleVendorExpEnsonoMap;
-	public static Map<String, Integer> peopleAvlbtOfBizUsersMap;
-	public static Map<String, Integer> peopleRiskValueRangeMap;
-	public static Map<String, String> peopleRiskCategoryMap;
+	private static Map<String, Integer> peopleSMEAvlbtMap;
+	private static Map<String, Integer> peopleVendorExpCTSMap;
+	private static Map<String, Integer> peopleVendorExpEnsonoMap;
+	private static Map<String, Integer> peopleAvlbtOfBizUsersMap;
+	private static Map<String, Integer> peopleRiskValueRangeMap;
+	private static Map<String, String> peopleRiskCategoryMap;
 	
 	/** -------------------------------- */
 	
-	public static Map<String, Integer> secVlnbtyCodeMap;
-	public static Map<String, Integer> SecVlnbtyInfraMap;
-	public static Map<String, Integer> compVlnbltsMap;
-	public static Map<String, String> secRiskCategoryMap;
-	public static Map<String, Integer> secRiskValueRangeMap;
+	private static Map<String, Integer> secVlnbtyCodeMap;
+	private static Map<String, Integer> secVlnbtyInfraMap;
+	private static Map<String, Integer> secCompVlnbltsMap;
+	private static Map<String, Integer> secRiskValueRangeMap;
+	private static Map<String, String> secRiskCategoryMap;
 	
 	public void init() {
 		initializeInfraRiskScores();
@@ -117,11 +108,11 @@ public class ApplicationFramework {
 		
 		peopleVendorExpEnsonoMap.put("Yes", 0);
 		peopleVendorExpEnsonoMap.put("No", 10);
-		peopleVendorExpEnsonoMap.put("Weightage", 20);		
+		peopleVendorExpEnsonoMap.put("Weightage", 25);		
 
 		peopleAvlbtOfBizUsersMap.put("Yes", 0);
 		peopleAvlbtOfBizUsersMap.put("No", 10);
-		peopleAvlbtOfBizUsersMap.put("Weightage", 20);
+		peopleAvlbtOfBizUsersMap.put("Weightage", 25);
 		
 		peopleRiskValueRangeMap.put("Category-A-Min", 8);
 		peopleRiskValueRangeMap.put("Category-A-Max", 10);
@@ -144,8 +135,8 @@ public class ApplicationFramework {
 	private void initializeSecurityRiskScores() {
 		
 		secVlnbtyCodeMap = new HashMap<String, Integer>();
-		SecVlnbtyInfraMap = new HashMap<String, Integer>();
-		compVlnbltsMap = new HashMap<String, Integer>();
+		secVlnbtyInfraMap = new HashMap<String, Integer>();
+		secCompVlnbltsMap = new HashMap<String, Integer>();
 		secRiskValueRangeMap = new HashMap<String, Integer>();
 		secRiskCategoryMap = new HashMap<String, String>();
 		
@@ -154,15 +145,15 @@ public class ApplicationFramework {
 		secVlnbtyCodeMap.put("No", 0);
 		secVlnbtyCodeMap.put("Weightage", 35);
 		
-		SecVlnbtyInfraMap.put("Yes - High Priority issues", 7);
-		SecVlnbtyInfraMap.put("Yes - Medium/Low Priority issues", 3);
-		SecVlnbtyInfraMap.put("No", 0);
-		SecVlnbtyInfraMap.put("Weightage", 35);
+		secVlnbtyInfraMap.put("Yes - High Priority issues", 7);
+		secVlnbtyInfraMap.put("Yes - Medium/Low Priority issues", 3);
+		secVlnbtyInfraMap.put("No", 0);
+		secVlnbtyInfraMap.put("Weightage", 35);
 		
-		compVlnbltsMap.put("Yes - High Priority issues", 6);
-		compVlnbltsMap.put("Yes - Medium/Low Priority issues", 3);
-		compVlnbltsMap.put("No", 0);
-		compVlnbltsMap.put("Weightage", 30);		
+		secCompVlnbltsMap.put("Yes - High Priority issues", 6);
+		secCompVlnbltsMap.put("Yes - Medium/Low Priority issues", 3);
+		secCompVlnbltsMap.put("No", 0);
+		secCompVlnbltsMap.put("Weightage", 30);		
 
 		secRiskValueRangeMap.put("Category-A-Min", 4);
 		secRiskValueRangeMap.put("Category-A-Max", 10);
@@ -181,33 +172,33 @@ public class ApplicationFramework {
 
 	public static void infraScoreRecalculation(ApplicationVO applicationVO){
 		
-		int infraPerformanceVal;
-		int infraObsoleteInfraVal;
-		int infraAvlbtOfDREnvVal;
-		int infraScalabilityIssuVal;
-		int infraFrequencyInfraVal; 
+		float infraPerformanceVal;
+		float infraObsoleteInfraVal;
+		float infraAvlbtOfDREnvVal;
+		float infraScalabilityIssuVal;
+		float infraFrequencyInfraVal; 
 		
-		float infraRiskScore = 0.0f;
+		float infraRiskScore;
 		String infraCategory = null;
 		String infraRiskColor = null;
 		
-		String appPerfSlaVal = applicationVO.getAppPerfSla();
-		String scalabilityVal = applicationVO.getScalability();
-		String obsoleteInfraVal = applicationVO.getObsoleteInfra();
-		String drEnvAvlbtVal = applicationVO.getDrEnvAvlbt();
-		String nwInfraIssuePmVal = applicationVO.getNwInfraIssuePm();
+		String appPerfSlaText = applicationVO.getAppPerfSla();
+		String scalabilityText = applicationVO.getScalability();
+		String obsoleteInfraText = applicationVO.getObsoleteInfra();
+		String drEnvAvlbtText = applicationVO.getDrEnvAvlbt();
+		String nwInfraIssuePmText = applicationVO.getNwInfraIssuePm();
 		
-		infraPerformanceVal = infraPerformanceMap.get(appPerfSlaVal);
-		infraObsoleteInfraVal = infraObsoleteInfraMap.get(obsoleteInfraVal);
-		infraAvlbtOfDREnvVal = infraAvlbtOfDREnvMap.get(drEnvAvlbtVal);
-		infraScalabilityIssuVal = infraScalabilityIssuMap.get(scalabilityVal);
-		infraFrequencyInfraVal = infraFrequencyInfraMap.get(nwInfraIssuePmVal);
+		infraPerformanceVal = infraPerformanceMap.get(appPerfSlaText);
+		infraObsoleteInfraVal = infraObsoleteInfraMap.get(obsoleteInfraText);
+		infraAvlbtOfDREnvVal = infraAvlbtOfDREnvMap.get(drEnvAvlbtText);
+		infraScalabilityIssuVal = infraScalabilityIssuMap.get(scalabilityText);
+		infraFrequencyInfraVal = infraFrequencyInfraMap.get(nwInfraIssuePmText);
 		
 		infraRiskScore = ((infraPerformanceVal * infraPerformanceMap.get("Weightage"))/100) + 
-						 ((infraObsoleteInfraVal * infraObsoleteInfraWeightage)/100) + 
-						 ((infraAvlbtOfDREnvVal * infraAvlbtOfDREnvWeightage)/100) +
-						 ((infraScalabilityIssuVal * infraScalabilityIssuWeightage)/100) + 
-						 ((infraFrequencyInfraVal * infraFrequencyInfraWeightage)/100);
+						 ((infraObsoleteInfraVal * infraObsoleteInfraMap.get("Weightage"))/100) + 
+						 ((infraAvlbtOfDREnvVal * infraAvlbtOfDREnvMap.get("Weightage"))/100) + 
+						 ((infraScalabilityIssuVal * infraScalabilityIssuMap.get("Weightage"))/100) +  
+						 ((infraFrequencyInfraVal * infraFrequencyInfraMap.get("Weightage"))/100);
 		
 		if( infraRiskScore >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-A-Max")){
 			infraCategory = "A";
@@ -223,6 +214,92 @@ public class ApplicationFramework {
 		applicationVO.setAppInfraRiskScore(String.valueOf(infraRiskScore));
 		applicationVO.setAppInfraRiskCategory(infraCategory);
 		applicationVO.setAppInfraRiskColor(infraRiskColor);
+		
+	}
+
+	public static void peopleScoreRecalculation(ApplicationVO applicationVO) {
+		
+		float peopleSMEAvlbtVal;
+		float peopleVendorExpCTSVal;
+		float peopleVendorExpEnsonoVal;
+		float peopleAvlbtOfBizUsersVal;
+		
+		float peopleRiskScore = 0.0f;
+		String peopleCategory = null;
+		String peopleRiskColor = null;
+		
+		String peopleSMEAvlbtText = applicationVO.getSmeAvlbt();
+		String peopleVendorExpCTSText = applicationVO.getVendorExptCts();
+		String peopleVendorExpEnsonoText = applicationVO.getVendorExptEnsono();
+		String peopleAvlbtOfBizUsersText = applicationVO.getAvlbtBizUsers();
+		
+		peopleSMEAvlbtVal = peopleSMEAvlbtMap.get(peopleSMEAvlbtText);
+		peopleVendorExpCTSVal = peopleVendorExpCTSMap.get(peopleVendorExpEnsonoText);
+		peopleVendorExpEnsonoVal = peopleVendorExpEnsonoMap.get(peopleAvlbtOfBizUsersText);
+		peopleAvlbtOfBizUsersVal = peopleAvlbtOfBizUsersMap.get(peopleVendorExpCTSText);
+		
+		peopleRiskScore = ((peopleSMEAvlbtVal * peopleSMEAvlbtMap.get("Weightage"))/100) + 
+						 ((peopleVendorExpCTSVal * peopleVendorExpCTSMap.get("Weightage"))/100) + 
+						 ((peopleVendorExpEnsonoVal * peopleVendorExpEnsonoMap.get("Weightage"))/100) +  
+						 ((peopleAvlbtOfBizUsersVal * peopleAvlbtOfBizUsersMap.get("Weightage"))/100);
+		
+		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-A-Max")){
+			peopleCategory = "A";
+			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
+		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-B-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-B-Max")){
+			peopleCategory = "B";
+			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
+		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-C-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-C-Max")){
+			peopleCategory = "C";
+			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
+		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-D-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-D-Max")){
+			peopleCategory = "D";
+			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
+		}
+		
+		applicationVO.setAppPeopleRiskScore(String.valueOf(peopleRiskScore));
+		applicationVO.setAppPeopleRiskCategory(peopleCategory);
+		applicationVO.setAppPeopleRiskColor(peopleRiskColor);
+		
+	}
+	
+
+	public static void securityScoreRecalculation(ApplicationVO applicationVO) {
+		
+		float secVlnbtyCodeVal;
+		float secVlnbtyInfraVal;
+		float secCompVlnbltsVal;
+		
+		float securityRiskScore = 0.0f;
+		String securityCategory = null;
+		String securityRiskColor = null;
+		
+		String secVlnbtyCodeText = applicationVO.getSecVlnbtyCode();
+		String secVlnbtyInfraText = applicationVO.getSecVlnbtyInfra();
+		String secCompVlnbltsText = applicationVO.getCompVlnblts();
+		
+		secVlnbtyCodeVal = secVlnbtyCodeMap.get(secVlnbtyCodeText);
+		secVlnbtyInfraVal = secVlnbtyInfraMap.get(secVlnbtyInfraText);
+		secCompVlnbltsVal = secCompVlnbltsMap.get(secCompVlnbltsText);
+		
+		securityRiskScore = ((secVlnbtyCodeVal * secVlnbtyCodeMap.get("Weightage"))/100) + 
+						 ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
+						 ((secCompVlnbltsVal * secCompVlnbltsMap.get("Weightage"))/100);
+		
+		if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-A-Max")){
+			securityCategory = "A";
+			securityRiskColor = secRiskCategoryMap.get(securityCategory);
+		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-B-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-B-Max")){
+			securityCategory = "B";
+			securityRiskColor = secRiskCategoryMap.get(securityCategory);
+		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-C-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-C-Max")){
+			securityCategory = "C";
+			securityRiskColor = secRiskCategoryMap.get(securityCategory);
+		}
+		
+		applicationVO.setAppSecurityRiskScore(String.valueOf(securityRiskScore));
+		applicationVO.setAppSecurityRiskCategory(securityCategory);
+		applicationVO.setAppSecurityRiskColor(securityRiskColor);
 		
 	}
 	
