@@ -149,6 +149,7 @@ public class ApplicationVO {
 		return noInterfacApp;
 	}
 	public void setNoInterfacApp(Integer noInterfacApp) {
+		
 		this.noInterfacApp = noInterfacApp;
 	}
 	public String getDataVolumeDay() {
