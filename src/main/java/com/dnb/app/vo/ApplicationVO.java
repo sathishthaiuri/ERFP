@@ -1,7 +1,5 @@
 package com.dnb.app.vo;
 
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "ApplicationVO")

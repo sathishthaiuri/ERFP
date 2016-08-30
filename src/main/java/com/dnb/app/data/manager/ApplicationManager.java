@@ -243,7 +243,7 @@ public class ApplicationManager {
 		applicationVO2.setAppPeopleRiskColor("YELLOW");
 		applicationVO2.setAppPeopleRiskCategory("A");
 		
-		List<ApplicationVO> applicationVOList = new ArrayList<>();
+		List<ApplicationVO> applicationVOList = new ArrayList<ApplicationVO>();
 		applicationVOList.add(applicationVO1);
 		applicationVOList.add(applicationVO2);
 		

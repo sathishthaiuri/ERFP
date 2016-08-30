@@ -95,9 +95,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public ApplicationVO scoreRecalculation(ApplicationVO applicationVO) throws ServiceException {
 
-		ApplicationFramework.infraScoreRecalculation(applicationVO);
-		ApplicationFramework.peopleScoreRecalculation(applicationVO);
-		ApplicationFramework.securityScoreRecalculation(applicationVO);
+		ApplicationFramework.appMaintRiskScoreRecalculation(applicationVO);
+		ApplicationFramework.infraRiskScoreRecalculation(applicationVO);
+		ApplicationFramework.peopleRiskScoreRecalculation(applicationVO);
+		ApplicationFramework.securityRiskScoreRecalculation(applicationVO);
 		
 		return applicationVO;
 	}
