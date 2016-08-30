@@ -1,0 +1,474 @@
+API Services:
+http://localhost:8080/erfp/insertApplication		> To insert a new record into DB
+http://localhost:8080/erfp/selectApplication        > To fetch an existing record from DB via AppID
+http://localhost:8080/erfp/updateApplication        > To overwrite existing record in DB        
+http://localhost:8080/erfp/deleteApplication        > To remove a record from DB
+http://localhost:8080/erfp/listApplicationRecords   > Which brings all existing record from DB along with scores
+http://localhost:8080/erfp/scoreRecalculation       > For given record it re-calculates scores again and sends it back       
+
+
+===============================================================================/insertApplication
+---------------------------------------Request
+{
+    "appId": 100,
+    "appName": "New App",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    
+    "ageInYears": "> 25 years",
+    "noReleaseUbr": 0,
+    "noTktsVlm": 0,
+    "noSev1Sev2": 1,
+    "noIncTkt": 0,
+    "noSrtCount": 0,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "Low < 2 Hours/Day",
+    "noOutofoffCallouts": 0,
+    
+    "noInterfacApp": 1,
+    "dataVolumeDay": "Low < 50K Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "< 4 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "Yes",
+    
+    "appPerfSla": "Met SLA",
+    "scalability": "No",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "No",
+    "vendorExptEnsono": "No",
+    "avlbtBizUsers": "Yes",
+    
+    "secVlnbtyCode": "Yes - High Priority issues",
+    "secVlnbtyInfra": "Yes - High Priority issues",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Partial"
+}
+---------------------------------------Response
+{
+  "statusCode": "OK",
+  "statusDescription": "New App inserted Successfully"
+}
+
+===============================================================================selectApplication
+---------------------------------------Request
+{
+    "appId": 100,
+    "appName": "New App",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    
+    "ageInYears": "> 25 years",
+    "noReleaseUbr": 0,
+    "noTktsVlm": 0,
+    "noSev1Sev2": 1,
+    "noIncTkt": 0,
+    "noSrtCount": 0,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "Low < 2 Hours/Day",
+    "noOutofoffCallouts": 0,
+    
+    "noInterfacApp": 1,
+    "dataVolumeDay": "Low < 50K Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "< 4 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "Yes",
+    
+    "appPerfSla": "Met SLA",
+    "scalability": "No",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "No",
+    "vendorExptEnsono": "No",
+    "avlbtBizUsers": "Yes",
+    
+    "secVlnbtyCode": "Yes - High Priority issues",
+    "secVlnbtyInfra": "Yes - High Priority issues",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Partial"
+}
+---------------------------------------Response
+{
+  "appId": 100,
+  "appName": "New App",
+  "appCategory": "Data Supply Chain",
+  "supportScope": "General",
+  "ageInYears": "> 25 years",
+  "noReleaseUbr": 0,
+  "noTktsVlm": 0,
+  "noSev1Sev2": 1,
+  "noIncTkt": 0,
+  "noSrtCount": 0,
+  "noTktRslvVendor": "No",
+  "manualIntervension": "Low < 2 Hours/Day",
+  "noOutofoffCallouts": 0,
+  "noInterfacApp": 1,
+  "dataVolumeDay": "Low < 50K Txns",
+  "techSuprtAvlbt": "Legacy & Support Available",
+  "codeAvlbt": "Yes",
+  "increaDataVlmYr": "Low < 3%",
+  "regCompliance": "No",
+  "revImpact": "Direct but not immediate Revenue Impact",
+  "impatcToCustomer": "Medium - 10 to 50 users",
+  "recoveryDuration": "< 4 Hours",
+  "impactUpDnStream": "< 5 systems",
+  "impactBrandImg": "Yes",
+  "appPerfSla": "Met SLA",
+  "scalability": "No",
+  "obsoleteInfra": "No",
+  "drEnvAvlbt": "Yes",
+  "nwInfraIssuePm": "< 2",
+  "smeAvlbt": "Yes - 1 SME",
+  "vendorExptCts": "No",
+  "vendorExptEnsono": "No",
+  "avlbtBizUsers": "Yes",
+  "secVlnbtyCode": "Yes - High Priority issues",
+  "secVlnbtyInfra": "Yes - High Priority issues",
+  "compVlnblts": "No",
+  "confMgtVlnbty": "Partial",
+  "appRiskMaintScore": null,
+  "appRiskMaintColor": null,
+  "appRiskMaintCategory": null,
+  "appInfraRiskScore": null,
+  "appInfraRiskColor": null,
+  "appInfraRiskCategory": null,
+  "appSecurityRiskScore": null,
+  "appSecurityRiskColor": null,
+  "appSecurityRiskCategory": null,
+  "appPeopleRiskScore": null,
+  "appPeopleRiskColor": null,
+  "appPeopleRiskCategory": null
+}
+===============================================================================updateApplication
+---------------------------------------Request
+{
+    "appId": 100,
+    "appName": "New App-Update",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    
+    "ageInYears": "> 15 years",
+    "noReleaseUbr": 10,
+    "noTktsVlm": 0,
+    "noSev1Sev2": 1,
+    "noIncTkt": 0,
+    "noSrtCount": 0,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "Low < 2 Hours/Day",
+    "noOutofoffCallouts": 0,
+    
+    "noInterfacApp": 1,
+    "dataVolumeDay": "Low < 50K Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "< 4 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "Yes",
+    
+    "appPerfSla": "Met SLA",
+    "scalability": "Yes",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "No",
+    "vendorExptEnsono": "No",
+    "avlbtBizUsers": "Yes",
+    
+    "secVlnbtyCode": "Yes - High Priority issues",
+    "secVlnbtyInfra": "Yes - High Priority issues",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Yes"
+  }
+---------------------------------------Response
+{
+  "statusCode": "OK",
+  "statusDescription": "New App-Update updated Successfully"
+}
+===============================================================================deleteApplication
+---------------------------------------Request
+{
+    "appId": 100,
+    "appName": "New App-Update",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    
+    "ageInYears": "> 15 years",
+    "noReleaseUbr": 10,
+    "noTktsVlm": 0,
+    "noSev1Sev2": 1,
+    "noIncTkt": 0,
+    "noSrtCount": 0,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "Low < 2 Hours/Day",
+    "noOutofoffCallouts": 0,
+    
+    "noInterfacApp": 1,
+    "dataVolumeDay": "Low < 50K Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "< 4 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "Yes",
+    
+    "appPerfSla": "Met SLA",
+    "scalability": "Yes",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "No",
+    "vendorExptEnsono": "No",
+    "avlbtBizUsers": "Yes",
+    
+    "secVlnbtyCode": "Yes - High Priority issues",
+    "secVlnbtyInfra": "Yes - High Priority issues",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Yes"
+  }
+---------------------------------------Response
+{
+  "statusCode": "OK",
+  "statusDescription": "New App-Update removed Successfully"
+}
+===============================================================================listApplicationRecords
+---------------------------------------Request
+<Not Applicable>
+---------------------------------------Response
+[
+  {
+    "appId": 1,
+    "appName": "OSP – Online",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    "ageInYears": "> 25 years",
+    "noReleaseUbr": 5,
+    "noTktsVlm": 5,
+    "noSev1Sev2": 5,
+    "noIncTkt": 5,
+    "noSrtCount": 5,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "Low < 2 Hours/Day",
+    "noOutofoffCallouts": 0,
+    "noInterfacApp": 1,
+    "dataVolumeDay": "Low < 50K Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "< 4 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "Yes",
+    "appPerfSla": "Met SLA",
+    "scalability": "No",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "Yes",
+    "vendorExptEnsono": "Yes",
+    "avlbtBizUsers": "No",
+    "secVlnbtyCode": "No",
+    "secVlnbtyInfra": "No",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Yes",
+    "appRiskMaintScore": "1.9",
+    "appRiskMaintColor": "YELLOW",
+    "appRiskMaintCategory": "C",
+    "appInfraRiskScore": "1",
+    "appInfraRiskColor": "GREEN",
+    "appInfraRiskCategory": "B",
+    "appSecurityRiskScore": "9",
+    "appSecurityRiskColor": "RED",
+    "appSecurityRiskCategory": "D",
+    "appPeopleRiskScore": "1.8",
+    "appPeopleRiskColor": "GREEN",
+    "appPeopleRiskCategory": "A"
+  },
+  {
+    "appId": 2,
+    "appName": "AOS – Batch",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    "ageInYears": "> 25 years",
+    "noReleaseUbr": 15,
+    "noTktsVlm": 723,
+    "noSev1Sev2": 0,
+    "noIncTkt": 515,
+    "noSrtCount": 0,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "High >4 Hours/Day",
+    "noOutofoffCallouts": 50,
+    "noInterfacApp": 10,
+    "dataVolumeDay": "Medium > 50K Txns to 1 Mn Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "4 to 12 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "No",
+    "appPerfSla": "Met SLA",
+    "scalability": "No",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "Yes",
+    "vendorExptEnsono": "Yes",
+    "avlbtBizUsers": "No",
+    "secVlnbtyCode": "No",
+    "secVlnbtyInfra": "No",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Yes",
+    "appRiskMaintScore": "2.5",
+    "appRiskMaintColor": "YELLOW",
+    "appRiskMaintCategory": "D",
+    "appInfraRiskScore": "0.9",
+    "appInfraRiskColor": "GREEN",
+    "appInfraRiskCategory": "A",
+    "appSecurityRiskScore": "5.9",
+    "appSecurityRiskColor": "GREEN",
+    "appSecurityRiskCategory": "B",
+    "appPeopleRiskScore": "3.8",
+    "appPeopleRiskColor": "YELLOW",
+    "appPeopleRiskCategory": "A"
+  }
+]
+===============================================================================scoreRecalculation
+---------------------------------------Request
+{
+    "appId": 1,
+    "appName": "OSP – Online",
+    "appCategory": "Data Supply Chain",
+    "supportScope": "General",
+    
+    "ageInYears": "> 25 years",
+    "noReleaseUbr": 0,
+    "noTktsVlm": 0,
+    "noSev1Sev2": 1,
+    "noIncTkt": 0,
+    "noSrtCount": 0,
+    "noTktRslvVendor": "No",
+    "manualIntervension": "Low < 2 Hours/Day",
+    "noOutofoffCallouts": 0,
+    
+    "noInterfacApp": 1,
+    "dataVolumeDay": "Low < 50K Txns",
+    "techSuprtAvlbt": "Legacy & Support Available",
+    "codeAvlbt": "Yes",
+    "increaDataVlmYr": "Low < 3%",
+    "regCompliance": "No",
+    
+    "revImpact": "Direct but not immediate Revenue Impact",
+    "impatcToCustomer": "Medium - 10 to 50 users",
+    "recoveryDuration": "< 4 Hours",
+    "impactUpDnStream": "< 5 systems",
+    "impactBrandImg": "Yes",
+    
+    "appPerfSla": "Met SLA",
+    "scalability": "No",
+    "obsoleteInfra": "No",
+    "drEnvAvlbt": "Yes",
+    "nwInfraIssuePm": "< 2",
+    
+    "smeAvlbt": "Yes - 1 SME",
+    "vendorExptCts": "No",
+    "vendorExptEnsono": "No",
+    "avlbtBizUsers": "Yes",
+    
+    "secVlnbtyCode": "Yes - High Priority issues",
+    "secVlnbtyInfra": "Yes - High Priority issues",
+    "compVlnblts": "No",
+    "confMgtVlnbty": "Partial"
+  }
+---------------------------------------Response
+  {
+  "appId": 1,
+  "appName": "OSP – Online",
+  "appCategory": "Data Supply Chain",
+  "supportScope": "General",
+  "ageInYears": "> 25 years",
+  "noReleaseUbr": 0,
+  "noTktsVlm": 0,
+  "noSev1Sev2": 1,
+  "noIncTkt": 0,
+  "noSrtCount": 0,
+  "noTktRslvVendor": "No",
+  "manualIntervension": "Low < 2 Hours/Day",
+  "noOutofoffCallouts": 0,
+  "noInterfacApp": 1,
+  "dataVolumeDay": "Low < 50K Txns",
+  "techSuprtAvlbt": "Legacy & Support Available",
+  "codeAvlbt": "Yes",
+  "increaDataVlmYr": "Low < 3%",
+  "regCompliance": "No",
+  "revImpact": "Direct but not immediate Revenue Impact",
+  "impatcToCustomer": "Medium - 10 to 50 users",
+  "recoveryDuration": "< 4 Hours",
+  "impactUpDnStream": "< 5 systems",
+  "impactBrandImg": "Yes",
+  "appPerfSla": "Met SLA",
+  "scalability": "No",
+  "obsoleteInfra": "No",
+  "drEnvAvlbt": "Yes",
+  "nwInfraIssuePm": "< 2",
+  "smeAvlbt": "Yes - 1 SME",
+  "vendorExptCts": "No",
+  "vendorExptEnsono": "No",
+  "avlbtBizUsers": "Yes",
+  "secVlnbtyCode": "Yes - High Priority issues",
+  "secVlnbtyInfra": "Yes - High Priority issues",
+  "compVlnblts": "No",
+  "confMgtVlnbty": "Partial",
+  
+  "appRiskMaintScore": "6.0",
+  "appRiskMaintColor": "RED",
+  "appRiskMaintCategory": "A",
+  "appInfraRiskScore": "1.0",
+  "appInfraRiskColor": "GREEN",
+  "appInfraRiskCategory": "C",
+  "appSecurityRiskScore": "4.9",
+  "appSecurityRiskColor": "RED",
+  "appSecurityRiskCategory": "A",
+  "appPeopleRiskScore": "6.25",
+  "appPeopleRiskColor": "YELLOW",
+  "appPeopleRiskCategory": "B"
+}
+===============================================================================
