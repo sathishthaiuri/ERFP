@@ -11,7 +11,6 @@ public class ApplicationManager {
 	
 	public static List<ApplicationVO> assignScores(List<ApplicationVO> applicationVOList){
 		
-		
 		return null;
 	}
 	
@@ -104,7 +103,7 @@ public class ApplicationManager {
 		
 	}
 
-	private ApplicationVO calculateStabilityScores(ApplicationVO applicationVO){
+	/*private ApplicationVO calculateStabilityScores(ApplicationVO applicationVO){
 		
 		return null;
 	}
@@ -136,7 +135,7 @@ public class ApplicationManager {
 		String compVlnbltsVal = applicationVO.getCompVlnblts();
 				
 		return null;
-	}
+	}*/
 	
 	public static List<ApplicationVO> simulateApplicationRecords(){
 		
@@ -179,6 +178,19 @@ public class ApplicationManager {
 		applicationVO1.setCompVlnblts("No");
 		applicationVO1.setConfMgtVlnbty("Yes");
 		
+		applicationVO1.setAppRiskMaintScore("1.9");
+		applicationVO1.setAppRiskMaintColor("YELLOW");
+		applicationVO1.setAppRiskMaintCategory("C");
+		applicationVO1.setAppInfraRiskScore("1");
+		applicationVO1.setAppInfraRiskColor("GREEN");
+		applicationVO1.setAppInfraRiskCategory("B");
+		applicationVO1.setAppSecurityRiskScore("9");
+		applicationVO1.setAppSecurityRiskColor("RED");
+		applicationVO1.setAppSecurityRiskCategory("D");
+		applicationVO1.setAppPeopleRiskScore("1.8");
+		applicationVO1.setAppPeopleRiskColor("GREEN");
+		applicationVO1.setAppPeopleRiskCategory("A");
+		
 		ApplicationVO applicationVO2 = new ApplicationVO();
 		applicationVO2.setAppId(2);
 		applicationVO2.setAppName("AOS – Batch");
@@ -217,6 +229,19 @@ public class ApplicationManager {
 		applicationVO2.setSecVlnbtyInfra("No");
 		applicationVO2.setCompVlnblts("No");
 		applicationVO2.setConfMgtVlnbty("Yes");
+		
+		applicationVO2.setAppRiskMaintScore("2.5");
+		applicationVO2.setAppRiskMaintColor("YELLOW");
+		applicationVO2.setAppRiskMaintCategory("D");
+		applicationVO2.setAppInfraRiskScore("0.9");
+		applicationVO2.setAppInfraRiskColor("GREEN");
+		applicationVO2.setAppInfraRiskCategory("A");
+		applicationVO2.setAppSecurityRiskScore("5.9");
+		applicationVO2.setAppSecurityRiskColor("GREEN");
+		applicationVO2.setAppSecurityRiskCategory("B");
+		applicationVO2.setAppPeopleRiskScore("3.8");
+		applicationVO2.setAppPeopleRiskColor("YELLOW");
+		applicationVO2.setAppPeopleRiskCategory("A");
 		
 		List<ApplicationVO> applicationVOList = new ArrayList<>();
 		applicationVOList.add(applicationVO1);

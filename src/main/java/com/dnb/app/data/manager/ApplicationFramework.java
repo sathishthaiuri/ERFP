@@ -7,6 +7,30 @@ import com.dnb.app.vo.ApplicationVO;
 
 public class ApplicationFramework {
 
+	private static Map<String, Float> stabilityNoTktsVlmMap;
+	private static Map<String, Float> stabilityNoSev1Sev2Map;
+	private static Map<String, Float> stabilityNoSrtCountMap;
+	private static Map<String, Float> stabilityNoReleaseUbrMap;
+	private static Map<String, Float> stabilityNoTktRslvVendorMap;
+	private static Map<String, Float> stabilityManualIntervensionMap;
+	
+	/** -------------------------------- */
+
+	private static Map<String, Float> complexityNoInterfacAppMap;
+	private static Map<String, Float> complexityDataVolumeDayMap;
+	private static Map<String, Float> complexityTechSuprtAvlbtMap;
+	private static Map<String, Float> complexityCodeAvlbtMap;
+	private static Map<String, Float> complexityIncreaDataVlmYrMap;
+	private static Map<String, Float> complexityRegComplianceMap;
+	
+	/** -------------------------------- */
+
+	private static Map<String, Integer> impactRevImpactMap;
+	private static Map<String, Integer> impactImpatcToCustomerMap;
+	private static Map<String, Integer> impactRecoveryDurationMap;
+	
+	/** -------------------------------- */
+	
 	private static Map<String, Integer> infraPerformanceMap;
 	private static Map<String, Integer> infraObsoleteInfraMap;
 	private static Map<String, Integer> infraAvlbtOfDREnvMap;
@@ -33,9 +57,166 @@ public class ApplicationFramework {
 	private static Map<String, String> secRiskCategoryMap;
 	
 	public void init() {
+		initializeScalabilityRiskScores();
+		initializeComplexityRiskScores();
+		initializeImpactRiskScores();
+		
 		initializeInfraRiskScores();
 		initializePeopleRiskScores();
 		initializeSecurityRiskScores();
+	}
+	
+	private void initializeScalabilityRiskScores() {
+		
+		stabilityNoTktsVlmMap = new HashMap<String, Float>();
+		stabilityNoSev1Sev2Map = new HashMap<String, Float>();
+		stabilityNoSrtCountMap = new HashMap<String, Float>();
+		stabilityNoReleaseUbrMap = new HashMap<String, Float>();
+		stabilityNoTktRslvVendorMap = new HashMap<String, Float>();
+		stabilityManualIntervensionMap = new HashMap<String, Float>();
+		
+		stabilityNoTktsVlmMap.put("Range-One-Min", 0.0f);
+		stabilityNoTktsVlmMap.put("Range-One-Max", 0.0f);
+		stabilityNoTktsVlmMap.put("Range-One-Score", 0.0f);
+		stabilityNoTktsVlmMap.put("Range-Two-Min", 1.0f);
+		stabilityNoTktsVlmMap.put("Range-Two-Max", 50.0f);
+		stabilityNoTktsVlmMap.put("Range-Two-Score", 2.0f);
+		stabilityNoTktsVlmMap.put("Range-Three-Min", 51.0f);
+		stabilityNoTktsVlmMap.put("Range-Three-Max", 100.0f);
+		stabilityNoTktsVlmMap.put("Range-Three-Score", 4.0f);
+		stabilityNoTktsVlmMap.put("Range-Four-Min", 101.0f);
+		stabilityNoTktsVlmMap.put("Range-Four-Max", 500.0f);
+		stabilityNoTktsVlmMap.put("Range-Four-Score", 6.0f);
+		stabilityNoTktsVlmMap.put("Range-Five-Min", 501.0f);
+		stabilityNoTktsVlmMap.put("Range-Five-Max", 1500.0f);
+		stabilityNoTktsVlmMap.put("Range-Five-Score", 8.0f);
+		stabilityNoTktsVlmMap.put("Range-Six-Min", 1501.0f);
+		stabilityNoTktsVlmMap.put("Range-Six-Max", 8000.0f);
+		stabilityNoTktsVlmMap.put("Range-Six-Score", 10.0f);
+		stabilityNoTktsVlmMap.put("Weightage", 7.0f);
+		
+		stabilityNoSev1Sev2Map.put("Range-One-Min", 0.0f);
+		stabilityNoSev1Sev2Map.put("Range-One-Max", 0.0f);
+		stabilityNoSev1Sev2Map.put("Range-One-Score", 0.0f);
+		stabilityNoSev1Sev2Map.put("Range-Two-Min", 1.0f);
+		stabilityNoSev1Sev2Map.put("Range-Two-Max", 10.0f);
+		stabilityNoSev1Sev2Map.put("Range-Two-Score", 5.0f);
+		stabilityNoSev1Sev2Map.put("Range-Three-Min", 11.0f);
+		stabilityNoSev1Sev2Map.put("Range-Three-Max", 100.0f);
+		stabilityNoSev1Sev2Map.put("Range-Three-Score", 10.0f);
+		stabilityNoSev1Sev2Map.put("Weightage", 7.0f);
+		
+		stabilityNoSrtCountMap.put("Range-One-Min", 0.0f);
+		stabilityNoSrtCountMap.put("Range-One-Max", 0.0f);
+		stabilityNoSrtCountMap.put("Range-One-Score", 0.0f);
+		stabilityNoSrtCountMap.put("Range-Two-Min", 1.0f);
+		stabilityNoSrtCountMap.put("Range-Two-Max", 15.0f);
+		stabilityNoSrtCountMap.put("Range-Two-Score", 5.0f);
+		stabilityNoSrtCountMap.put("Range-Three-Min", 16.0f);
+		stabilityNoSrtCountMap.put("Range-Three-Max", 100.0f);
+		stabilityNoSrtCountMap.put("Range-Three-Score", 10.0f);
+		stabilityNoSrtCountMap.put("Weightage", 7.0f);	
+		
+		stabilityNoReleaseUbrMap.put("Range-One-Min", 0.0f);
+		stabilityNoReleaseUbrMap.put("Range-One-Max", 0.0f);
+		stabilityNoReleaseUbrMap.put("Range-One-Score", 0.0f);
+		stabilityNoReleaseUbrMap.put("Range-Two-Min", 1.0f);
+		stabilityNoReleaseUbrMap.put("Range-Two-Max", 30.0f);
+		stabilityNoReleaseUbrMap.put("Range-Two-Score", 5.0f);
+		stabilityNoReleaseUbrMap.put("Range-Three-Min", 31.0f);
+		stabilityNoReleaseUbrMap.put("Range-Three-Max", 60.0f);
+		stabilityNoReleaseUbrMap.put("Range-Three-Score", 10.0f);
+		stabilityNoReleaseUbrMap.put("Weightage", 7.0f);	
+
+		stabilityManualIntervensionMap.put("Low < 2 Hours/Day", 0.0f);
+		stabilityManualIntervensionMap.put("Medium <4 Hours/Day", 5.0f);
+		stabilityManualIntervensionMap.put("High >4 Hours/Day", 10.0f);
+		stabilityManualIntervensionMap.put("Weightage", 7.0f);
+
+		stabilityNoTktRslvVendorMap.put("Low < 2 Tickets/Year", 0.0f);
+		stabilityNoTktRslvVendorMap.put("Medium >2 & < 8 Tickets/Year", 5.0f);
+		stabilityNoTktRslvVendorMap.put("High > 8 Tickets/Year", 10.0f);
+		stabilityNoTktRslvVendorMap.put("Weightage", 5.0f);
+
+		
+		
+		System.out.println("initializeScalabilityRiskScores()...Done");
+		
+	}
+
+	private void initializeComplexityRiskScores() {
+		
+		complexityNoInterfacAppMap = new HashMap<String, Float>();
+		complexityDataVolumeDayMap = new HashMap<String, Float>();
+		complexityTechSuprtAvlbtMap = new HashMap<String, Float>();
+		complexityCodeAvlbtMap = new HashMap<String, Float>();
+		complexityIncreaDataVlmYrMap = new HashMap<String, Float>();
+		complexityRegComplianceMap = new HashMap<String, Float>();
+		
+		complexityNoInterfacAppMap.put("Range-A-Min", 0.0f);
+		complexityNoInterfacAppMap.put("Range-A-Max", 0.0f);
+		complexityNoInterfacAppMap.put("Range-B-Min", 1.0f);
+		complexityNoInterfacAppMap.put("Range-B-Max", 8.0f);
+		complexityNoInterfacAppMap.put("Range-C-Min", 9.0f);
+		complexityNoInterfacAppMap.put("Range-C-Max", 50.0f);
+		complexityNoInterfacAppMap.put("Weightage", 5.0f);
+		
+		complexityDataVolumeDayMap.put("Low < 50K Txns", 1.0f);
+		complexityDataVolumeDayMap.put("Medium > 50K Txns to 1 Mn Txns", 5.0f);
+		complexityDataVolumeDayMap.put("High >1M Txns", 10.0f);
+		complexityDataVolumeDayMap.put("Weightage", 2.5f);
+		
+		complexityTechSuprtAvlbtMap.put("Web & Support Available", 3.0f);
+		complexityTechSuprtAvlbtMap.put("Web & Support Unavailable", 6.0f);
+		complexityTechSuprtAvlbtMap.put("Legacy & Support Available", 4.0f);
+		complexityTechSuprtAvlbtMap.put("Legacy & Support Unavailable", 8.0f);
+		complexityTechSuprtAvlbtMap.put("Niche & Support Available", 5.0f);
+		complexityTechSuprtAvlbtMap.put("Niche & Support Unavailable", 10.0f);
+		complexityTechSuprtAvlbtMap.put("Weightage", 5.0f);		
+		
+		complexityCodeAvlbtMap.put("Yes", 0.0f);
+		complexityCodeAvlbtMap.put("Partial", 6.0f);
+		complexityCodeAvlbtMap.put("No", 10.0f);
+		complexityCodeAvlbtMap.put("Weightage", 10.0f);
+
+		complexityIncreaDataVlmYrMap.put("Yes", 10.0f);
+		complexityIncreaDataVlmYrMap.put("No", 0.0f);
+		complexityIncreaDataVlmYrMap.put("Weightage", 10.0f);
+		
+		complexityRegComplianceMap.put("Low < 3%", 0.0f);
+		complexityRegComplianceMap.put("Medium 3% to 8%", 5.0f);
+		complexityRegComplianceMap.put("High  > 8%", 10.0f);
+		complexityRegComplianceMap.put("Weightage", 2.5f);
+		
+		System.out.println("initializeComplexityRiskScores()...Done");
+		
+	}
+	
+	private void initializeImpactRiskScores() {
+		
+		impactRevImpactMap = new HashMap<String, Integer>();
+		impactImpatcToCustomerMap = new HashMap<String, Integer>();
+		impactRecoveryDurationMap = new HashMap<String, Integer>();
+		
+		impactRevImpactMap.put("Direct & Immediate Revenue Impact", 10);
+		impactRevImpactMap.put("Direct but not immediate Revenue Impact", 7);
+		impactRevImpactMap.put("Indirect Revenue Impact", 4);
+		impactRevImpactMap.put("No Revenue Impact", 0);
+		impactRevImpactMap.put("Weightage", 9);
+		
+		impactImpatcToCustomerMap.put("High > 50 Users", 10);
+		impactImpatcToCustomerMap.put("Medium - 10 to 50 users", 6);
+		impactImpatcToCustomerMap.put("Low < 10 users", 0);
+		impactImpatcToCustomerMap.put("Weightage", 8);
+		
+		impactRecoveryDurationMap.put("< 4 Hours", 0);
+		impactRecoveryDurationMap.put("4 to 12 Hours", 4);
+		impactRecoveryDurationMap.put("12 Hours to 1 Day", 6);
+		impactRecoveryDurationMap.put("> 1 Day", 10);
+		impactRecoveryDurationMap.put("Weightage", 8);		
+
+		System.out.println("initializeImpactRiskScores()...Done");
+		
 	}
 	
 	private void initializeInfraRiskScores() {
@@ -263,7 +444,6 @@ public class ApplicationFramework {
 		
 	}
 	
-
 	public static void securityScoreRecalculation(ApplicationVO applicationVO) {
 		
 		float secVlnbtyCodeVal;
@@ -302,6 +482,7 @@ public class ApplicationFramework {
 		applicationVO.setAppSecurityRiskColor(securityRiskColor);
 		
 	}
+
 	
 	
 }
