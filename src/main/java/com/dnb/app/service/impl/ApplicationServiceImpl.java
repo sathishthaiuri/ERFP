@@ -85,12 +85,24 @@ public class ApplicationServiceImpl implements ApplicationService {
 		}
 		
 		List<ApplicationVO> applicationVOList = new ArrayList<>();
+		ApplicationVO applicationVO = null;
 		for (ApplicationModel applicationModel : applicationsModelList) {
-			applicationVOList.add(ApplicationManager.assignModel2VoMapper(applicationModel));
+			applicationVO = ApplicationManager.assignModel2VoMapper(applicationModel);
+			applyScoreCalculation(applicationVO);
+			
+			applicationVOList.add(applicationVO);
 		}
 		return applicationVOList;
 	}
 
+
+	private void applyScoreCalculation(ApplicationVO applicationVO) throws ServiceException {
+
+		ApplicationFramework.appMaintRiskScoreRecalculation(applicationVO);
+		ApplicationFramework.infraRiskScoreRecalculation(applicationVO);
+		ApplicationFramework.peopleRiskScoreRecalculation(applicationVO);
+		ApplicationFramework.securityRiskScoreRecalculation(applicationVO);
+	}
 
 	@Override
 	public ApplicationVO scoreRecalculation(ApplicationVO applicationVO) throws ServiceException {
@@ -102,5 +114,4 @@ public class ApplicationServiceImpl implements ApplicationService {
 		
 		return applicationVO;
 	}
-
 }

@@ -47,8 +47,9 @@ public class ApplicationController {
 
 	@RequestMapping(value = "listApplicationRecords", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")
 	public @ResponseBody List<ApplicationVO> listApplicationRecords() throws ServiceException {
-		//return erfpService.listApplicationRecords();
-		return ApplicationManager.simulateApplicationRecords();
+		
+		//return erfpService.listApplicationRecords();  /** Data fetches from MySQL DB */
+		return ApplicationManager.simulateApplicationRecords(); /** Data simulation instead of from DB */
 	}
 
 	@RequestMapping(value = "scoreRecalculation", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")

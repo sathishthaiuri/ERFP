@@ -7,6 +7,8 @@ import com.dnb.app.vo.ApplicationVO;
 
 public class ApplicationFramework {
 
+	private static Float defaultFloatValue = 0.0f;
+	
 	private static Map<String, Float> appMaintRiskValueRangeMap;
 	private static Map<String, String> appMaintRiskCategoryMap;
 	
@@ -425,8 +427,8 @@ public class ApplicationFramework {
 		Float noSev1Sev2MatrixVal = calculateMatrixRangeScore(stabilityNoSev1Sev2Map, noSev1Sev2VOVal);
 		Float noSrtCountMatrixVal = calculateMatrixRangeScore(stabilityNoSrtCountMap, noSrtCountVOVal);
 		Float noReleaseUbrMatrixVal = calculateMatrixRangeScore(stabilityNoReleaseUbrMap, noReleaseUbrVOVal);
-		Float manualIntervensionVal = stabilityManualIntervensionMap.get(manualIntervensionText);
-		Float noTktRslvVendorVal = stabilityNoTktRslvVendorMap.get(noTktRslvVendorText);
+		Float manualIntervensionVal = stabilityManualIntervensionMap.getOrDefault(manualIntervensionText, defaultFloatValue);
+		Float noTktRslvVendorVal = stabilityNoTktRslvVendorMap.getOrDefault(noTktRslvVendorText, defaultFloatValue);
 
 		stabilityRiskScore = ((noTktsVlmMatrixVal * stabilityNoTktsVlmMap.get("Weightage")) / 100)
 							+ ((noSev1Sev2MatrixVal * stabilityNoSev1Sev2Map.get("Weightage")) / 100)
@@ -451,11 +453,11 @@ public class ApplicationFramework {
 		String regComplianceText = applicationVO.getRegCompliance();
 		
 		Float noInterfacAppMatrixVal = calculateMatrixRangeScore(complexityNoInterfacAppMap, noInterfacAppVOVal);
-		Float dataVolumeDayVal = complexityDataVolumeDayMap.get(dataVolumeDayText);
-		Float techSuprtAvlbtVal = complexityTechSuprtAvlbtMap.get(techSuprtAvlbtText);
-		Float codeAvlbtVal = complexityCodeAvlbtMap.get(codeAvlbtText);
-		Float increaDataVlmYrVal = complexityIncreaDataVlmYrMap.get(increaDataVlmYrText);
-		Float regComplianceVal = complexityRegComplianceMap.get(regComplianceText);
+		Float dataVolumeDayVal = complexityDataVolumeDayMap.getOrDefault(dataVolumeDayText, defaultFloatValue);
+		Float techSuprtAvlbtVal = complexityTechSuprtAvlbtMap.getOrDefault(techSuprtAvlbtText, defaultFloatValue);
+		Float codeAvlbtVal = complexityCodeAvlbtMap.getOrDefault(codeAvlbtText, defaultFloatValue);
+		Float increaDataVlmYrVal = complexityIncreaDataVlmYrMap.getOrDefault(increaDataVlmYrText, defaultFloatValue);
+		Float regComplianceVal = complexityRegComplianceMap.getOrDefault(regComplianceText, defaultFloatValue);
 		
 		complexityRiskScore = ((noInterfacAppMatrixVal * complexityNoInterfacAppMap.get("Weightage"))/100) + 
 						 ((dataVolumeDayVal * complexityDataVolumeDayMap.get("Weightage"))/100) +  
@@ -475,9 +477,9 @@ public class ApplicationFramework {
 		String impatcToCustomerText = applicationVO.getImpatcToCustomer();
 		String recoveryDurationText = applicationVO.getRecoveryDuration();
 		
-		Float revImpactVal = impactRevImpactMap.get(revImpactText);
-		Float impatcToCustomerVal = impactImpatcToCustomerMap.get(impatcToCustomerText);
-		Float recoveryDurationVal = impactRecoveryDurationMap.get(recoveryDurationText);
+		Float revImpactVal = impactRevImpactMap.getOrDefault(revImpactText, defaultFloatValue);
+		Float impatcToCustomerVal = impactImpatcToCustomerMap.getOrDefault(impatcToCustomerText, defaultFloatValue);
+		Float recoveryDurationVal = impactRecoveryDurationMap.getOrDefault(recoveryDurationText, defaultFloatValue);
 		
 		impactRiskScore = ((revImpactVal * impactRevImpactMap.get("Weightage"))/100) + 
 						 ((impatcToCustomerVal * impactImpatcToCustomerMap.get("Weightage"))/100) +  
@@ -499,11 +501,11 @@ public class ApplicationFramework {
 		String drEnvAvlbtText = applicationVO.getDrEnvAvlbt();
 		String nwInfraIssuePmText = applicationVO.getNwInfraIssuePm();
 		
-		Float infraPerformanceVal = infraPerformanceMap.get(appPerfSlaText);
-		Float infraObsoleteInfraVal = infraObsoleteInfraMap.get(obsoleteInfraText);
-		Float infraAvlbtOfDREnvVal = infraAvlbtOfDREnvMap.get(drEnvAvlbtText);
-		Float infraScalabilityIssuVal = infraScalabilityIssuMap.get(scalabilityText);
-		Float infraFrequencyInfraVal = infraFrequencyInfraMap.get(nwInfraIssuePmText);
+		Float infraPerformanceVal = infraPerformanceMap.getOrDefault(appPerfSlaText, defaultFloatValue);
+		Float infraObsoleteInfraVal = infraObsoleteInfraMap.getOrDefault(obsoleteInfraText, defaultFloatValue);
+		Float infraAvlbtOfDREnvVal = infraAvlbtOfDREnvMap.getOrDefault(drEnvAvlbtText, defaultFloatValue);
+		Float infraScalabilityIssuVal = infraScalabilityIssuMap.getOrDefault(scalabilityText, defaultFloatValue);
+		Float infraFrequencyInfraVal = infraFrequencyInfraMap.getOrDefault(nwInfraIssuePmText, defaultFloatValue);
 		
 		infraRiskScore = ((infraPerformanceVal * infraPerformanceMap.get("Weightage"))/100) + 
 						 ((infraObsoleteInfraVal * infraObsoleteInfraMap.get("Weightage"))/100) + 
@@ -540,10 +542,10 @@ public class ApplicationFramework {
 		String peopleVendorExpEnsonoText = applicationVO.getVendorExptEnsono();
 		String peopleAvlbtOfBizUsersText = applicationVO.getAvlbtBizUsers();
 		
-		Float peopleSMEAvlbtVal = peopleSMEAvlbtMap.get(peopleSMEAvlbtText);
-		Float peopleVendorExpCTSVal = peopleVendorExpCTSMap.get(peopleVendorExpEnsonoText);
-		Float peopleVendorExpEnsonoVal = peopleVendorExpEnsonoMap.get(peopleAvlbtOfBizUsersText);
-		Float peopleAvlbtOfBizUsersVal = peopleAvlbtOfBizUsersMap.get(peopleVendorExpCTSText);
+		Float peopleSMEAvlbtVal = peopleSMEAvlbtMap.getOrDefault(peopleSMEAvlbtText, defaultFloatValue);
+		Float peopleVendorExpCTSVal = peopleVendorExpCTSMap.getOrDefault(peopleVendorExpEnsonoText, defaultFloatValue);
+		Float peopleVendorExpEnsonoVal = peopleVendorExpEnsonoMap.getOrDefault(peopleAvlbtOfBizUsersText, defaultFloatValue);
+		Float peopleAvlbtOfBizUsersVal = peopleAvlbtOfBizUsersMap.getOrDefault(peopleVendorExpCTSText, defaultFloatValue);
 		
 		peopleRiskScore = ((peopleSMEAvlbtVal * peopleSMEAvlbtMap.get("Weightage"))/100) + 
 						 ((peopleVendorExpCTSVal * peopleVendorExpCTSMap.get("Weightage"))/100) + 
@@ -581,9 +583,9 @@ public class ApplicationFramework {
 		String secVlnbtyInfraText = applicationVO.getSecVlnbtyInfra();
 		String secCompVlnbltsText = applicationVO.getCompVlnblts();
 		
-		Float secVlnbtyCodeVal = secVlnbtyCodeMap.get(secVlnbtyCodeText);
-		Float secVlnbtyInfraVal = secVlnbtyInfraMap.get(secVlnbtyInfraText);
-		Float secCompVlnbltsVal = secCompVlnbltsMap.get(secCompVlnbltsText);
+		Float secVlnbtyCodeVal = secVlnbtyCodeMap.getOrDefault(secVlnbtyCodeText, defaultFloatValue);
+		Float secVlnbtyInfraVal = secVlnbtyInfraMap.getOrDefault(secVlnbtyInfraText, defaultFloatValue);
+		Float secCompVlnbltsVal = secCompVlnbltsMap.getOrDefault(secCompVlnbltsText, defaultFloatValue);
 		
 		securityRiskScore = ((secVlnbtyCodeVal * secVlnbtyCodeMap.get("Weightage"))/100) + 
 						 ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
