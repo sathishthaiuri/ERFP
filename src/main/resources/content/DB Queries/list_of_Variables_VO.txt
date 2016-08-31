@@ -1,0 +1,44 @@
+private Integer APP_ID;
+
+private String APP_NAME;
+private String APP_CATEGORY;
+private String SUPPORT_SCOPE;
+
+private String AGE_IN_YEARS;
+private Integer NO_RELEASE_UBR;
+private Integer NO_TKTS_VLM;
+private Integer NO_SEV1_SEV2;
+private Integer NO_INC_TKT;
+private Integer NO_SRT_COUNT;
+private String NO_TKT_RSLV_W_VENDOR;
+private String MANUAL_INTERVENSION;
+private Integer NO_OUTOFOFF_CALLOUTS;
+
+private Integer NO_INTERFAC_APP;
+private String DATA_VOLUME_DAY;
+private String TECH_SUPRT_AVLBT;
+private String CODE_AVLBT;
+private String INCREA_DATA_VLM_YR;
+private String REG_COMPLIANCE;
+
+private String REV_IMPACT;
+private String IMPATC_TO_CUSTOMER;
+private String RECOVERY_DURATION;
+private String IMPACT_UP_DN_STREAM;
+private String IMPACT_BRAND_IMG;
+
+private String APP_PERF_SLA;
+private String SCALABILITY;
+private String OBSOLETE_INFRA;
+private String DR_ENV_AVLBT;
+private String NW_INFRA_ISSUE_PM;
+
+private String SME_AVLBT;
+private String VENDOR_EXPT_CTS;
+private String VENDOR_EXPT_ENSONO;
+private String AVALBT_BIZ_USERS;
+
+private String SEC_VLNBTY_CODE;
+private String SEC_VLNBTY_INFRA;
+private String COMP_VLNBLTS;
+private String CONF_MGT_VLNBTY;
