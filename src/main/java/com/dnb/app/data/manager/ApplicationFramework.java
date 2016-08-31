@@ -9,6 +9,7 @@ public class ApplicationFramework {
 
 	private static Float defaultFloatValue = 0.0f;
 	
+	private static Map<String, Float> appMaintRiskWeightageMap;
 	private static Map<String, Float> appMaintRiskValueRangeMap;
 	private static Map<String, String> appMaintRiskCategoryMap;
 	
@@ -77,8 +78,13 @@ public class ApplicationFramework {
 	
 	private void initializeAppMaintRiskScores(){
 		
+		appMaintRiskWeightageMap = new HashMap<String, Float>();
 		appMaintRiskValueRangeMap = new HashMap<String, Float>();
 		appMaintRiskCategoryMap = new HashMap<String, String>();
+		
+		appMaintRiskWeightageMap.put("Stability-Weightage", 40.0f);
+		appMaintRiskWeightageMap.put("Complexity-Weightage", 35.0f);
+		appMaintRiskWeightageMap.put("Impact-Weightage", 25.0f);
 		
 		appMaintRiskValueRangeMap.put("Category-A-Min", 5.0f);
 		appMaintRiskValueRangeMap.put("Category-A-Max", 10.0f);
@@ -388,9 +394,9 @@ public class ApplicationFramework {
 		String appMaintRiskCategory = null;
 		String appMaintRiskColor = null;
 		
-		appMaintRiskScore = stabilityRiskScoreRecalculation(applicationVO) +
-							  complexityRiskScoreRecalculation(applicationVO) + 
-							  impactRiskScoreRecalculation(applicationVO);
+		appMaintRiskScore = ((stabilityRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Stability-Weightage")) / 100) +
+							((complexityRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Complexity-Weightage")) / 100) + 
+							((impactRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Impact-Weightage")) / 100);
 		
 		if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-A-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-A-Max")){
 			appMaintRiskCategory = "A";
@@ -430,12 +436,12 @@ public class ApplicationFramework {
 		Float manualIntervensionVal = stabilityManualIntervensionMap.getOrDefault(manualIntervensionText, defaultFloatValue);
 		Float noTktRslvVendorVal = stabilityNoTktRslvVendorMap.getOrDefault(noTktRslvVendorText, defaultFloatValue);
 
-		stabilityRiskScore = ((noTktsVlmMatrixVal * stabilityNoTktsVlmMap.get("Weightage")) / 100)
-							+ ((noSev1Sev2MatrixVal * stabilityNoSev1Sev2Map.get("Weightage")) / 100)
-							+ ((noSrtCountMatrixVal * stabilityNoSrtCountMap.get("Weightage")) / 100)
-							+ ((noReleaseUbrMatrixVal * stabilityNoReleaseUbrMap.get("Weightage")) / 100)
-							+ ((manualIntervensionVal * stabilityManualIntervensionMap.get("Weightage")) / 100) +
-							+ ((noTktRslvVendorVal * stabilityNoTktRslvVendorMap.get("Weightage")) / 100);
+		stabilityRiskScore = ((noTktsVlmMatrixVal * stabilityNoTktsVlmMap.get("Weightage")) / 100) +
+							 ((noSev1Sev2MatrixVal * stabilityNoSev1Sev2Map.get("Weightage")) / 100) +
+							 ((noSrtCountMatrixVal * stabilityNoSrtCountMap.get("Weightage")) / 100) +
+							 ((noReleaseUbrMatrixVal * stabilityNoReleaseUbrMap.get("Weightage")) / 100) +
+							 ((manualIntervensionVal * stabilityManualIntervensionMap.get("Weightage")) / 100) +
+							 ((noTktRslvVendorVal * stabilityNoTktRslvVendorMap.get("Weightage")) / 100);
 
 		return stabilityRiskScore;
 
@@ -460,11 +466,11 @@ public class ApplicationFramework {
 		Float regComplianceVal = complexityRegComplianceMap.getOrDefault(regComplianceText, defaultFloatValue);
 		
 		complexityRiskScore = ((noInterfacAppMatrixVal * complexityNoInterfacAppMap.get("Weightage"))/100) + 
-						 ((dataVolumeDayVal * complexityDataVolumeDayMap.get("Weightage"))/100) +  
-						 ((techSuprtAvlbtVal * complexityTechSuprtAvlbtMap.get("Weightage"))/100) +
-						 ((codeAvlbtVal * complexityCodeAvlbtMap.get("Weightage"))/100) + 
-						 ((increaDataVlmYrVal * complexityIncreaDataVlmYrMap.get("Weightage"))/100) +  
-						 ((regComplianceVal * complexityRegComplianceMap.get("Weightage"))/100);
+						 	  ((dataVolumeDayVal * complexityDataVolumeDayMap.get("Weightage"))/100) +  
+						 	  ((techSuprtAvlbtVal * complexityTechSuprtAvlbtMap.get("Weightage"))/100) +
+						 	  ((codeAvlbtVal * complexityCodeAvlbtMap.get("Weightage"))/100) + 
+						 	  ((increaDataVlmYrVal * complexityIncreaDataVlmYrMap.get("Weightage"))/100) +  
+						 	  ((regComplianceVal * complexityRegComplianceMap.get("Weightage"))/100);
 		
 		return complexityRiskScore;
 	}
@@ -482,8 +488,8 @@ public class ApplicationFramework {
 		Float recoveryDurationVal = impactRecoveryDurationMap.getOrDefault(recoveryDurationText, defaultFloatValue);
 		
 		impactRiskScore = ((revImpactVal * impactRevImpactMap.get("Weightage"))/100) + 
-						 ((impatcToCustomerVal * impactImpatcToCustomerMap.get("Weightage"))/100) +  
-						 ((recoveryDurationVal * impactRecoveryDurationMap.get("Weightage"))/100);
+						  ((impatcToCustomerVal * impactImpatcToCustomerMap.get("Weightage"))/100) +  
+						  ((recoveryDurationVal * impactRecoveryDurationMap.get("Weightage"))/100);
 		
 		return impactRiskScore;
 	}
@@ -548,9 +554,9 @@ public class ApplicationFramework {
 		Float peopleAvlbtOfBizUsersVal = peopleAvlbtOfBizUsersMap.getOrDefault(peopleVendorExpCTSText, defaultFloatValue);
 		
 		peopleRiskScore = ((peopleSMEAvlbtVal * peopleSMEAvlbtMap.get("Weightage"))/100) + 
-						 ((peopleVendorExpCTSVal * peopleVendorExpCTSMap.get("Weightage"))/100) + 
-						 ((peopleVendorExpEnsonoVal * peopleVendorExpEnsonoMap.get("Weightage"))/100) +  
-						 ((peopleAvlbtOfBizUsersVal * peopleAvlbtOfBizUsersMap.get("Weightage"))/100);
+						  ((peopleVendorExpCTSVal * peopleVendorExpCTSMap.get("Weightage"))/100) + 
+						  ((peopleVendorExpEnsonoVal * peopleVendorExpEnsonoMap.get("Weightage"))/100) +  
+						  ((peopleAvlbtOfBizUsersVal * peopleAvlbtOfBizUsersMap.get("Weightage"))/100);
 		
 		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-A-Max")){
 			peopleCategory = "A";
@@ -588,8 +594,8 @@ public class ApplicationFramework {
 		Float secCompVlnbltsVal = secCompVlnbltsMap.getOrDefault(secCompVlnbltsText, defaultFloatValue);
 		
 		securityRiskScore = ((secVlnbtyCodeVal * secVlnbtyCodeMap.get("Weightage"))/100) + 
-						 ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
-						 ((secCompVlnbltsVal * secCompVlnbltsMap.get("Weightage"))/100);
+						    ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
+						    ((secCompVlnbltsVal * secCompVlnbltsMap.get("Weightage"))/100);
 		
 		if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-A-Max")){
 			securityCategory = "A";
