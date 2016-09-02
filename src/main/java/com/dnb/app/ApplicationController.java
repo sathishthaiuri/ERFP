@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +27,7 @@ import com.dnb.app.service.api.ApplicationService;
 import com.dnb.app.vo.ApplicationVO;
 import com.dnb.app.vo.UserDetailsVO;
 import com.dnb.app.wrapper.ResponseWrapper;
+import com.google.gson.Gson;
 
 import jxl.Workbook;
 import jxl.write.Label;
@@ -31,6 +35,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
+
 
 @Controller
 public class ApplicationController {
@@ -62,14 +67,19 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(value = "listApplicationRecords", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")
-	public @ResponseBody List<ApplicationVO> listApplicationRecords() throws ServiceException {
+	public @ResponseBody String listApplicationRecords() throws ServiceException {
+		//return erfpService.listApplicationRecords();
+		//return ApplicationManager.simulateApplicationRecords();
 		
-		//return erfpService.listApplicationRecords();  /** Data fetches from MySQL DB */
-		return ApplicationManager.simulateApplicationRecords(); /** Data simulation instead of from DB */
+		//String jsonObj = new Gson().toJson(ApplicationManager.simulateApplicationRecords() );
+
+		String jsonObj = new Gson().toJson(erfpService.listApplicationRecords());
+		return jsonObj;
 	}
 
 	@RequestMapping(value = "scoreRecalculation", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")
-	public @ResponseBody ApplicationVO scoreRecalculation(@RequestBody ApplicationVO applicationVO) throws ServiceException {
+	public @ResponseBody ApplicationVO scoreRecalculation(@RequestParam(value="jsonData") String jsonData) throws ServiceException {		
+		ApplicationVO applicationVO = new Gson().fromJson(jsonData, ApplicationVO.class);
 		return erfpService.scoreRecalculation(applicationVO);
 	}
 	
@@ -78,6 +88,14 @@ public class ApplicationController {
 		return erfpService.validateUserDetails(userDetailsVO);
 	}
 	
+	@RequestMapping(value = "/userSessionLogoff", method = RequestMethod.GET)
+	public String signOut(HttpSession httpSession) {
+		httpSession.invalidate();
+		System.out.println("User session cleared");
+		
+		return "sessionCleared";
+	}
+
 	/**
 	 * Handle request to download an Excel document via JXL
 	 */

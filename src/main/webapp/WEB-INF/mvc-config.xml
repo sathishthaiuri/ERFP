@@ -26,5 +26,9 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".html" />
 	</bean>
+	<mvc:resources mapping="bootstrap/**" location="/bootstrap/" />
+	<mvc:resources mapping="i18n/**" location="/i18n/" />	
+	<mvc:resources mapping="js/**" location="/js/" />
+	<mvc:resources mapping="images/**" location="/images/" />
 
 </beans>

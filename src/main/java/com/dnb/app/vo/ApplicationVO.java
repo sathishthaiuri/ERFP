@@ -50,21 +50,21 @@ public class ApplicationVO {
 	private String compVlnblts = null;
 	private String confMgtVlnbty = null;
 	
-	private String appRiskMaintScore = null;
 	private String appRiskMaintColor = null;
 	private String appRiskMaintCategory = null;
+	private String appRiskMaintScore = null;
 	
-	private String appInfraRiskScore = null;
 	private String appInfraRiskColor = null;
 	private String appInfraRiskCategory = null;
+	private String appInfraRiskScore = null;
 	
-	private String appSecurityRiskScore = null;
 	private String appSecurityRiskColor = null;
 	private String appSecurityRiskCategory = null;
+	private String appSecurityRiskScore = null;
 	
-	private String appPeopleRiskScore = null;
 	private String appPeopleRiskColor = null;
 	private String appPeopleRiskCategory = null;
+	private String appPeopleRiskScore = null;
 	
 	
 	public Integer getAppId() {
