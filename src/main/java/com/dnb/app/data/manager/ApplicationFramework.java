@@ -1,5 +1,6 @@
 package com.dnb.app.data.manager;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import com.dnb.app.vo.ApplicationVO;
 public class ApplicationFramework {
 
 	private static Float defaultFloatValue = 0.0f;
+	private static DecimalFormat df2;
 	
 	private static Map<String, Float> appMaintRiskWeightageMap;
 	private static Map<String, Float> appMaintRiskValueRangeMap;
@@ -65,6 +67,8 @@ public class ApplicationFramework {
 	private static Map<String, String> secRiskCategoryMap;
 	
 	public void init() {
+		df2 = new DecimalFormat(".##");
+		
 		initializeAppMaintRiskScores();
 		
 		initializeStabilityRiskScores();
@@ -391,6 +395,7 @@ public class ApplicationFramework {
 	public static void appMaintRiskScoreRecalculation(ApplicationVO applicationVO){
 		
 		float appMaintRiskScore;
+		String appMaintRiskScoreText;
 		String appMaintRiskCategory = null;
 		String appMaintRiskColor = null;
 		
@@ -412,7 +417,8 @@ public class ApplicationFramework {
 			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
 		}
 		
-		applicationVO.setAppRiskMaintScore(String.valueOf(appMaintRiskScore));
+		appMaintRiskScoreText = df2.format(appMaintRiskScore);
+		applicationVO.setAppRiskMaintScore(appMaintRiskScoreText);
 		applicationVO.setAppRiskMaintCategory(appMaintRiskCategory);
 		applicationVO.setAppRiskMaintColor(appMaintRiskColor);
 
