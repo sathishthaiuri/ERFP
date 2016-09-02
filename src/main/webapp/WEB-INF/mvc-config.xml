@@ -14,6 +14,12 @@
 	<mvc:default-servlet-handler/>
 
 	<import resource="classpath:spring/application-config.xml"/>
+	
+	<bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+  		<property name="order" value="1"/>
+  		<property name="basename" value="views"/>
+	</bean>
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->

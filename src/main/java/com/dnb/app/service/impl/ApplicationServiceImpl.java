@@ -15,6 +15,7 @@ import com.dnb.app.model.ApplicationModel;
 import com.dnb.app.repository.api.ApplicationRepository;
 import com.dnb.app.service.api.ApplicationService;
 import com.dnb.app.vo.ApplicationVO;
+import com.dnb.app.vo.UserDetailsVO;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
@@ -113,5 +114,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 		ApplicationFramework.securityRiskScoreRecalculation(applicationVO);
 		
 		return applicationVO;
+	}
+	
+	@Override
+	public UserDetailsVO validateUserDetails(UserDetailsVO userDetailsVO){
+		
+		return userDetailsVO;
 	}
 }

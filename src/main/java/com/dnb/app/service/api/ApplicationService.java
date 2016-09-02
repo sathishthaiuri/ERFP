@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dnb.app.exception.ServiceException;
 import com.dnb.app.vo.ApplicationVO;
+import com.dnb.app.vo.UserDetailsVO;
 
 public interface ApplicationService {
 
@@ -18,5 +19,7 @@ public interface ApplicationService {
 	List<ApplicationVO> listApplicationRecords() throws ServiceException;
 
 	ApplicationVO scoreRecalculation(ApplicationVO applicationVO) throws ServiceException;
+
+	UserDetailsVO validateUserDetails(UserDetailsVO userDetailsVO);
 
 }

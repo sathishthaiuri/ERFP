@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Enterprise Risk Framework Portal</title>
-</head>
-<body>
+<meta charset="UTF-8">
+<title>ERFP Application</title>
+<link rel="stylesheet" href="./css/style.css">
 
-	<h1>ERFP</h1>
-	
+<style>
+div.groove {
+	border-style: groove;
+}
+</style>
+</head>
+
+<body>
+	<div align="center">
+		<h2>Enterprise Risk Framework Portal (ERFP)</h2>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<table border="1" style="width:100%">
+		<tr>
+			<td width="20%"></td>
+			<td width="60%">
+				<img width="" height="" alt="" src="./images/categoriesLoginSnap.PNG">
+			</td>
+			<td width="20%">
+				<div class="container">
+					<section id="content">
+						<form action="http://localhost:8080/erfp/listApplicationRecords"
+							method="post">
+							<h1>Login Form</h1>
+							<div>
+								<input type="text" placeholder="Username" required=""
+									id="username" value="presenter@dnb.com" />
+							</div>
+							<div>
+								<input type="password" placeholder="Password" required=""
+									id="password" value="12345678" />
+							</div>
+							<div>
+								<input type="submit" value="Log in" width="30" /> <a href="#">Lost
+									your password?</a> <a href="#">Register</a>
+							</div>
+						</form>
+						<!-- form -->
+						<div class="button">
+							<a href="#">Download White Papers</a>
+						</div>
+						<!-- button -->
+					</section>
+				</div>
+			</td>
+		</tr>
+
+	</table>
+
+
+</body>
+
+<!-- <script src="./js/index.js"></script> -->
+
+
+
+
 </body>
 </html>
