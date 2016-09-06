@@ -179,7 +179,7 @@ public class ApplicationFramework {
 		stabilityNoTktRslvVendorMap.put("High > 5 Tickets/Year", 10.0f);
 		stabilityNoTktRslvVendorMap.put("Weightage", 5.0f);
 
-		System.out.println("initializeScalabilityRiskScores()...Done");
+		System.out.println("initializeStabilityRiskScores()...Done");
 	}
 
 	private void initializeComplexityRiskScores() {
@@ -403,7 +403,7 @@ public class ApplicationFramework {
 							((complexityRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Complexity-Weightage")) / 100) + 
 							((impactRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Impact-Weightage")) / 100);
 		
-		if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-A-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-A-Max")){
+		if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-A-Min") && appMaintRiskScore <= appMaintRiskValueRangeMap.get("Category-A-Max")){
 			appMaintRiskCategory = "A";
 			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
 		}else if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-B-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-B-Max")){
@@ -525,7 +525,7 @@ public class ApplicationFramework {
 						 ((infraScalabilityIssuVal * infraScalabilityIssuMap.get("Weightage"))/100) +  
 						 ((infraFrequencyInfraVal * infraFrequencyInfraMap.get("Weightage"))/100);
 		
-		if( infraRiskScore >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-A-Max")){
+		if( infraRiskScore >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskScore <= infraRiskValueRangeMap.get("Category-A-Max")){
 			infraCategory = "A";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
 		}else if( infraRiskScore >= infraRiskValueRangeMap.get("Category-B-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-B-Max")){
@@ -564,7 +564,7 @@ public class ApplicationFramework {
 						  ((peopleVendorExpEnsonoVal * peopleVendorExpEnsonoMap.get("Weightage"))/100) +  
 						  ((peopleAvlbtOfBizUsersVal * peopleAvlbtOfBizUsersMap.get("Weightage"))/100);
 		
-		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-A-Max")){
+		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore <= peopleRiskValueRangeMap.get("Category-A-Max")){
 			peopleCategory = "A";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
 		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-B-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-B-Max")){
@@ -603,7 +603,7 @@ public class ApplicationFramework {
 						    ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
 						    ((secCompVlnbltsVal * secCompVlnbltsMap.get("Weightage"))/100);
 		
-		if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-A-Max")){
+		if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore <= secRiskValueRangeMap.get("Category-A-Max")){
 			securityCategory = "A";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
 		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-B-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-B-Max")){
@@ -630,32 +630,32 @@ public class ApplicationFramework {
 		for (int counter = 1; counter <= mapSize; counter++) {
 			
 			if(counter == 1){
-				if( lookUpVal >= rangeMatrixMap.get("Range-One-Min") && lookUpVal < rangeMatrixMap.get("Range-One-Max")){
+				if( lookUpVal >= rangeMatrixMap.get("Range-One-Min") && lookUpVal <= rangeMatrixMap.get("Range-One-Max")){
 					rangeMatrixScore = rangeMatrixMap.get("Range-One-Score");
 					break;
 				}
 			}else if(counter == 2){
-				if( lookUpVal >= rangeMatrixMap.get("Range-Two-Min") && lookUpVal < rangeMatrixMap.get("Range-Two-Max")){
+				if( lookUpVal >= rangeMatrixMap.get("Range-Two-Min") && lookUpVal <= rangeMatrixMap.get("Range-Two-Max")){
 					rangeMatrixScore = rangeMatrixMap.get("Range-Two-Score");
 					break;
 				}
 			}else if(counter == 3){
-				if( lookUpVal >= rangeMatrixMap.get("Range-Three-Min") && lookUpVal < rangeMatrixMap.get("Range-Three-Max")){
+				if( lookUpVal >= rangeMatrixMap.get("Range-Three-Min") && lookUpVal <= rangeMatrixMap.get("Range-Three-Max")){
 					rangeMatrixScore = rangeMatrixMap.get("Range-Three-Score");
 					break;
 				}
 			}else if(counter == 4){
-				if( lookUpVal >= rangeMatrixMap.get("Range-Four-Min") && lookUpVal < rangeMatrixMap.get("Range-Four-Max")){
+				if( lookUpVal >= rangeMatrixMap.get("Range-Four-Min") && lookUpVal <= rangeMatrixMap.get("Range-Four-Max")){
 					rangeMatrixScore = rangeMatrixMap.get("Range-Four-Score");
 					break;
 				}
 			}else if(counter == 5){
-				if( lookUpVal >= rangeMatrixMap.get("Range-Five-Min") && lookUpVal < rangeMatrixMap.get("Range-Five-Max")){
+				if( lookUpVal >= rangeMatrixMap.get("Range-Five-Min") && lookUpVal <= rangeMatrixMap.get("Range-Five-Max")){
 					rangeMatrixScore = rangeMatrixMap.get("Range-Five-Score");
 					break;
 				}
 			}else if(counter == 6){
-				if( lookUpVal >= rangeMatrixMap.get("Range-Six-Min") && lookUpVal < rangeMatrixMap.get("Range-Six-Max")){
+				if( lookUpVal >= rangeMatrixMap.get("Range-Six-Min") && lookUpVal <= rangeMatrixMap.get("Range-Six-Max")){
 					rangeMatrixScore = rangeMatrixMap.get("Range-Six-Score");
 					break;
 				}

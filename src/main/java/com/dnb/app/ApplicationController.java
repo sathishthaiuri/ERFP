@@ -79,7 +79,12 @@ public class ApplicationController {
 
 	@RequestMapping(value = "scoreRecalculation", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")
 	public @ResponseBody ApplicationVO scoreRecalculation(@RequestParam(value="jsonData") String jsonData) throws ServiceException {		
+		System.out.println("jsonData"+jsonData);
 		ApplicationVO applicationVO = new Gson().fromJson(jsonData, ApplicationVO.class);
+		System.out.println("applicationVO"+applicationVO);
+		if(applicationVO.getIncreaDataVlmYr()!=null && applicationVO.getIncreaDataVlmYr().contains("Percent")){
+			applicationVO.setIncreaDataVlmYr(applicationVO.getIncreaDataVlmYr().replace("Percent", " %"));
+		}
 		return erfpService.scoreRecalculation(applicationVO);
 	}
 	
