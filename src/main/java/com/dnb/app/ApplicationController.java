@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dnb.app.data.manager.ApplicationManager;
 import com.dnb.app.exception.ServiceException;
 import com.dnb.app.net.codejava.spring.Book;
 import com.dnb.app.service.api.ApplicationService;
@@ -69,8 +67,8 @@ public class ApplicationController {
 	@RequestMapping(value = "listApplicationRecords", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")
 	public @ResponseBody String listApplicationRecords() throws ServiceException {
 		//return erfpService.listApplicationRecords();
-		//return ApplicationManager.simulateApplicationRecords();
 		
+		//return ApplicationManager.simulateApplicationRecords();
 		//String jsonObj = new Gson().toJson(ApplicationManager.simulateApplicationRecords() );
 
 		String jsonObj = new Gson().toJson(erfpService.listApplicationRecords());
