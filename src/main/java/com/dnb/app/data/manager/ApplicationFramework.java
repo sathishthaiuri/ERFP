@@ -174,9 +174,9 @@ public class ApplicationFramework {
 		stabilityManualIntervensionMap.put("High >4 Hours/Day", 10.0f);
 		stabilityManualIntervensionMap.put("Weightage", 7.0f);
 
-		stabilityNoTktRslvVendorMap.put("Low < 2 Tickets/Year", 0.0f);
-		stabilityNoTktRslvVendorMap.put("Medium >2 & < 8 Tickets/Year", 5.0f);
-		stabilityNoTktRslvVendorMap.put("High > 8 Tickets/Year", 10.0f);
+		stabilityNoTktRslvVendorMap.put("No", 0.0f);
+		stabilityNoTktRslvVendorMap.put("Medium < 5 Tickets/Year", 5.0f);
+		stabilityNoTktRslvVendorMap.put("High > 5 Tickets/Year", 10.0f);
 		stabilityNoTktRslvVendorMap.put("Weightage", 5.0f);
 
 		System.out.println("initializeScalabilityRiskScores()...Done");
