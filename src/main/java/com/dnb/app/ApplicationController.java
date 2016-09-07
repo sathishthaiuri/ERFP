@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dnb.app.data.manager.ApplicationManager;
 import com.dnb.app.exception.ServiceException;
 import com.dnb.app.net.codejava.spring.Book;
 import com.dnb.app.service.api.ApplicationService;
@@ -76,7 +77,7 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(value = "scoreRecalculation", method = { RequestMethod.GET, RequestMethod.POST }, headers = "Accept=application/json")
-	public @ResponseBody ApplicationVO scoreRecalculation(@RequestParam(value="jsonData") String jsonData) throws ServiceException {		
+	public @ResponseBody ApplicationVO scoreRecalculation(@RequestBody String jsonData) throws ServiceException {		
 		System.out.println("jsonData"+jsonData);
 		ApplicationVO applicationVO = new Gson().fromJson(jsonData, ApplicationVO.class);
 		System.out.println("applicationVO"+applicationVO);

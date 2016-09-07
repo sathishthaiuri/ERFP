@@ -222,7 +222,7 @@ public class ApplicationFramework {
 
 		complexityIncreaDataVlmYrMap.put("Low < 3%", 0.0f);
 		complexityIncreaDataVlmYrMap.put("Medium 3% to 8%", 5.0f);
-		complexityIncreaDataVlmYrMap.put("High  > 8%", 10.0f);
+		complexityIncreaDataVlmYrMap.put("High > 8%", 10.0f);
 		complexityIncreaDataVlmYrMap.put("Weightage", 2.5f);
 		
 		complexityRegComplianceMap.put("Yes", 10.0f);

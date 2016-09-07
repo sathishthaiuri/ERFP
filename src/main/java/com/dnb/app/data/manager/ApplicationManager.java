@@ -141,7 +141,7 @@ public class ApplicationManager {
 		
 		ApplicationVO applicationVO1 = new ApplicationVO();
 		applicationVO1.setAppId(1);
-		applicationVO1.setAppName("OSP – Online");
+		applicationVO1.setAppName("OSP - Online");
 		applicationVO1.setAppCategory("Data Supply Chain");
 		applicationVO1.setSupportScope("General");
 		applicationVO1.setAgeInYears("> 25 years");
@@ -193,7 +193,7 @@ public class ApplicationManager {
 		
 		ApplicationVO applicationVO2 = new ApplicationVO();
 		applicationVO2.setAppId(2);
-		applicationVO2.setAppName("AOS – Batch");
+		applicationVO2.setAppName("AOS - Batch");
 		applicationVO2.setAppCategory("Data Supply Chain");
 		applicationVO2.setSupportScope("General");
 		applicationVO2.setAgeInYears("> 25 years");
