@@ -1,4 +1,4 @@
-SELECT * FROM grtb.app_risk_profile;CREATE TABLE `app_risk_profile` (
+CREATE TABLE `app_risk_profile` (
   `APP_ID` int(11) NOT NULL,
   `APP_NAME` varchar(100) DEFAULT NULL,
   `APP_CATEGORY` varchar(60) DEFAULT NULL,
