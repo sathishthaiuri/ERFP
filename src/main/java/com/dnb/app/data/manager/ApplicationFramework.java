@@ -399,9 +399,13 @@ public class ApplicationFramework {
 		String appMaintRiskCategory = null;
 		String appMaintRiskColor = null;
 		
-		appMaintRiskScore = ((stabilityRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Stability-Weightage")) / 100) +
+		/*appMaintRiskScore = ((stabilityRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Stability-Weightage")) / 100) +
 							((complexityRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Complexity-Weightage")) / 100) + 
-							((impactRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Impact-Weightage")) / 100);
+							((impactRiskScoreRecalculation(applicationVO) * appMaintRiskWeightageMap.get("Impact-Weightage")) / 100);*/
+
+		appMaintRiskScore = stabilityRiskScoreRecalculation(applicationVO) +
+								complexityRiskScoreRecalculation(applicationVO) + 
+									impactRiskScoreRecalculation(applicationVO);
 		
 		if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-A-Min") && appMaintRiskScore <= appMaintRiskValueRangeMap.get("Category-A-Max")){
 			appMaintRiskCategory = "A";

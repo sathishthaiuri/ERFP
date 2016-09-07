@@ -213,22 +213,52 @@ function reCalculateRiskScore() {
         dataType: "json",
         success: function(data) {
             console.log("Success");
+            
         	$('#screen2Right').empty();
         	$('#screen2Right').show();            
             console.log("Data: "+data.appId);
             console.log("Data: "+data.appName);
             console.log( data.appRiskMaintColor+'_'+data.appRiskMaintCategory);
-            var recalSectionDIV='<div id="riskScoreImageDiv"><div class="divTableCell"><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'+data.appRiskMaintColor+'_'+data.appRiskMaintCategory+'.png" /><label for="appName" class="imtip">'+data.appPeopleRiskScore+'</label></div></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/infra_'+data.appInfraRiskColor+'_'+data.appInfraRiskCategory+'.png" /><label for="appName" class="imtip">'+data.appInfraRiskScore+'</label></div></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/security_'+data.appSecurityRiskColor+'_'+data.appSecurityRiskCategory+'.png" /><label for="appName" class="imtip">'+data.appSecurityRiskScore+'</label></div></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/people_'+data.appPeopleRiskColor+'_'+data.appPeopleRiskCategory+'.png" /><label for="appName" class="imtip">'+data.appPeopleRiskScore+'</label></div></td></tr></tbody></table></td></tr></table></br></div></div>';                     
+            
+			var recalSectionDIV = '<div id="riskScoreImageDiv"><div class="divTableCell"></br></br></br></br></br></br></br></br></br></br><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'
+							+ data.appRiskMaintColor
+							+ '_'
+							+ data.appRiskMaintCategory
+							+ '.png" /><label for="appName" class="imtip">'
+							+ data.appRiskMaintScore
+							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/infra_'
+							+ data.appInfraRiskColor
+							+ '_'
+							+ data.appInfraRiskCategory
+							+ '.png" /><label for="appName" class="imtip">'
+							+ data.appInfraRiskScore
+							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/security_'
+							+ data.appSecurityRiskColor
+							+ '_'
+							+ data.appSecurityRiskCategory
+							+ '.png" /><label for="appName" class="imtip">'
+							+ data.appSecurityRiskScore
+							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/people_'
+							+ data.appPeopleRiskColor
+							+ '_'
+							+ data.appPeopleRiskCategory
+							+ '.png" /><label for="appName" class="imtip">'
+							+ data.appPeopleRiskScore
+							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br></div></div>'
+							+ '<table><tr><td>---</td></tr></table>';    
+					            
            	$('#screen2Right').append(recalSectionDIV);
         }
  });       
 }
 
 function loadRecalcSection(value){	
+	
 	console.log("value:"+arr[value - 1]);
 	$("#screen1").hide();
 	$("#screen2Left").empty();
 	$("#screen2Right").empty();
+	
 	screentwoLefthtml = '<form id="riskScoreform"><div class="center_content"><div class="divTable1"><table style="height: 110px; margin-right: auto; margin-left: 12px; margin-top: 1%; font-size: 13; font-weight: bold;" width="400"><tbody><tr style="height: 15px;"><td>Application ID :</td><td><label name="appId+"><b>'
 			+ arr[value - 1].appId
 			+ '</b></p></td></tr><tr style="height: 15px;"><td>Application Name :</td><td><label name="appName"><b>'
@@ -237,7 +267,7 @@ function loadRecalcSection(value){
 			+ arr[value - 1].appCategory
 			+ '</b></label></td></tr><tr style="height: 15px;"><td>Support Scope:</td><td style="font-weight: bold;"><label name="supportScope"><b>'
 			+ arr[value - 1].supportScope
-			+ '</b></label></td></tr><tr><td></td></tr></tbody></table><img style="margin-left: 52%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();" /><div class="divTableBody"><div class="divTableRow1"><div class="divTableCell"><table style="width: 650px; height: 210px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 210px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2" style="margin-left: 4%;">Application Stability Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Age</td><td align="right"><select name="ageInYears"><option selected="selected">'
+			+ '</b></label></td></tr><tr><td></td></tr></tbody></table><img style="margin-left: 52%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();" /><div class="divTableBody"><div class="divTableRow1"><div class="divTableCell"><table style="width: 650px; height: 210px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 210px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2" style="margin-left: 4%;">Application Stability Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Age</td><td align="right"><select name="ageInYears"><option selected="selected">'
 			+ arr[value - 1].ageInYears
 			+ '</option><option>> 2 years</option><option>> 5 years</option><option>> 10 years</option><option>> 15 years</option><option>> 25 years</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Releases/UBR</td><td align="right"><input name="noReleaseUbr" id="noReleaseUbr" type="number" value='
 			+ arr[value - 1].noReleaseUbr
@@ -251,14 +281,14 @@ function loadRecalcSection(value){
 			+ arr[value - 1].noSrtCount
 			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;No. of Tickets resolved with Vendor support (3rd Party like<br>Axway etc) </td><td align="right"><select name="noTktRslvVendor" id="noTktRslvVendor"><option selected="selected">'
 			+ arr[value - 1].noTktRslvVendor
-			+ '</option><option>No</option><option>Medium < 5 Tickets/Year</option><option>High > 5 Tickets/Year</option>														 </select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Manual Intervention/Production Support in Effort/Day</td><td align="right"><select name="manualIntervension" id="manualIntervension"><option selected="selected">'
+			+ '</option><option>No</option><option>Medium < 5 Tickets/Year</option><option>High > 5 Tickets/Year</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Manual Intervention/Production Support in Effort/Day</td><td align="right"><select name="manualIntervension" id="manualIntervension"><option selected="selected">'
 			+ arr[value - 1].manualIntervension
 			+ '</option><option>Low < 2 Hours/Day</option><option>Medium <4 Hours/Day</option><option>High >4 Hours/Day</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number ofOut of Office Hour callouts (2015)</td><td align="right"><input name="noOutofoffCallouts" type="number" id="noOutofoffCallouts" value='
 			+ arr[value - 1].noOutofoffCallouts
-			+ ' /></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Application Complexity Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Interfacing applications</td><td align="right"><input name="noInterfacApp" id="noInterfacApp" type="number" value='
+			+ ' /></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Application Complexity Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Interfacing applications</td><td align="right"><input name="noInterfacApp" id="noInterfacApp" type="number" value='
 			+ arr[value - 1].noInterfacApp
 			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Data Volume /Transaction per day</td><td align="right"><select name="dataVolumeDay" id="dataVolumeDay"><option selected="selected">'
-			+ arr[value - 1].noTktsVlm
+			+ arr[value - 1].dataVolumeDay
 			+ '</option><option>Low < 50K Txns</option><option>Medium > 50K Txns to 1 Mn Txns</option><option>High >1M Txns</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Technology and Support Availability</td><td align="right"><select name="techSuprtAvlbt" id="techSuprtAvlbt"><option selected="selected">'
 			+ arr[value - 1].techSuprtAvlbt
 			+ '</option><option>Web & Support Available</option><option>Web & Support Unavailable</option><option>Legacy & Support Available</option><option>Legacy & Support Unavailable</option><option>Niche & Support Available</option><option>Niche & Support Unavailable</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Code Availability</td><td align="right"><select name="codeAvlbt" id="codeAvlbt"><option selected="selected">'
@@ -267,7 +297,7 @@ function loadRecalcSection(value){
 			+ arr[value - 1].increaDataVlmYr
 			+ '</option><option>Low < 3%</option><option>Medium 3% to 8%</option><option>High > 8%</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Regulatory Compliance</td><td align="right"><select name="regCompliance" id="regCompliance"><option selected="selected">'
 			+ arr[value - 1].regCompliance
-			+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Impact and Recovery Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Revenue Impact</td><td align="right"><select name="revImpact" id="revImpact"><option selected="selected">'
+			+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Impact and Recovery Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Revenue Impact</td><td align="right"><select name="revImpact" id="revImpact"><option selected="selected">'
 			+ arr[value - 1].revImpact
 			+ '</option><option>Direct & Immediate Revenue Impact</option><option>Indirect Revenue Impact</option><option>No Revenue Impact</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Customer</td><td align="right"><select name="impatcToCustomer" id="impatcToCustomer"><option selected="selected">'
 			+ arr[value - 1].impatcToCustomer
@@ -306,25 +336,25 @@ function loadRecalcSection(value){
 			+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><img style="margin-left: 65%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();" /></div><div class="divTableCell3"><br><br><br><br><table style="margin-left: 20px; margin-top: 100px; height: 27px;" width="100%"><tbody></tbody></table></div></div></div></div></div></form>';
 	
 
-		screentwoRighthtml = '<div id="riskScoreImageDiv"><div class="divTableCell"><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'
+		screentwoRighthtml = '<div id="riskScoreImageDiv"><div class="divTableCell"></br></br></br></br></br></br></br></br></br></br><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'
 			+ arr[value - 1].appRiskMaintColor
 			+ '_'
 			+ arr[value - 1].appRiskMaintCategory
 			+ '.png" /><label for="appName" class="imtip">'
-			+ arr[value - 1].appPeopleRiskScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/infra_'
+			+ arr[value - 1].appRiskMaintScore
+			+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/infra_'
 			+ arr[value - 1].appInfraRiskColor
 			+ '_'
 			+ arr[value - 1].appInfraRiskCategory
 			+ '.png" /><label for="appName" class="imtip">'
 			+ arr[value - 1].appInfraRiskScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/security_'
+			+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/security_'
 			+ arr[value - 1].appSecurityRiskColor
 			+ '_'
 			+ arr[value - 1].appSecurityRiskCategory
 			+ '.png" /><label for="appName" class="imtip">'
 			+ arr[value - 1].appSecurityRiskScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/people_'
+			+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/people_'
 			+ arr[value - 1].appPeopleRiskColor
 			+ '_'
 			+ arr[value - 1].appPeopleRiskCategory
