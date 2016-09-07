@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ERFP Application</title>
-<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="./css/style.css">
-
-<style>
-div.groove {
-	border-style: groove;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>ERFP Application</title>
+	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="./css/style.css">
+	
+	<style>
+		div.groove {
+			border-style: groove;
+		}
+	</style>
 </head>
 
 <body>
+	<script>
+		function redirectURL(sw) {
+		    document.getElementById('loginForm').action = "http://"+window.location.host+"/erfp/dashboardScreen.html"
+		}
+	</script>
+	
 	<div align="center">
 		<h2>Enterprise Risk Framework Portal (ERFP)</h2>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<br><br><br><br><br>
 
 	<table border="0" style="width:100%">
 		<tr>
@@ -32,8 +34,7 @@ div.groove {
 			<td width="20%">
 				<div class="container">
 					<section id="content">
-						<form action="http://dbqwCTWAPV01:8888/erfp/dashboardScreen.html"
-							method="post">
+						<form id="loginForm" onsubmit="redirectURL()" method="post">
 							<h1>Login Form</h1>
 							<div>
 								<input type="text" placeholder="Username" required=""
@@ -57,16 +58,7 @@ div.groove {
 				</div>
 			</td>
 		</tr>
-
 	</table>
-
-
-</body>
-
-<!-- <script src="./js/index.js"></script> -->
-
-
-
 
 </body>
 </html>
