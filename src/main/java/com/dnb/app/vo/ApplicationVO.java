@@ -66,6 +66,7 @@ public class ApplicationVO {
 	private String appPeopleRiskCategory = null;
 	private String appPeopleRiskScore = null;
 	
+	private String changeStatusSummary = null;
 	
 	public Integer getAppId() {
 		return appId;
@@ -364,6 +365,13 @@ public class ApplicationVO {
 	}
 	public void setAppPeopleRiskCategory(String appPeopleRiskCategory) {
 		this.appPeopleRiskCategory = appPeopleRiskCategory;
+	}
+	
+	public String getChangeStatusSummary() {
+		return changeStatusSummary;
+	}
+	public void setChangeStatusSummary(String changeStatusSummary) {
+		this.changeStatusSummary = changeStatusSummary;
 	}
 	
 	

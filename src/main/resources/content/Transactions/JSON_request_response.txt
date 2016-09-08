@@ -270,7 +270,7 @@ http://localhost:8080/erfp/scoreRecalculation       > For given record it re-cal
 [
   {
     "appId": 1,
-    "appName": "OSP – Online",
+    "appName": "OSP - Online",
     "appCategory": "Data Supply Chain",
     "supportScope": "General",
     "ageInYears": "> 25 years",
@@ -321,7 +321,7 @@ http://localhost:8080/erfp/scoreRecalculation       > For given record it re-cal
   },
   {
     "appId": 2,
-    "appName": "AOS – Batch",
+    "appName": "AOS - Batch",
     "appCategory": "Data Supply Chain",
     "supportScope": "General",
     "ageInYears": "> 25 years",

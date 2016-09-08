@@ -107,11 +107,13 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Override
 	public ApplicationVO scoreRecalculation(ApplicationVO applicationVO) throws ServiceException {
-
+		
+		//prepareChangeStatusSummary(applicationVO, "Initial");
 		ApplicationFramework.appMaintRiskScoreRecalculation(applicationVO);
 		ApplicationFramework.infraRiskScoreRecalculation(applicationVO);
 		ApplicationFramework.peopleRiskScoreRecalculation(applicationVO);
 		ApplicationFramework.securityRiskScoreRecalculation(applicationVO);
+		//prepareChangeStatusSummary(applicationVO, "Final");
 		
 		return applicationVO;
 	}
@@ -120,5 +122,52 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public UserDetailsVO validateUserDetails(UserDetailsVO userDetailsVO){
 		
 		return userDetailsVO;
+	}
+	
+	private void prepareChangeStatusSummary(ApplicationVO applicationVO, String prepareStage){
+		String changeSummaryText = null;
+		
+		if(prepareStage.contains("Initial")){
+			changeSummaryText = ApplicationFramework.getChangeSummary();
+			
+			changeSummaryText = changeSummaryText.replace("AMS-O-Score#", applicationVO.getAppRiskMaintScore());
+			changeSummaryText = changeSummaryText.replace("AMS-O-Grade#", applicationVO.getAppRiskMaintCategory());
+			changeSummaryText = changeSummaryText.replace("AMS-O-Color#", applicationVO.getAppRiskMaintColor());
+			
+			changeSummaryText = changeSummaryText.replace("IRS-O-Score#", applicationVO.getAppInfraRiskScore());
+			changeSummaryText = changeSummaryText.replace("IRS-O-Grade#", applicationVO.getAppInfraRiskCategory());
+			changeSummaryText = changeSummaryText.replace("IRS-O-Color#", applicationVO.getAppInfraRiskColor());
+			
+			changeSummaryText = changeSummaryText.replace("SRS-O-Score#", applicationVO.getAppSecurityRiskScore());
+			changeSummaryText = changeSummaryText.replace("SRS-O-Grade#", applicationVO.getAppSecurityRiskCategory());
+			changeSummaryText = changeSummaryText.replace("SRS-O-Color#", applicationVO.getAppSecurityRiskColor());
+			
+			changeSummaryText = changeSummaryText.replace("PRS-O-Score#", applicationVO.getAppPeopleRiskScore());
+			changeSummaryText = changeSummaryText.replace("PRS-O-Grade#", applicationVO.getAppPeopleRiskCategory());
+			changeSummaryText = changeSummaryText.replace("PRS-O-Color#", applicationVO.getAppPeopleRiskColor());
+			
+			applicationVO.setChangeStatusSummary(changeSummaryText);
+		}else if(prepareStage.contains("Final")){
+			changeSummaryText = applicationVO.getChangeStatusSummary();
+			
+			changeSummaryText = changeSummaryText.replace("AMS-N-Score#", applicationVO.getAppRiskMaintScore());
+			changeSummaryText = changeSummaryText.replace("AMS-N-Grade#", applicationVO.getAppRiskMaintCategory());
+			changeSummaryText = changeSummaryText.replace("AMS-N-Color#", applicationVO.getAppRiskMaintColor());
+			
+			changeSummaryText = changeSummaryText.replace("IRS-N-Score#", applicationVO.getAppInfraRiskScore());
+			changeSummaryText = changeSummaryText.replace("IRS-N-Grade#", applicationVO.getAppInfraRiskCategory());
+			changeSummaryText = changeSummaryText.replace("IRS-N-Color#", applicationVO.getAppInfraRiskColor());
+			
+			changeSummaryText = changeSummaryText.replace("SRS-N-Score#", applicationVO.getAppSecurityRiskScore());
+			changeSummaryText = changeSummaryText.replace("SRS-N-Grade#", applicationVO.getAppSecurityRiskCategory());
+			changeSummaryText = changeSummaryText.replace("SRS-N-Color#", applicationVO.getAppSecurityRiskColor());
+			
+			changeSummaryText = changeSummaryText.replace("PRS-N-Score#", applicationVO.getAppPeopleRiskScore());
+			changeSummaryText = changeSummaryText.replace("PRS-N-Grade#", applicationVO.getAppPeopleRiskCategory());
+			changeSummaryText = changeSummaryText.replace("PRS-N-Color#", applicationVO.getAppPeopleRiskColor());
+			
+			applicationVO.setChangeStatusSummary(changeSummaryText);
+		} 
+		
 	}
 }
