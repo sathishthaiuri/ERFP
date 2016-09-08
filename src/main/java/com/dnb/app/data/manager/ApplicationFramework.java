@@ -8,8 +8,9 @@ import com.dnb.app.vo.ApplicationVO;
 
 public class ApplicationFramework {
 
+	private static String changeSummary = null; 
 	private static Float defaultFloatValue = 0.0f;
-	private static DecimalFormat df2;
+	private static DecimalFormat decimalFormat1_1;
 	
 	private static Map<String, Float> appMaintRiskWeightageMap;
 	private static Map<String, Float> appMaintRiskValueRangeMap;
@@ -67,8 +68,9 @@ public class ApplicationFramework {
 	private static Map<String, String> secRiskCategoryMap;
 	
 	public void init() {
-		df2 = new DecimalFormat(".##");
 		
+		decimalFormat1_1 = new DecimalFormat("#.##");
+		initializeChangeSummary();
 		initializeAppMaintRiskScores();
 		
 		initializeStabilityRiskScores();
@@ -80,6 +82,158 @@ public class ApplicationFramework {
 		initializeSecurityRiskScores();
 	}
 	
+	private void initializeChangeSummary() {
+		
+		changeSummary =  "   <table>  "  + 
+				 "   		<tr>  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>App.Maint Score (1)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>AMS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>AMS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>AMS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>AMS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>AMS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>AMS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>AMS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   			  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>Infra Risk Score (2)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>IRS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>IRS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>IRS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>IRS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>IRS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>IRS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>IRS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   		</tr>  "  + 
+				 "   		<tr>  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>Security Risk Score (3)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>SRS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>SRS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>SRS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>SRS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>SRS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>SRS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>SRS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   			  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>People Risk Score (4)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>PRS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>PRS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>PRS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>PRS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>PRS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>PRS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>PRS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   		</tr>  "  + 
+				 "  	</table>  " ; 
+	}
+
 	private void initializeAppMaintRiskScores(){
 		
 		appMaintRiskWeightageMap = new HashMap<String, Float>();
@@ -421,7 +575,7 @@ public class ApplicationFramework {
 			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
 		}
 		
-		appMaintRiskScoreText = df2.format(appMaintRiskScore);
+		appMaintRiskScoreText = decimalFormat1_1.format(appMaintRiskScore);
 		applicationVO.setAppRiskMaintScore(appMaintRiskScoreText);
 		applicationVO.setAppRiskMaintCategory(appMaintRiskCategory);
 		applicationVO.setAppRiskMaintColor(appMaintRiskColor);
@@ -540,7 +694,7 @@ public class ApplicationFramework {
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
 		}
 		
-		applicationVO.setAppInfraRiskScore(String.valueOf(infraRiskScore));
+		applicationVO.setAppInfraRiskScore(decimalFormat1_1.format(infraRiskScore));
 		applicationVO.setAppInfraRiskCategory(infraCategory);
 		applicationVO.setAppInfraRiskColor(infraRiskColor);
 		
@@ -582,7 +736,7 @@ public class ApplicationFramework {
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
 		}
 		
-		applicationVO.setAppPeopleRiskScore(String.valueOf(peopleRiskScore));
+		applicationVO.setAppPeopleRiskScore(decimalFormat1_1.format(peopleRiskScore));
 		applicationVO.setAppPeopleRiskCategory(peopleCategory);
 		applicationVO.setAppPeopleRiskColor(peopleRiskColor);
 		
@@ -618,7 +772,7 @@ public class ApplicationFramework {
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
 		}
 		
-		applicationVO.setAppSecurityRiskScore(String.valueOf(securityRiskScore));
+		applicationVO.setAppSecurityRiskScore(decimalFormat1_1.format(securityRiskScore));
 		applicationVO.setAppSecurityRiskCategory(securityCategory);
 		applicationVO.setAppSecurityRiskColor(securityRiskColor);
 		
@@ -667,5 +821,10 @@ public class ApplicationFramework {
 		}
 		
 		return rangeMatrixScore;
+	}
+
+	
+	public static String getChangeSummary() {
+		return changeSummary;
 	}
 }
