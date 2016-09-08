@@ -93,61 +93,74 @@
             <img src="images/filter.png" class="filter"/> 
             </span>
         </div>  
-        <table align="center" style='width:90%' class="table table-striped">
+        <table align="center" style='width:95%' class="table table-striped">
             <tr>
+            	<th style='width:5%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appId' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appId' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appId'; sortReverse = !sortReverse">ID</a> 
+                  <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" placeholder="App.ID" ng-show="showSearch==true" ng-model="seachAppName.appId" class="searchtxt" />
+                </th>
                 <th style='width:15%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appName' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appName' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appName'; sortReverse = !sortReverse">Application Name </a> 
                   <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
+                    <input type="text" placeholder="Enter Application Name" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
                 </th>
-                <th style='width:13%'>
+                <th style='width:15%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appCategory' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appCategory' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appCategory'; sortReverse = !sortReverse">Category</a>
                    <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchCategory';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appCategory" class="searchtxt" />
+                    <input type="text"  placeholder="Enter Category" ng-show="showSearch==true" ng-model="seachAppName.appCategory" class="searchtxt" />
                 </th>
-                <th style='width:13%'>
+                <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='supportScope' && sortReverse"></span><span class=arrow-down ng-show="sortType=='supportScope' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'supportScope'; sortReverse = !sortReverse">Support Scope</a>  
                    <!--  <img src="images/filter.png" class="filter" ng-click="searchType='searchSupportScope';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
+                    <input type="text" placeholder="Enter Scope" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
                 </th>
                 <th style='width:16%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appRiskMaintScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appRiskMaintScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appRiskMaintScore'; sortReverse = !sortReverse">App. Maint Risk Score</a> 
                     <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchMaintRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />  
+                    <input type="text"  placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />  
                 </th>
-                <th style='width:15%'>
+                <th style='width:13%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appInfraRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appInfraRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appInfraRiskScore'; sortReverse = !sortReverse">Infra Risk Score</a> 
 <!--                     <img src="images/filter.png" class="filter" ng-click="searchType='searchInfraRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
+                    <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
                 </th>
                 <th style='width:15%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appSecurityRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appSecurityRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appSecurityRiskScore'; sortReverse = !sortReverse">Security Risk Score</a>
                   <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchSecurityRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
+                    <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
                 </th>
-                <th style='width:16%'>
+                <th style='width:19%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appPeopleRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appPeopleRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appPeopleRiskScore'; sortReverse = !sortReverse">People Risk Score</a> 
                     <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchPeopleRiskScore';showSearch = !showSearch;" alt="search"/> -->
                      </font>
-                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appPeopleRiskScore" class="searchtxt" />
+                    <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appPeopleRiskScore" class="searchtxt" />
                 </th>                 
             </tr>
             <tbody>              
                 <tr ng-repeat='row in appRecordList | orderBy:sortType:sortReverse | filter:seachAppName'>
+                 	<td>
+                        <!-- <a href="#" onclick="loadRecalcSection({{$index+1}});"> -->
+                        <a href="#" ng-click="loadAppDetails(row.appId)">
+                            <font size="2">{{row.appId}}</font>
+                        </a>
+                    </td>
                     <td>
                         <!-- <a href="#" onclick="loadRecalcSection({{$index+1}});"> -->
                         <a href="#" ng-click="loadAppDetails(row.appName)">

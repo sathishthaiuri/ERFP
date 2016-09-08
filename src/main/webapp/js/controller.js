@@ -24,7 +24,7 @@ $.fn.serializeObject = function()
        var self = this;       
        window.mscope=$scope;
           $scope.applRecordList;   
-          $scope.sortType="appName";
+          $scope.sortType="appId";
           $scope.sortBack = false;
           $scope.isModel = true;     
           $scope.searchType;     
@@ -125,7 +125,10 @@ function reCalculateRiskScore() {
 							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br></div></div>';    
 					            
            	$('#screen2Right').append(recalSectionDIV);
-           	$("#modelWindow").css("display","none");        }
+           	setTimeout(function(){           		
+           		$("#modelWindow").css("display","none");
+           	},1500);
+           	}
  });       
 }
 
@@ -144,7 +147,7 @@ function loadRecalcSection(value){
 		+ arr.appCategory
 		+ '</b></label></td></tr><tr style="height: 15px;"><td>Support Scope:</td><td style="font-weight: bold;"><label name="supportScope"><b>'
 		+ arr.supportScope
-		+ '</b></label></td></tr><tr><td></td></tr></tbody></table><a href="#"><img style="margin-left: 52%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();return false;" /></a><div class="divTableBody"><div class="divTableRow1"><div class="divTableCell"><table style="width: 650px; height: 210px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 210px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2" style="margin-left: 4%;">Application Stability Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Age</td><td align="right"><select name="ageInYears"><option selected="selected">'
+		+ '</b></label></td></tr><tr><td></td></tr></tbody></table><a href="#"><img style="margin-left: 52%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();return false;" /></a><div class="divTableBody"><div class="divTableRow1"><div class="divTableCell"><table style="width: 650px; height: 210px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 210px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2" style="margin-left: 4%;">Application Stability Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Age</td><td align="right"><select name="ageInYears"><option selected="selected">'
 		+ arr.ageInYears
 		+ '</option><option>> 2 years</option><option>> 5 years</option><option>> 10 years</option><option>> 15 years</option><option>> 25 years</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Releases/UBR</td><td align="right"><input name="noReleaseUbr" id="noReleaseUbr" type="number" value='
 		+ arr.noReleaseUbr

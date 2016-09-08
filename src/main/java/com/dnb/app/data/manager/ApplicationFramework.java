@@ -10,7 +10,7 @@ public class ApplicationFramework {
 
 	private static String changeSummary = null; 
 	private static Float defaultFloatValue = 0.0f;
-	private static DecimalFormat decimalFormat1_1;
+	private static DecimalFormat decimalFormat1_2;
 	
 	private static Map<String, Float> appMaintRiskWeightageMap;
 	private static Map<String, Float> appMaintRiskValueRangeMap;
@@ -69,7 +69,7 @@ public class ApplicationFramework {
 	
 	public void init() {
 		
-		decimalFormat1_1 = new DecimalFormat("#.##");
+		decimalFormat1_2 = new DecimalFormat("#.##");
 		initializeChangeSummary();
 		initializeAppMaintRiskScores();
 		
@@ -244,19 +244,19 @@ public class ApplicationFramework {
 		appMaintRiskWeightageMap.put("Complexity-Weightage", 35.0f);
 		appMaintRiskWeightageMap.put("Impact-Weightage", 25.0f);
 		
-		appMaintRiskValueRangeMap.put("Category-A-Min", 5.0f);
-		appMaintRiskValueRangeMap.put("Category-A-Max", 10.0f);
-		appMaintRiskValueRangeMap.put("Category-B-Min", 4.0f);
-		appMaintRiskValueRangeMap.put("Category-B-Max", 5.0f);
-		appMaintRiskValueRangeMap.put("Category-C-Min", 3.0f);
-		appMaintRiskValueRangeMap.put("Category-C-Max", 4.0f);
-		appMaintRiskValueRangeMap.put("Category-D-Min", 0.0f);
-		appMaintRiskValueRangeMap.put("Category-D-Max", 3.0f);
+		appMaintRiskValueRangeMap.put("Category-D-Min", 5.0f);
+		appMaintRiskValueRangeMap.put("Category-D-Max", 10.0f);
+		appMaintRiskValueRangeMap.put("Category-C-Min", 4.0f);
+		appMaintRiskValueRangeMap.put("Category-C-Max", 5.0f);
+		appMaintRiskValueRangeMap.put("Category-B-Min", 3.0f);
+		appMaintRiskValueRangeMap.put("Category-B-Max", 4.0f);
+		appMaintRiskValueRangeMap.put("Category-A-Min", 0.0f);
+		appMaintRiskValueRangeMap.put("Category-A-Max", 3.0f);
 		
-		appMaintRiskCategoryMap.put("A", "RED");
-		appMaintRiskCategoryMap.put("B", "YELLOW");
+		appMaintRiskCategoryMap.put("D", "RED");
 		appMaintRiskCategoryMap.put("C", "YELLOW");
-		appMaintRiskCategoryMap.put("D", "GREEN");
+		appMaintRiskCategoryMap.put("B", "YELLOW");
+		appMaintRiskCategoryMap.put("A", "GREEN");
 		
 		System.out.println("initializeAppMaintRiskScores()...Done");
 	}
@@ -449,16 +449,16 @@ public class ApplicationFramework {
 		infraFrequencyInfraMap.put("< 2", 0.0f);
 		infraFrequencyInfraMap.put("Weightage", 20.0f);
 		
-		infraRiskValueRangeMap.put("Category-A-Min", 6.0f);
-		infraRiskValueRangeMap.put("Category-A-Max", 10.0f);
+		infraRiskValueRangeMap.put("Category-C-Min", 6.0f);
+		infraRiskValueRangeMap.put("Category-C-Max", 10.0f);
 		infraRiskValueRangeMap.put("Category-B-Min", 2.0f);
 		infraRiskValueRangeMap.put("Category-B-Max", 6.0f);
-		infraRiskValueRangeMap.put("Category-C-Min", 0.0f);
-		infraRiskValueRangeMap.put("Category-C-Max", 2.0f);
+		infraRiskValueRangeMap.put("Category-A-Min", 0.0f);
+		infraRiskValueRangeMap.put("Category-A-Max", 2.0f);
 		
-		infraRiskCategoryMap.put("A", "RED");
+		infraRiskCategoryMap.put("C", "RED");
 		infraRiskCategoryMap.put("B", "YELLOW");
-		infraRiskCategoryMap.put("C", "GREEN");
+		infraRiskCategoryMap.put("A", "GREEN");
 		
 		System.out.println("initializeInfraRiskScores()...Done");
 		
@@ -490,19 +490,19 @@ public class ApplicationFramework {
 		peopleAvlbtOfBizUsersMap.put("No", 10.0f);
 		peopleAvlbtOfBizUsersMap.put("Weightage", 25.0f);
 		
-		peopleRiskValueRangeMap.put("Category-A-Min", 8.0f);
-		peopleRiskValueRangeMap.put("Category-A-Max", 10.0f);
-		peopleRiskValueRangeMap.put("Category-B-Min", 5.0f);
-		peopleRiskValueRangeMap.put("Category-B-Max", 8.0f);
-		peopleRiskValueRangeMap.put("Category-C-Min", 2.0f);
-		peopleRiskValueRangeMap.put("Category-C-Max", 5.0f);
-		peopleRiskValueRangeMap.put("Category-D-Min", 0.0f);
-		peopleRiskValueRangeMap.put("Category-D-Max", 2.0f);
+		peopleRiskValueRangeMap.put("Category-D-Min", 8.0f);
+		peopleRiskValueRangeMap.put("Category-D-Max", 10.0f);
+		peopleRiskValueRangeMap.put("Category-C-Min", 5.0f);
+		peopleRiskValueRangeMap.put("Category-C-Max", 8.0f);
+		peopleRiskValueRangeMap.put("Category-B-Min", 2.0f);
+		peopleRiskValueRangeMap.put("Category-B-Max", 5.0f);
+		peopleRiskValueRangeMap.put("Category-A-Min", 0.0f);
+		peopleRiskValueRangeMap.put("Category-A-Max", 2.0f);
 		
-		peopleRiskCategoryMap.put("A", "RED");
-		peopleRiskCategoryMap.put("B", "YELLOW");
+		peopleRiskCategoryMap.put("D", "RED");
 		peopleRiskCategoryMap.put("C", "YELLOW");
-		peopleRiskCategoryMap.put("D", "GREEN");
+		peopleRiskCategoryMap.put("B", "YELLOW");
+		peopleRiskCategoryMap.put("A", "GREEN");
 		
 		System.out.println("initializePeopleRiskScores()...Done");
 		
@@ -531,16 +531,16 @@ public class ApplicationFramework {
 		secCompVlnbltsMap.put("No", 0.0f);
 		secCompVlnbltsMap.put("Weightage", 30.0f);		
 
-		secRiskValueRangeMap.put("Category-A-Min", 4.0f);
-		secRiskValueRangeMap.put("Category-A-Max", 10.0f);
+		secRiskValueRangeMap.put("Category-C-Min", 4.0f);
+		secRiskValueRangeMap.put("Category-C-Max", 10.0f);
 		secRiskValueRangeMap.put("Category-B-Min", 2.0f);
 		secRiskValueRangeMap.put("Category-B-Max", 4.0f);
-		secRiskValueRangeMap.put("Category-C-Min", 0.0f);
-		secRiskValueRangeMap.put("Category-C-Max", 2.0f);
+		secRiskValueRangeMap.put("Category-A-Min", 0.0f);
+		secRiskValueRangeMap.put("Category-A-Max", 2.0f);
 		
-		secRiskCategoryMap.put("A", "RED");
+		secRiskCategoryMap.put("C", "RED");
 		secRiskCategoryMap.put("B", "YELLOW");
-		secRiskCategoryMap.put("C", "GREEN");
+		secRiskCategoryMap.put("A", "GREEN");
 		
 		System.out.println("initializeSecurityRiskScores()...Done");
 		
@@ -561,21 +561,21 @@ public class ApplicationFramework {
 								complexityRiskScoreRecalculation(applicationVO) + 
 									impactRiskScoreRecalculation(applicationVO);
 		
-		if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-A-Min") && appMaintRiskScore <= appMaintRiskValueRangeMap.get("Category-A-Max")){
-			appMaintRiskCategory = "A";
-			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
-		}else if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-B-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-B-Max")){
-			appMaintRiskCategory = "B";
+		if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-D-Min") && appMaintRiskScore <= appMaintRiskValueRangeMap.get("Category-D-Max")){
+			appMaintRiskCategory = "D";
 			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
 		}else if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-C-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-C-Max")){
 			appMaintRiskCategory = "C";
 			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
-		}else if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-D-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-D-Max")){
-			appMaintRiskCategory = "D";
+		}else if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-B-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-B-Max")){
+			appMaintRiskCategory = "B";
+			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
+		}else if( appMaintRiskScore >= appMaintRiskValueRangeMap.get("Category-A-Min") && appMaintRiskScore < appMaintRiskValueRangeMap.get("Category-A-Max")){
+			appMaintRiskCategory = "A";
 			appMaintRiskColor = appMaintRiskCategoryMap.get(appMaintRiskCategory);
 		}
 		
-		appMaintRiskScoreText = decimalFormat1_1.format(appMaintRiskScore);
+		appMaintRiskScoreText = decimalFormat1_2.format(appMaintRiskScore);
 		applicationVO.setAppRiskMaintScore(appMaintRiskScoreText);
 		applicationVO.setAppRiskMaintCategory(appMaintRiskCategory);
 		applicationVO.setAppRiskMaintColor(appMaintRiskColor);
@@ -683,18 +683,18 @@ public class ApplicationFramework {
 						 ((infraScalabilityIssuVal * infraScalabilityIssuMap.get("Weightage"))/100) +  
 						 ((infraFrequencyInfraVal * infraFrequencyInfraMap.get("Weightage"))/100);
 		
-		if( infraRiskScore >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskScore <= infraRiskValueRangeMap.get("Category-A-Max")){
-			infraCategory = "A";
+		if( infraRiskScore >= infraRiskValueRangeMap.get("Category-C-Min") && infraRiskScore <= infraRiskValueRangeMap.get("Category-C-Max")){
+			infraCategory = "C";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
 		}else if( infraRiskScore >= infraRiskValueRangeMap.get("Category-B-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-B-Max")){
 			infraCategory = "B";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
-		}else if( infraRiskScore >= infraRiskValueRangeMap.get("Category-C-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-C-Max")){
-			infraCategory = "C";
+		}else if( infraRiskScore >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-A-Max")){
+			infraCategory = "A";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
 		}
 		
-		applicationVO.setAppInfraRiskScore(decimalFormat1_1.format(infraRiskScore));
+		applicationVO.setAppInfraRiskScore(decimalFormat1_2.format(infraRiskScore));
 		applicationVO.setAppInfraRiskCategory(infraCategory);
 		applicationVO.setAppInfraRiskColor(infraRiskColor);
 		
@@ -722,21 +722,21 @@ public class ApplicationFramework {
 						  ((peopleVendorExpEnsonoVal * peopleVendorExpEnsonoMap.get("Weightage"))/100) +  
 						  ((peopleAvlbtOfBizUsersVal * peopleAvlbtOfBizUsersMap.get("Weightage"))/100);
 		
-		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore <= peopleRiskValueRangeMap.get("Category-A-Max")){
-			peopleCategory = "A";
-			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
-		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-B-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-B-Max")){
-			peopleCategory = "B";
+		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-D-Min") && peopleRiskScore <= peopleRiskValueRangeMap.get("Category-D-Max")){
+			peopleCategory = "D";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
 		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-C-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-C-Max")){
 			peopleCategory = "C";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
-		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-D-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-D-Max")){
-			peopleCategory = "D";
+		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-B-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-B-Max")){
+			peopleCategory = "B";
+			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
+		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-A-Max")){
+			peopleCategory = "A";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
 		}
 		
-		applicationVO.setAppPeopleRiskScore(decimalFormat1_1.format(peopleRiskScore));
+		applicationVO.setAppPeopleRiskScore(decimalFormat1_2.format(peopleRiskScore));
 		applicationVO.setAppPeopleRiskCategory(peopleCategory);
 		applicationVO.setAppPeopleRiskColor(peopleRiskColor);
 		
@@ -761,18 +761,18 @@ public class ApplicationFramework {
 						    ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
 						    ((secCompVlnbltsVal * secCompVlnbltsMap.get("Weightage"))/100);
 		
-		if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore <= secRiskValueRangeMap.get("Category-A-Max")){
-			securityCategory = "A";
+		if( securityRiskScore >= secRiskValueRangeMap.get("Category-C-Min") && securityRiskScore <= secRiskValueRangeMap.get("Category-C-Max")){
+			securityCategory = "C";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
 		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-B-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-B-Max")){
 			securityCategory = "B";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
-		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-C-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-C-Max")){
-			securityCategory = "C";
+		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-A-Max")){
+			securityCategory = "A";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
 		}
 		
-		applicationVO.setAppSecurityRiskScore(decimalFormat1_1.format(securityRiskScore));
+		applicationVO.setAppSecurityRiskScore(decimalFormat1_2.format(securityRiskScore));
 		applicationVO.setAppSecurityRiskCategory(securityCategory);
 		applicationVO.setAppSecurityRiskColor(securityRiskColor);
 		
