@@ -20,55 +20,170 @@
 	
 	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.i18n.properties-min-1.0.9.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
-	<script type="text/javascript" src="js/controller.js"></script>
-	<script type="text/javascript" src="js/i18n.js"></script>
-	<script type="text/javascript" src="js/base64.js"></script>
-	<script type="text/javascript" src="js/dirPagination.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>	
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	
+    <!-- // <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script> -->
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/i18n.js"></script>
+    <script type="text/javascript" src="js/base64.js"></script>
+    <script type="text/javascript" src="js/dirPagination.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+    .model-overlay {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 3;
+        top: 0;
+        left: 0;        
+    }
+    
+    .loader {
+        width: 168px;
+        height: 168px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+    
+    .arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #ccc;
+        display:inline-block;
+    }
+    
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #ccc;
+        display:inline-block;
+    }
+    .filter{
+        height:16px;
+        width:16px;
+        cursor:pointer;
+    }
+    .searchtxt{
+    margin-top:3px;
+    width: 90% !important;
+    }
+    </style>
 </head>
 
-<body ng-controller="ApplicationController" ng-init="init()">
-
-	 <header id="header">
-			<h1><a href="#screen1" onclick="backToHome()"><img src="images/headerlogo.png"></a></h1>			
-		</header>			
-	<div id="screen1">
-			<!-- <h5 style="margin-right: auto;">Score Card</h5> -->
-			<table align="center" style='width:90%' class="table table-striped">
-				<tr>
-					<th ng-click="orderBy('scnNumber')" style='width:15%'><font size="2">Application Name</font></th>
-					<th ng-click="orderBy('scnNumber')" style='width:15%'><font size="2">Category</font></th>
-					<th ng-click="orderBy('scnNumber')" style='width:10%'><font size="2">Support Scope</font></th>
-					<th ng-click="orderBy('scnNumber')" style='width:20%'><font size="2">App. Maint Risk Score</font></th>
-					<th ng-click="orderBy('scnNumber')" style='width:15%'><font size="2">Infra Risk Score</font></th>
-					<th ng-click="orderBy('scnNumber')" style='width:12%'><font size="2">Security Risk Score</font></th>	
-					<th ng-click="orderBy('scnNumber')" style='width:13%'><font size="2">People Risk Score</font></th>					
-				
-				</tr>
-				<tbody>					
-				<!-- <tr ng-repeat="retrieveJsonVals in retrieveJsonVal">					
-					<td>{{retrieveJsonVals.appName}}</td>
-					<td>{{retrieveJsonVals.appCategory}}</td>
-					<td>{{retrieveJsonVals.supportScope}}</td>	
-					<td>{{retrieveJsonVals.appName}}</td>
-					<td>{{retrieveJsonVals.appCategory}}</td>
-					<td>{{retrieveJsonVals.supportScope}}</td>					
-					<td>{{retrieveJsonVals.supportScope}}</td>
-					<td><button class="btn btn-primary" ng-click="view()">View</button></td>
-				</tr> -->
-				</tbody>				
-			</table>	
-			<div id="inner"></div>		
-	</div>
-		
-	<div style="width:100%; id="screen2">
-		<div id="screen2Left" style="float:left; width:55%;"></div>
-		<div id="screen2Right" style="float:right; width:45%;"></div>
-	</div>
+<body ng-controller="ApplicationController" ng-init="init()"> 
+    <header id="header">
+        <h1><a href="#screen1" onclick="backToHome()"><img src="images/headerlogo.png"></a></h1>
+    </header>
+    
+    <div id="screen1">
+        <!-- {{appRecordList}} -->
+        <!-- <h5 style="margin-right: auto;">Score Card</h5> -->      
+        <div style="text-align:right;display:block;padding-right:67px;font-weight:"bold" >
+            <span style="cursor:pointer" ng-click="showSearchFields()">Search
+            <img src="images/filter.png" class="filter"/> 
+            </span>
+        </div>  
+        <table align="center" style='width:90%' class="table table-striped">
+            <tr>
+                <th style='width:15%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appName' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appName' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appName'; sortReverse = !sortReverse">Application Name </a> 
+                  <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
+                </th>
+                <th style='width:13%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appCategory' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appCategory' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appCategory'; sortReverse = !sortReverse">Category</a>
+                   <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchCategory';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appCategory" class="searchtxt" />
+                </th>
+                <th style='width:13%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='supportScope' && sortReverse"></span><span class=arrow-down ng-show="sortType=='supportScope' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'supportScope'; sortReverse = !sortReverse">Support Scope</a>  
+                   <!--  <img src="images/filter.png" class="filter" ng-click="searchType='searchSupportScope';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
+                </th>
+                <th style='width:16%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appRiskMaintScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appRiskMaintScore' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appRiskMaintScore'; sortReverse = !sortReverse">App. Maint Risk Score</a> 
+                    <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchMaintRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />  
+                </th>
+                <th style='width:15%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appInfraRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appInfraRiskScore' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appInfraRiskScore'; sortReverse = !sortReverse">Infra Risk Score</a> 
+<!--                     <img src="images/filter.png" class="filter" ng-click="searchType='searchInfraRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
+                </th>
+                <th style='width:15%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appSecurityRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appSecurityRiskScore' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appSecurityRiskScore'; sortReverse = !sortReverse">Security Risk Score</a>
+                  <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchSecurityRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
+                </th>
+                <th style='width:16%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='appPeopleRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appPeopleRiskScore' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'appPeopleRiskScore'; sortReverse = !sortReverse">People Risk Score</a> 
+                    <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchPeopleRiskScore';showSearch = !showSearch;" alt="search"/> -->
+                     </font>
+                    <input type="text" ng-show="showSearch==true" ng-model="seachAppName.appPeopleRiskScore" class="searchtxt" />
+                </th>                 
+            </tr>
+            <tbody>              
+                <tr ng-repeat='row in appRecordList | orderBy:sortType:sortReverse | filter:seachAppName'>
+                    <td>
+                        <!-- <a href="#" onclick="loadRecalcSection({{$index+1}});"> -->
+                        <a href="#" ng-click="loadAppDetails(row.appName)">
+                            <font size="2">{{row.appName}}</font>
+                        </a>
+                    </td>
+                    <td>
+                        <font size="2">{{row.appCategory}}</font>
+                    </td>
+                    <td>
+                        <font size="2">{{row.supportScope}}</font>
+                    </td>
+                    <td>
+                        <font size="2"><img ng-src="images/{{row.appRiskMaintColor}}.png"> {{row.appRiskMaintCategory}} {{row.appRiskMaintScore}}</font>
+                    </td>
+                    <td>
+                        <font size="2"><img ng-src="images/{{row.appInfraRiskColor}}.png"> {{row.appInfraRiskCategory}} {{row.appInfraRiskScore}}</font>
+                    </td>
+                    <td>
+                        <font size="2"><img ng-src="images/{{row.appSecurityRiskColor}}.png"> {{row.appSecurityRiskCategory}} {{row.appSecurityRiskScore}}</font>
+                    </td>
+                    <td>
+                        <font size="2"><img ng-src="images/{{row.appPeopleRiskColor}}.png"> {{row.appPeopleRiskCategory}} {{row.appPeopleRiskScore}}</font>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="inner" style='display:none'></div>
+    </div>
+    <div style="width:100%;" id="screen2">
+        <div id="screen2Left" style="float:left; width:55%;"></div>
+        <div id="screen2Right" style="float:right; width:45%;"></div>
+    </div>
+    <div class="model-overlay" ng-show="isModel" id="modelWindow">
+        <img src="images/gears.gif" class="loader">
+    </div>
+    
 </body>
 </html>

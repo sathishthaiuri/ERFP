@@ -1,5 +1,5 @@
 var arr = [];
-
+var isModel=false;
 $.fn.serializeObject = function()
 {
     var o = {};
@@ -22,167 +22,52 @@ $.fn.serializeObject = function()
 
        as.controller('ApplicationController', function ($scope, $http, i18n) {
        var self = this;       
-             
-        $scope.init = function () {                        
-              $.ajax({                   
-                     url:"listApplicationRecords",
-                     type: "get",
-                     dataType: "json",
-                     data:{ method : 'listApplicationRecords' },
-                     success: function(data) {                              
-                           /** iterate the application list*/                            
-                            $scope.retrieveJsonObj = [];
-                            $scope.retrieveJsonVal = [];
-                            $scope.retrieveJson = [];
-                           console.log(data)
-                            /*angular.forEach(data, function (item, key){
-                            //  $scope.retrieveJson.push("[{");
-                         angular.forEach(item, function(comment, index){
-                             //iterate over the likes array:                              
-                             angular.forEach(comment, function (like, i){
-                             //   $scope.retrieveJson.push(i)
-                            //    $scope.retrieveJson.push(":")
-                                $scope.retrieveJson.push(like);                              
-                             });   
-                            // $scope.retrieveJson.push("}, {");
-                         });
-                       //  $scope.retrieveJson.push("}];");
-                     });*/
-                            
-                            var frameHTML="<table class=\"table-striped\" align=\"center\" style='width:90%'>";
-                            var index = 0;
-                           angular.forEach(data, function(value, key) {
-                        	   	   arr[index] = value;
-                        	   	   index = index + 1;
-                                   angular.forEach(value, function(value1, key1){
-                                         if(key1=="appName"){
-                                                 //console.log(value);
-                                                 //$scope.retrieveJson.push(value1);
-                                        //	 obj = JSON.parse(data);
-                                        	// console.log($scope.appId);
-                                        	 //var screentwohtml = "{\"erfp\":[' "+value.appId;
-                                        	 //var text = '{"erfp":[{"appId":"1","appName":"OSP – Online","appCategory":"Data Supply Chain" }]}';
-                                        	// console.log(value1);
-                                        	// console.log(text);                                        	                                    	 
-                                               	//frameHTML = frameHTML+"<tr><td align=\"left\" style='width:15%'><a href=\"index2.html\"?Id="+value+"><font size=\"2\">"+value1+"</font></a></td>";
-                                        	     
-                                                 frameHTML = frameHTML+"<tr><td align=\"left\" style='width:15%'> <a href=\"#\" onclick=\"loadRecalcSection('"+index+"');\"><font size=\"2\">"+value1+"</font></a></td>";
-                                          }    
-                                       
-                                          if(key1=="appCategory"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);
-                                                 frameHTML = frameHTML+"<td align=\"left\" style='width:15%'><font size=\"2\">"+value1+"</font></td>";
-                                          }                                 
-                                          if(key1=="supportScope"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);
-                                                 frameHTML = frameHTML+"<td align=\"left\" style='width:10%'><font size=\"2\">"+value1+"</font></td>";
-                                          }
-                                         
-                                          //Application Maintanance Risk Band...
-                                          if(key1=="appRiskMaintColor"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);                                              
-                                                 frameHTML = frameHTML+"<td align=\"left\" style='width:20%'>&nbsp;<img src=\"images/"+value1+".png\">";
-                                          }
-                                          if(key1=="appRiskMaintCategory"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);                                              
-                                                 frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font>";
-                                          }
-                                          if(key1=="appRiskMaintScore"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);
-                                                 frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font></td>";
-                                          }                                         
-                                         
-                                          
-                                          //Infra Risk Band...
-                                          if(key1=="appInfraRiskColor"){
-                                              
-                                              //$scope.retrieveJson.push(value1);                                              
-                                              frameHTML = frameHTML+"<td align=\"left\" style='width:15%'><img src=\"images/"+value1+".png\">";
-                                          }
-                                          if(key1=="appInfraRiskCategory"){
-                                              
-                                              //$scope.retrieveJson.push(value1);                                              
-                                              frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font>";
-                                          }
-                                          if(key1=="appInfraRiskScore"){
-                                              
-                                              //$scope.retrieveJson.push(value1);
-                                              frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font></td>";
-                                          } 
-                                         
-                                          //Security Risk Band...
-                                          if(key1=="appSecurityRiskColor"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);                                              
-                                                 frameHTML = frameHTML+"<td align=\"left\" style='width:15%'><img src=\"images/"+value1+".png\">";
-                                          }
-                                          if(key1=="appSecurityRiskCategory"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);                                              
-                                                 frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font>";
-                                          }                                        
-                                          if(key1=="appSecurityRiskScore"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);
-                                                 frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font></td>";
-                                          }                                         
-                                         
-                                          
-                                          //People Risk Score...
-                                          if(key1=="appPeopleRiskColor"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);                                              
-                                                 frameHTML = frameHTML+"<td align=\"left\" style='width:15%'><img src=\"images/"+value1+".png\">";
-                                          }
-                                          if(key1=="appPeopleRiskCategory"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);                                              
-                                                 frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font>";
-                                          }
-                                          if(key1=="appPeopleRiskScore"){
-                                                 
-                                                 //$scope.retrieveJson.push(value1);
-                                                 frameHTML = frameHTML+"&nbsp;&nbsp;<font size=\"2\">"+value1+"</font></td></tr>";
-                                          }    
-                                         
-                                                                                   
-                                   });
-                                   
-                                   //$scope.retrieveJson.push('},{');
-                            });
-                            frameHTML = frameHTML+"</table>";
-                            
-                     /*      $scope.retrieveJson = data; // get data from json
-                                          angular.forEach($scope.retrieveJson, function(item){                                                  
-                                                             $scope.retrieveJsonVal.push(item);                                                                   
-                                           })*/
-                           // $scope.retrieveJsonVal.push(data); 
-                           
-                           // console.log(ul_tag);
-                                   
-                            //console.log("After JSON Parsing:"+JSON.stringify($scope.retrieveJson));
-                           
-                                                       
-                            document.getElementById('inner').innerHTML=frameHTML;
-                           
-                     }
-              });           
-        }; 
-        
-              
-
-    });
-       
-       
-       
-     
-}());
-
+       window.mscope=$scope;
+          $scope.applRecordList;   
+          $scope.sortType="appName";
+          $scope.sortBack = false;
+          $scope.isModel = true;     
+          $scope.searchType;     
+         $scope.init=function(){
+           $http({
+                method: "GET",
+                url: "listApplicationRecords",
+                data: {
+                    "method" : 'listApplicationRecords'
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function successCallback(response) {
+                   $scope.appRecordList = response.data;
+                   $scope.isModel = isModel = false;
+                },
+                function errorCallback(response) {
+                   alert("Please check the backend/network connectivity");
+                });
+         }
+       $scope.loadAppDetails=function(appName){    	   
+       	$scope.row;
+       		for(var i = 0; i<= $scope.appRecordList.length;i++){
+       			$scope.row=$scope.appRecordList[i];       			
+       				if($scope.row.appName == appName){
+       					arr = $scope.row;
+       					loadRecalcSection(arr);
+       					break;
+       				}       			
+       		}
+       } 
+       $scope.searchfield = function(){
+    	   return $scope.searchField;
+       }
+       $scope.showSearchFields = function(){
+    	   $scope.showSearch =  !$scope.showSearch;
+    	   if($scope.showSearch == false){
+    		   $scope.seachAppName=null;
+    	   }
+       }
+    });       
+})();
 var screentwohtml ="";
 
 /**
@@ -196,15 +81,8 @@ function backToHome(){
 
 
 function reCalculateRiskScore() {	
-	 
-	 var jsonText=JSON.stringify($('#riskScoreform').serializeObject());	 
-	//var jsonText ='{ "appId": 1,"appName": "OSP - Online"}';
-	//console.log(jsonText);	 
-    //var encoded = $.toJSON($('#formid1'));
-	 /* $('#riskScoreform').submit(function() {
-		     console.log(JSON.stringify($('#riskScoreform').serializeObject()));
-		    return false;
-		  });	*/
+	$("#modelWindow").css("display","block");
+	 var jsonText=JSON.stringify($('#riskScoreform').serializeObject());
 	$.ajax({                   
         url:"scoreRecalculation",
         type: "POST",       
@@ -216,9 +94,9 @@ function reCalculateRiskScore() {
             
         	$('#screen2Right').empty();
         	$('#screen2Right').show();            
-            console.log("Data: "+data.appId);
-            console.log("Data: "+data.appName);
-            console.log( data.appRiskMaintColor+'_'+data.appRiskMaintCategory);
+            //console.log("Data: "+data.appId);
+            //console.log("Data: "+data.appName);
+            //console.log( data.appRiskMaintColor+'_'+data.appRiskMaintCategory);
             
 			var recalSectionDIV = '<div id="riskScoreImageDiv"><div class="divTableCell"></br></br></br></br></br></br></br></br></br></br><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'
 							+ data.appRiskMaintColor
@@ -244,123 +122,122 @@ function reCalculateRiskScore() {
 							+ data.appPeopleRiskCategory
 							+ '.png" /><label for="appName" class="imtip">'
 							+ data.appPeopleRiskScore
-							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br></div></div>'
-							+ '<table><tr><td>---</td></tr></table>';    
+							+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br></div></div>';    
 					            
            	$('#screen2Right').append(recalSectionDIV);
-        }
+           	$("#modelWindow").css("display","none");        }
  });       
 }
 
 function loadRecalcSection(value){	
 	
-	console.log("value:"+arr[value - 1]);
+	//console.log("value:"+arr[value - 1]);
 	$("#screen1").hide();
 	$("#screen2Left").empty();
 	$("#screen2Right").empty();
 	
 	screentwoLefthtml = '<form id="riskScoreform"><div class="center_content"><div class="divTable1"><table style="height: 110px; margin-right: auto; margin-left: 12px; margin-top: 1%; font-size: 13; font-weight: bold;" width="400"><tbody><tr style="height: 15px;"><td>Application ID :</td><td><label name="appId+"><b>'
-			+ arr[value - 1].appId
-			+ '</b></p></td></tr><tr style="height: 15px;"><td>Application Name :</td><td><label name="appName"><b>'
-			+ arr[value - 1].appName
-			+ '</b></label></td></tr><tr style="height: 15px;"><td>Application Category :</td><td style="font-weight: bold;"><label name="appCategory"><b>'
-			+ arr[value - 1].appCategory
-			+ '</b></label></td></tr><tr style="height: 15px;"><td>Support Scope:</td><td style="font-weight: bold;"><label name="supportScope"><b>'
-			+ arr[value - 1].supportScope
-			+ '</b></label></td></tr><tr><td></td></tr></tbody></table><img style="margin-left: 52%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();" /><div class="divTableBody"><div class="divTableRow1"><div class="divTableCell"><table style="width: 650px; height: 210px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 210px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2" style="margin-left: 4%;">Application Stability Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Age</td><td align="right"><select name="ageInYears"><option selected="selected">'
-			+ arr[value - 1].ageInYears
-			+ '</option><option>> 2 years</option><option>> 5 years</option><option>> 10 years</option><option>> 15 years</option><option>> 25 years</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Releases/UBR</td><td align="right"><input name="noReleaseUbr" id="noReleaseUbr" type="number" value='
-			+ arr[value - 1].noReleaseUbr
-			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Tickets Volume</td><td align="right"><input name="noTktsVlm" type="number" id="noTktsVlm" value='
-			+ arr[value - 1].noTktsVlm
-			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Sev1\Sev2</td><td align="right"><input name="noSev1Sev2" type="number" id="noSev1Sev2" value='
-			+ arr[value - 1].noSev1Sev2
-			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Incident Tickets</td><td align="right"><input name="noIncTkt" id="noIncTkt" type="number" value='
-			+ arr[value - 1].noIncTkt
-			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;No. Of SRT"s\Issue Bridges directly attributed to Application</td><td align="right"><input name="noSrtCount" type="number" id="noSrtCount" value='
-			+ arr[value - 1].noSrtCount
-			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;No. of Tickets resolved with Vendor support (3rd Party like<br>Axway etc) </td><td align="right"><select name="noTktRslvVendor" id="noTktRslvVendor"><option selected="selected">'
-			+ arr[value - 1].noTktRslvVendor
-			+ '</option><option>No</option><option>Medium < 5 Tickets/Year</option><option>High > 5 Tickets/Year</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Manual Intervention/Production Support in Effort/Day</td><td align="right"><select name="manualIntervension" id="manualIntervension"><option selected="selected">'
-			+ arr[value - 1].manualIntervension
-			+ '</option><option>Low < 2 Hours/Day</option><option>Medium <4 Hours/Day</option><option>High >4 Hours/Day</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number ofOut of Office Hour callouts (2015)</td><td align="right"><input name="noOutofoffCallouts" type="number" id="noOutofoffCallouts" value='
-			+ arr[value - 1].noOutofoffCallouts
-			+ ' /></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Application Complexity Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Interfacing applications</td><td align="right"><input name="noInterfacApp" id="noInterfacApp" type="number" value='
-			+ arr[value - 1].noInterfacApp
-			+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Data Volume /Transaction per day</td><td align="right"><select name="dataVolumeDay" id="dataVolumeDay"><option selected="selected">'
-			+ arr[value - 1].dataVolumeDay
-			+ '</option><option>Low < 50K Txns</option><option>Medium > 50K Txns to 1 Mn Txns</option><option>High >1M Txns</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Technology and Support Availability</td><td align="right"><select name="techSuprtAvlbt" id="techSuprtAvlbt"><option selected="selected">'
-			+ arr[value - 1].techSuprtAvlbt
-			+ '</option><option>Web & Support Available</option><option>Web & Support Unavailable</option><option>Legacy & Support Available</option><option>Legacy & Support Unavailable</option><option>Niche & Support Available</option><option>Niche & Support Unavailable</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Code Availability</td><td align="right"><select name="codeAvlbt" id="codeAvlbt"><option selected="selected">'
-			+ arr[value - 1].codeAvlbt
-			+ '</option><option>Partial</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;% Increase in data volume/Year</td><td align="right"><select name="increaDataVlmYr" id="increaDataVlmYr"><option selected="selected">'
-			+ arr[value - 1].increaDataVlmYr
-			+ '</option><option>Low < 3%</option><option>Medium 3% to 8%</option><option>High > 8%</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Regulatory Compliance</td><td align="right"><select name="regCompliance" id="regCompliance"><option selected="selected">'
-			+ arr[value - 1].regCompliance
-			+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Impact and Recovery Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Revenue Impact</td><td align="right"><select name="revImpact" id="revImpact"><option selected="selected">'
-			+ arr[value - 1].revImpact
-			+ '</option><option>Direct & Immediate Revenue Impact</option><option>Indirect Revenue Impact</option><option>No Revenue Impact</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Customer</td><td align="right"><select name="impatcToCustomer" id="impatcToCustomer"><option selected="selected">'
-			+ arr[value - 1].impatcToCustomer
-			+ '</option><option>High > 50 Users</option><option>Medium - 10 to 50 users</option><option>Low < 10 users</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Recovery Duration (App./SW/Infra.)</td><td align="right"><select name="recoveryDuration" id="recoveryDuration"><option selected="selected">'
-			+ arr[value - 1].recoveryDuration
-			+ '</option><option>4 to 12 Hours</option><option>12 Hours to 1 Day</option><option>> 1 Day</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Upstream / Downstream Apps</td><td align="right"><select name="impactUpDnStream" id="impactUpDnStream"><option selected="selected">'
-			+ arr[value - 1].impactUpDnStream
-			+ '</option><option>> 5 systems</option><option>< 5 systems</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Brand Image</td><td align="right"><select name="impactBrandImg" id="impactBrandImg"><option selected="selected">'
-			+ arr[value - 1].impactBrandImg
-			+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">Infra. Risk</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Performance SLA</td><td align="right"><select name="appPerfSla" id="appPerfSla"><option selected="selected">'
-			+ arr[value - 1].appPerfSla
-			+ '</option><option>Above defined SLA</option><option>Below SLA</option><option>Met SLA</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Scalability/Capacity Related Issues</td><td align="right"><select name="scalability" id="scalability"><option selected="selected">'
-			+ arr[value - 1].scalability
-			+ '</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Obsolete Infrastructure</td><td align="right"><select name="obsoleteInfra" id="obsoleteInfra"><option selected="selected">'
-			+ arr[value - 1].obsoleteInfra
-			+ '</option><option>Yes</option><option>No</option><option>Partial</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;DR Environment Availability</td><td align="right"><select name="drEnvAvlbt" id="drEnvAvlbt"><option selected="selected">'
-			+ arr[value - 1].drEnvAvlbt
-			+ '</option><option>Yes</option><option>No</option><option>Partial</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Network / Infrastructure issues per month</td><td align="right"><select name="nwInfraIssuePm" id="nwInfraIssuePm"><option selected="selected">'
-			+ arr[value - 1].nwInfraIssuePm
-			+ '</option><option>> 5</option><option>> 2 and < 5</option><option>< 2</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">Security. Risk</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Security Vulnerability (Code)</td><td align="right"><select name="secVlnbtyCode" id="secVlnbtyCode"><option selected="selected">'
-			+ arr[value - 1].secVlnbtyCode
-			+ '</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Security Vulnerability (Infra)</td><td align="right"><select name="secVlnbtyInfra" id="secVlnbtyInfra"><option selected="selected">'
-			+ arr[value - 1].secVlnbtyInfra
-			+ '</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Compliance Related Vulnerabilities</td><td align="right"><select name="compVlnblts" id="compVlnblts"><option selected="selected">'
-			+ arr[value - 1].compVlnblts
-			+ '</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Conf. Mgmt Availability</td><td align="right"><select name="confMgtVlnbty" id="confMgtVlnbty"><option selected="selected">'
-			+ arr[value - 1].confMgtVlnbty
-			+ '</option><option>Yes</option><option>No</option><option>Partial</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">People. Risk</td></tr><tr style="height: 15px;"><td align="left">&nbsp;SME Availability</td><td align="right"><select name="smeAvlbt"><option selected="selected">'
-			+ arr[value - 1].smeAvlbt
-			+ '</option><option>Yes - 1 SME</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Vendor Expertise(Cognizant Availability)</td><td align="right"><select name="vendorExptCts"><option selected="selected">'
-			+ arr[value - 1].vendorExptCts
-			+ '</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Vendor Expertise(Ensono Availability)</td><td align="right"><select name="vendorExptEnsono"><option selected="selected">'
-			+ arr[value - 1].vendorExptEnsono
-			+ '</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Availability Business Users</td><td align="right"><select name="avlbtBizUsers"><option selected="selected">'
-			+ arr[value - 1].avlbtBizUsers
-			+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><img style="margin-left: 65%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();" /></div><div class="divTableCell3"><br><br><br><br><table style="margin-left: 20px; margin-top: 100px; height: 27px;" width="100%"><tbody></tbody></table></div></div></div></div></div></form>';
-	
+		+ arr.appId
+		+ '</b></p></td></tr><tr style="height: 15px;"><td>Application Name :</td><td><label name="appName"><b>'
+		+ arr.appName
+		+ '</b></label></td></tr><tr style="height: 15px;"><td>Application Category :</td><td style="font-weight: bold;"><label name="appCategory"><b>'
+		+ arr.appCategory
+		+ '</b></label></td></tr><tr style="height: 15px;"><td>Support Scope:</td><td style="font-weight: bold;"><label name="supportScope"><b>'
+		+ arr.supportScope
+		+ '</b></label></td></tr><tr><td></td></tr></tbody></table><a href="#"><img style="margin-left: 52%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();return false;" /></a><div class="divTableBody"><div class="divTableRow1"><div class="divTableCell"><table style="width: 650px; height: 210px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 210px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2" style="margin-left: 4%;">Application Stability Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Age</td><td align="right"><select name="ageInYears"><option selected="selected">'
+		+ arr.ageInYears
+		+ '</option><option>> 2 years</option><option>> 5 years</option><option>> 10 years</option><option>> 15 years</option><option>> 25 years</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Releases/UBR</td><td align="right"><input name="noReleaseUbr" id="noReleaseUbr" type="number" value='
+		+ arr.noReleaseUbr
+		+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Tickets Volume</td><td align="right"><input name="noTktsVlm" type="number" id="noTktsVlm" value='
+		+ arr.noTktsVlm
+		+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Sev1\Sev2</td><td align="right"><input name="noSev1Sev2" type="number" id="noSev1Sev2" value='
+		+ arr.noSev1Sev2
+		+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Incident Tickets</td><td align="right"><input name="noIncTkt" id="noIncTkt" type="number" value='
+		+ arr.noIncTkt
+		+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;No. Of SRT"s\Issue Bridges directly attributed to Application</td><td align="right"><input name="noSrtCount" type="number" id="noSrtCount" value='
+		+ arr.noSrtCount
+		+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;No. of Tickets resolved with Vendor support (3rd Party like<br>Axway etc) </td><td align="right"><select name="noTktRslvVendor" id="noTktRslvVendor"><option selected="selected">'
+		+ arr.noTktRslvVendor
+		+ '</option><option>No</option><option>Medium < 5 Tickets/Year</option><option>High > 5 Tickets/Year</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Manual Intervention/Production Support in Effort/Day</td><td align="right"><select name="manualIntervension" id="manualIntervension"><option selected="selected">'
+		+ arr.manualIntervension
+		+ '</option><option>Low < 2 Hours/Day</option><option>Medium <4 Hours/Day</option><option>High >4 Hours/Day</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number ofOut of Office Hour callouts (2015)</td><td align="right"><input name="noOutofoffCallouts" type="number" id="noOutofoffCallouts" value='
+		+ arr.noOutofoffCallouts
+		+ ' /></td></tr></tbody></table></td></tr></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Application Complexity Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Number of Interfacing applications</td><td align="right"><input name="noInterfacApp" id="noInterfacApp" type="number" value='
+		+ arr.noInterfacApp
+		+ ' /></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Data Volume /Transaction per day</td><td align="right"><select name="dataVolumeDay" id="dataVolumeDay"><option selected="selected">'
+		+ arr.dataVolumeDay
+		+ '</option><option>Low < 50K Txns</option><option>Medium > 50K Txns to 1 Mn Txns</option><option>High >1M Txns</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Technology and Support Availability</td><td align="right"><select name="techSuprtAvlbt" id="techSuprtAvlbt"><option selected="selected">'
+		+ arr.techSuprtAvlbt
+		+ '</option><option>Web & Support Available</option><option>Web & Support Unavailable</option><option>Legacy & Support Available</option><option>Legacy & Support Unavailable</option><option>Niche & Support Available</option><option>Niche & Support Unavailable</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Code Availability</td><td align="right"><select name="codeAvlbt" id="codeAvlbt"><option selected="selected">'
+		+ arr.codeAvlbt
+		+ '</option><option>Partial</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;% Increase in data volume/Year</td><td align="right"><select name="increaDataVlmYr" id="increaDataVlmYr"><option selected="selected">'
+		+ arr.increaDataVlmYr
+		+ '</option><option>Low < 3%</option><option>Medium 3% to 8%</option><option>High > 8%</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Regulatory Compliance</td><td align="right"><select name="regCompliance" id="regCompliance"><option selected="selected">'
+		+ arr.regCompliance
+		+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #fff2cc; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">&nbsp;Impact and Recovery Index</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Revenue Impact</td><td align="right"><select name="revImpact" id="revImpact"><option selected="selected">'
+		+ arr.revImpact
+		+ '</option><option>Direct & Immediate Revenue Impact</option><option>Indirect Revenue Impact</option><option>No Revenue Impact</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Customer</td><td align="right"><select name="impatcToCustomer" id="impatcToCustomer"><option selected="selected">'
+		+ arr.impatcToCustomer
+		+ '</option><option>High > 50 Users</option><option>Medium - 10 to 50 users</option><option>Low < 10 users</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Recovery Duration (App./SW/Infra.)</td><td align="right"><select name="recoveryDuration" id="recoveryDuration"><option selected="selected">'
+		+ arr.recoveryDuration
+		+ '</option><option>4 to 12 Hours</option><option>12 Hours to 1 Day</option><option>> 1 Day</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Upstream / Downstream Apps</td><td align="right"><select name="impactUpDnStream" id="impactUpDnStream"><option selected="selected">'
+		+ arr.impactUpDnStream
+		+ '</option><option>> 5 systems</option><option>< 5 systems</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Impact to Brand Image</td><td align="right"><select name="impactBrandImg" id="impactBrandImg"><option selected="selected">'
+		+ arr.impactBrandImg
+		+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">Infra. Risk</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Application Performance SLA</td><td align="right"><select name="appPerfSla" id="appPerfSla"><option selected="selected">'
+		+ arr.appPerfSla
+		+ '</option><option>Above defined SLA</option><option>Below SLA</option><option>Met SLA</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Scalability/Capacity Related Issues</td><td align="right"><select name="scalability" id="scalability"><option selected="selected">'
+		+ arr.scalability
+		+ '</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Obsolete Infrastructure</td><td align="right"><select name="obsoleteInfra" id="obsoleteInfra"><option selected="selected">'
+		+ arr.obsoleteInfra
+		+ '</option><option>Yes</option><option>No</option><option>Partial</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;DR Environment Availability</td><td align="right"><select name="drEnvAvlbt" id="drEnvAvlbt"><option selected="selected">'
+		+ arr.drEnvAvlbt
+		+ '</option><option>Yes</option><option>No</option><option>Partial</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Network / Infrastructure issues per month</td><td align="right"><select name="nwInfraIssuePm" id="nwInfraIssuePm"><option selected="selected">'
+		+ arr.nwInfraIssuePm
+		+ '</option><option>> 5</option><option>> 2 and < 5</option><option>< 2</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">Security. Risk</td></tr><tr style="height: 15px;"><td align="left">&nbsp;Security Vulnerability (Code)</td><td align="right"><select name="secVlnbtyCode" id="secVlnbtyCode"><option selected="selected">'
+		+ arr.secVlnbtyCode
+		+ '</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Security Vulnerability (Infra)</td><td align="right"><select name="secVlnbtyInfra" id="secVlnbtyInfra"><option selected="selected">'
+		+ arr.secVlnbtyInfra
+		+ '</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Compliance Related Vulnerabilities</td><td align="right"><select name="compVlnblts" id="compVlnblts"><option selected="selected">'
+		+ arr.compVlnblts
+		+ '</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Conf. Mgmt Availability</td><td align="right"><select name="confMgtVlnbty" id="confMgtVlnbty"><option selected="selected">'
+		+ arr.confMgtVlnbty
+		+ '</option><option>Yes</option><option>No</option><option>Partial</option></select></td></tr></tbody></table></td></tr></tbody></table></br><table style="width: 650px; height: 100px;"><tbody><tr><td style="width: 470px;"><table style="height: 100px; margin-left: 5%; background-color: #BCDEE8; font-size: 12; font-weight: bold;" width="600"><tbody><tr style="height: 15px;"><td align="center" colspan="2">People. Risk</td></tr><tr style="height: 15px;"><td align="left">&nbsp;SME Availability</td><td align="right"><select name="smeAvlbt"><option selected="selected">'
+		+ arr.smeAvlbt
+		+ '</option><option>Yes - 1 SME</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Vendor Expertise(Cognizant Availability)</td><td align="right"><select name="vendorExptCts"><option selected="selected">'
+		+ arr.vendorExptCts
+		+ '</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Vendor Expertise(Ensono Availability)</td><td align="right"><select name="vendorExptEnsono"><option selected="selected">'
+		+ arr.vendorExptEnsono
+		+ '</option><option>Yes</option><option>No</option></select></td></tr><tr style="height: 15px;"><td align="left">&nbsp;Availability Business Users</td><td align="right"><select name="avlbtBizUsers"><option selected="selected">'
+		+ arr.avlbtBizUsers
+		+ '</option><option>Yes</option><option>No</option></select></td></tr></tbody></table></td></tr></tbody></table></br><a href="#"><img style="margin-left: 65%;" width: 100px; height: 35px; top: 15px; left: 980px;" src="images/calcButton.png" alt="Re-Calculate" onclick="reCalculateRiskScore();return false;" /></a></div><div class="divTableCell3"><br><br><br><br><table style="margin-left: 20px; margin-top: 100px; height: 27px;" width="100%"><tbody></tbody></table></div></div></div></div></div></form>';
 
-		screentwoRighthtml = '<div id="riskScoreImageDiv"><div class="divTableCell"></br></br></br></br></br></br></br></br></br></br><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'
-			+ arr[value - 1].appRiskMaintColor
-			+ '_'
-			+ arr[value - 1].appRiskMaintCategory
-			+ '.png" /><label for="appName" class="imtip">'
-			+ arr[value - 1].appRiskMaintScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/infra_'
-			+ arr[value - 1].appInfraRiskColor
-			+ '_'
-			+ arr[value - 1].appInfraRiskCategory
-			+ '.png" /><label for="appName" class="imtip">'
-			+ arr[value - 1].appInfraRiskScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/security_'
-			+ arr[value - 1].appSecurityRiskColor
-			+ '_'
-			+ arr[value - 1].appSecurityRiskCategory
-			+ '.png" /><label for="appName" class="imtip">'
-			+ arr[value - 1].appSecurityRiskScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/people_'
-			+ arr[value - 1].appPeopleRiskColor
-			+ '_'
-			+ arr[value - 1].appPeopleRiskCategory
-			+ '.png" /><label for="appName" class="imtip">'
-			+ arr[value - 1].appPeopleRiskScore
-			+ '</label></div></td></tr></tbody></table></td></tr></table></br></div></div>';
+
+	screentwoRighthtml = '<div id="riskScoreImageDiv2"><div class="divTableCell"></br></br></br></br></br></br></br></br></br></br><table style="width: 65px; height: 100px;margin-top:20%;"><tr><td style="width: 47px;"><table style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/app_'
+		+ arr.appRiskMaintColor
+		+ '_'
+		+ arr.appRiskMaintCategory
+		+ '.png" /><label for="appName" class="imtip">'
+		+ arr.appRiskMaintScore
+		+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/infra_'
+		+ arr.appInfraRiskColor
+		+ '_'
+		+ arr.appInfraRiskCategory
+		+ '.png" /><label for="appName" class="imtip">'
+		+ arr.appInfraRiskScore
+		+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/security_'
+		+ arr.appSecurityRiskColor
+		+ '_'
+		+ arr.appSecurityRiskCategory
+		+ '.png" /><label for="appName" class="imtip">'
+		+ arr.appSecurityRiskScore
+		+ '</label></div></td></tr></tbody></table></td></tr></table></br></br></br></br></br><table style="width: 650px; height: 100px;"><tr><td style="width: 470px;"><table cellspacing="2" style="height: 100px; margin-left: 5%; background-color:; font-size: 12; font-weight: bold;" width="600px"><tbody><tr><td align="center"></td></tr><tr style="height: 24px;"><td align="center" colspan="3" rowspan="3"><div><img src="images/people_'
+		+ arr.appPeopleRiskColor
+		+ '_'
+		+ arr.appPeopleRiskCategory
+		+ '.png" /><label for="appName" class="imtip">'
+		+ arr.appPeopleRiskScore
+		+ '</label></div></td></tr></tbody></table></td></tr></table></br></div></div>';
 		
 	$("#screen2Left").append(screentwoLefthtml);
 	$("#screen2Right").append(screentwoRighthtml);
@@ -369,4 +246,6 @@ function loadRecalcSection(value){
 }
 
 
-
+//DETAILS VIEW WORKAROUND
+//WRITE ANOTHER NG-CLICK WHICH WILL GET THE APPNAME AND EXTRACT THE ROW FROM THE $SCOPE VARIABLE AND PASS IT TO 
+//THE loadRecalcSection TO RENDER THE DETAILS PAGE
