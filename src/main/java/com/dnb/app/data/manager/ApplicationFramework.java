@@ -39,6 +39,8 @@ public class ApplicationFramework {
 	private static Map<String, Float> impactRevImpactMap;
 	private static Map<String, Float> impactImpatcToCustomerMap;
 	private static Map<String, Float> impactRecoveryDurationMap;
+	private static Map<String, Float> impactUpDownSystemsMap;
+	private static Map<String, Float> impactToBrandImageMap;
 	
 	/** -------------------------------- */
 	
@@ -82,158 +84,6 @@ public class ApplicationFramework {
 		initializeSecurityRiskScores();
 	}
 	
-	private void initializeChangeSummary() {
-		
-		changeSummary =  "   <table>  "  + 
-				 "   		<tr>  "  + 
-				 "   			<td>  "  + 
-				 "   				<table border='1'>  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td colspan='5' align='center'><b>App.Maint Score (1)</b></td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr align='center'>  "  + 
-				 "   						<td colspan='2'>Previous Values</td>  "  + 
-				 "   						<td colspan='2'>New Values</td>  "  + 
-				 "   						<td>Status</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>AMS-O-Score#</td>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>AMS-N-Score#</td>  "  + 
-				 "   						<td rowspan='3'>AMS-Status#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>AMS-O-Grade#</td>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>AMS-N-Grade#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>AMS-O-Color#</td>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>AMS-N-Color#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   				</table>  "  + 
-				 "   			</td>  "  + 
-				 "   			  "  + 
-				 "   			<td>  "  + 
-				 "   				<table border='1'>  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td colspan='5' align='center'><b>Infra Risk Score (2)</b></td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr align='center'>  "  + 
-				 "   						<td colspan='2'>Previous Values</td>  "  + 
-				 "   						<td colspan='2'>New Values</td>  "  + 
-				 "   						<td>Status</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>IRS-O-Score#</td>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>IRS-N-Score#</td>  "  + 
-				 "   						<td rowspan='3'>IRS-Status#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>IRS-O-Grade#</td>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>IRS-N-Grade#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>IRS-O-Color#</td>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>IRS-N-Color#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   				</table>  "  + 
-				 "   			</td>  "  + 
-				 "   		</tr>  "  + 
-				 "   		<tr>  "  + 
-				 "   			<td>  "  + 
-				 "   				<table border='1'>  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td colspan='5' align='center'><b>Security Risk Score (3)</b></td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr align='center'>  "  + 
-				 "   						<td colspan='2'>Previous Values</td>  "  + 
-				 "   						<td colspan='2'>New Values</td>  "  + 
-				 "   						<td>Status</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>SRS-O-Score#</td>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>SRS-N-Score#</td>  "  + 
-				 "   						<td rowspan='3'>SRS-Status#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>SRS-O-Grade#</td>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>SRS-N-Grade#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>SRS-O-Color#</td>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>SRS-N-Color#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   				</table>  "  + 
-				 "   			</td>  "  + 
-				 "   			  "  + 
-				 "   			<td>  "  + 
-				 "   				<table border='1'>  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td colspan='5' align='center'><b>People Risk Score (4)</b></td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr align='center'>  "  + 
-				 "   						<td colspan='2'>Previous Values</td>  "  + 
-				 "   						<td colspan='2'>New Values</td>  "  + 
-				 "   						<td>Status</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>PRS-O-Score#</td>  "  + 
-				 "   						<td>Score</td>  "  + 
-				 "   						<td>PRS-N-Score#</td>  "  + 
-				 "   						<td rowspan='3'>PRS-Status#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>PRS-O-Grade#</td>  "  + 
-				 "   						<td>Grade</td>  "  + 
-				 "   						<td>PRS-N-Grade#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   					  "  + 
-				 "   					<tr>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>PRS-O-Color#</td>  "  + 
-				 "   						<td>Color</td>  "  + 
-				 "   						<td>PRS-N-Color#</td>  "  + 
-				 "   					</tr>  "  + 
-				 "   				</table>  "  + 
-				 "   			</td>  "  + 
-				 "   		</tr>  "  + 
-				 "  	</table>  " ; 
-	}
-
 	private void initializeAppMaintRiskScores(){
 		
 		appMaintRiskWeightageMap = new HashMap<String, Float>();
@@ -392,6 +242,8 @@ public class ApplicationFramework {
 		impactRevImpactMap = new HashMap<String, Float>();
 		impactImpatcToCustomerMap = new HashMap<String, Float>();
 		impactRecoveryDurationMap = new HashMap<String, Float>();
+		impactUpDownSystemsMap = new HashMap<String, Float>();
+		impactToBrandImageMap = new HashMap<String, Float>();
 		
 		impactRevImpactMap.put("Direct & Immediate Revenue Impact", 10.0f);
 		impactRevImpactMap.put("Direct but not immediate Revenue Impact", 7.0f);
@@ -408,7 +260,14 @@ public class ApplicationFramework {
 		impactRecoveryDurationMap.put("4 to 12 Hours", 4.0f);
 		impactRecoveryDurationMap.put("12 Hours to 1 Day", 6.0f);
 		impactRecoveryDurationMap.put("> 1 Day", 10.0f);
-		impactRecoveryDurationMap.put("Weightage", 8.0f);		
+		impactRecoveryDurationMap.put("Weightage", 8.0f);
+		
+		impactUpDownSystemsMap.put("> 5 systems", 10.0f);
+		impactUpDownSystemsMap.put("< 5 systems", 5.0f);
+		impactUpDownSystemsMap.put("No", 0.0f);
+		
+		impactToBrandImageMap.put("Yes", 10.0f);
+		impactToBrandImageMap.put("No", 0.0f);
 
 		System.out.println("initializeImpactRiskScores()...Done");
 		
@@ -642,14 +501,32 @@ public class ApplicationFramework {
 	private static float impactRiskScoreRecalculation(ApplicationVO applicationVO){
 		
 		float impactRiskScore = 0.0f;
+		float bizCriticalityTotal = 0.0f;
 		
 		String revImpactText = applicationVO.getRevImpact();
 		String impatcToCustomerText = applicationVO.getImpatcToCustomer();
 		String recoveryDurationText = applicationVO.getRecoveryDuration();
+		String impactUpDnStreamText = applicationVO.getImpactUpDnStream();
+		String impactBrandImgText = applicationVO.getImpactBrandImg();
 		
 		Float revImpactVal = impactRevImpactMap.getOrDefault(revImpactText, defaultFloatValue);
 		Float impatcToCustomerVal = impactImpatcToCustomerMap.getOrDefault(impatcToCustomerText, defaultFloatValue);
 		Float recoveryDurationVal = impactRecoveryDurationMap.getOrDefault(recoveryDurationText, defaultFloatValue);
+		Float impactUpDnStreamVal = impactUpDownSystemsMap.getOrDefault(impactUpDnStreamText, defaultFloatValue);
+		Float impactBrandImgVal = impactToBrandImageMap.getOrDefault(impactBrandImgText, defaultFloatValue);
+		
+		bizCriticalityTotal = (revImpactVal + 
+									impatcToCustomerVal + 
+										recoveryDurationVal + 
+												impactUpDnStreamVal + impactBrandImgVal);
+		
+		if(bizCriticalityTotal > 25){
+			applicationVO.setBizCriticalityText("High");
+		}else if(bizCriticalityTotal > 15 && bizCriticalityTotal <= 25){
+			applicationVO.setBizCriticalityText("Medium");
+		}else if(bizCriticalityTotal >= 0 && bizCriticalityTotal <= 15){
+			applicationVO.setBizCriticalityText("Low");
+		}
 		
 		impactRiskScore = ((revImpactVal * impactRevImpactMap.get("Weightage"))/100) + 
 						  ((impatcToCustomerVal * impactImpatcToCustomerMap.get("Weightage"))/100) +  
@@ -826,5 +703,157 @@ public class ApplicationFramework {
 	
 	public static String getChangeSummary() {
 		return changeSummary;
+	}
+	
+	private void initializeChangeSummary() {
+		
+		changeSummary =  "   <table>  "  + 
+				 "   		<tr>  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>App.Maint Score (1)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>AMS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>AMS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>AMS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>AMS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>AMS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>AMS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>AMS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   			  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>Infra Risk Score (2)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>IRS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>IRS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>IRS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>IRS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>IRS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>IRS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>IRS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   		</tr>  "  + 
+				 "   		<tr>  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>Security Risk Score (3)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>SRS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>SRS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>SRS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>SRS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>SRS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>SRS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>SRS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   			  "  + 
+				 "   			<td>  "  + 
+				 "   				<table border='1'>  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td colspan='5' align='center'><b>People Risk Score (4)</b></td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr align='center'>  "  + 
+				 "   						<td colspan='2'>Previous Values</td>  "  + 
+				 "   						<td colspan='2'>New Values</td>  "  + 
+				 "   						<td>Status</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>PRS-O-Score#</td>  "  + 
+				 "   						<td>Score</td>  "  + 
+				 "   						<td>PRS-N-Score#</td>  "  + 
+				 "   						<td rowspan='3'>PRS-Status#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>PRS-O-Grade#</td>  "  + 
+				 "   						<td>Grade</td>  "  + 
+				 "   						<td>PRS-N-Grade#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   					  "  + 
+				 "   					<tr>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>PRS-O-Color#</td>  "  + 
+				 "   						<td>Color</td>  "  + 
+				 "   						<td>PRS-N-Color#</td>  "  + 
+				 "   					</tr>  "  + 
+				 "   				</table>  "  + 
+				 "   			</td>  "  + 
+				 "   		</tr>  "  + 
+				 "  	</table>  " ; 
 	}
 }

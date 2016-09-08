@@ -29,6 +29,7 @@
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    
     <style type="text/css">
     .model-overlay {
         position: fixed;
@@ -56,7 +57,7 @@
         height: 0;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-bottom: 5px solid #ccc;
+        border-top: 5px solid #ccc;
         display:inline-block;
     }
     
@@ -65,7 +66,7 @@
         height: 0;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 5px solid #ccc;
+        border-bottom: 5px solid #ccc;
         display:inline-block;
     }
     .filter{
@@ -102,14 +103,14 @@
                   <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="App.ID" ng-show="showSearch==true" ng-model="seachAppName.appId" class="searchtxt" />
                 </th>
-                <th style='width:15%'>
+                <th style='width:20%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appName' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appName' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appName'; sortReverse = !sortReverse">Application Name </a> 
                   <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Application Name" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
                 </th>
-                <th style='width:15%'>
+                <th style='width:14%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appCategory' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appCategory' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appCategory'; sortReverse = !sortReverse">Category</a>
@@ -123,28 +124,39 @@
                    <!--  <img src="images/filter.png" class="filter" ng-click="searchType='searchSupportScope';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Scope" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
                 </th>
-                <th style='width:16%'>
+                
+                
+                <th style='width:10%'>
+                    <font size="2">
+                    <span class=arrow-up ng-show="sortType=='bizCriticalityText' && sortReverse"></span><span class=arrow-down ng-show="sortType=='bizCriticalityText' && !sortReverse"></span>
+                    <a href="#" ng-click="sortType = 'bizCriticalityText'; sortReverse = !sortReverse">Biz Criticality</a>
+                    <input type="text" placeholder="Enter Criticality" ng-show="showSearch==true" ng-model="seachAppName.bizCriticalityText" class="searchtxt" />
+                </th>
+                
+                
+                
+                <th style='width:11%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appRiskMaintScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appRiskMaintScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appRiskMaintScore'; sortReverse = !sortReverse">App. Maint Risk Score</a> 
                     <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchMaintRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text"  placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />  
                 </th>
-                <th style='width:13%'>
+                <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appInfraRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appInfraRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appInfraRiskScore'; sortReverse = !sortReverse">Infra Risk Score</a> 
 <!--                     <img src="images/filter.png" class="filter" ng-click="searchType='searchInfraRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
                 </th>
-                <th style='width:15%'>
+                <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appSecurityRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appSecurityRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appSecurityRiskScore'; sortReverse = !sortReverse">Security Risk Score</a>
                   <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchSecurityRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
                 </th>
-                <th style='width:19%'>
+                <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appPeopleRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appPeopleRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appPeopleRiskScore'; sortReverse = !sortReverse">People Risk Score</a> 
@@ -173,6 +185,13 @@
                     <td>
                         <font size="2">{{row.supportScope}}</font>
                     </td>
+                    
+                    
+                    <td>
+                   		<font size="2"><img ng-src="images/{{row.bizCriticalityText}}.png"> {{row.bizCriticalityText}} </font>
+                    </td>
+                    
+                    
                     <td>
                         <font size="2"><img ng-src="images/{{row.appRiskMaintColor}}.png"> {{row.appRiskMaintCategory}} {{row.appRiskMaintScore}}</font>
                     </td>

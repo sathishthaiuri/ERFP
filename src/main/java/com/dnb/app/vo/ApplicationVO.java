@@ -33,6 +33,7 @@ public class ApplicationVO {
 	private String recoveryDuration = null;
 	private String impactUpDnStream = null;
 	private String impactBrandImg = null;
+	private String bizCriticalityText  = null;
 
 	private String appPerfSla = null;
 	private String scalability = null;
@@ -213,6 +214,14 @@ public class ApplicationVO {
 	public void setImpactBrandImg(String impactBrandImg) {
 		this.impactBrandImg = impactBrandImg;
 	}
+	
+	public String getBizCriticalityText() {
+		return bizCriticalityText;
+	}
+	public void setBizCriticalityText(String bizCriticalityText) {
+		this.bizCriticalityText = bizCriticalityText;
+	}
+	
 	public String getAppPerfSla() {
 		return appPerfSla;
 	}
