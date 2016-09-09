@@ -80,6 +80,7 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
+		
 		<!-- Logging with SLF4J & LogBack -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -133,6 +134,7 @@
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>1.9.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>jsr311-api</artifactId>
@@ -140,7 +142,6 @@
 		</dependency>
 
 		<!-- JSON parsers -->
-
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -158,7 +159,6 @@
 		    <artifactId>jxl</artifactId>
 		    <version>2.6.12</version>
 		</dependency>
-	
 	
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>

@@ -74,6 +74,13 @@
         width:16px;
         cursor:pointer;
     }
+    
+    .icon_theme{
+        height:24px;
+        width:24px;
+        cursor:pointer;
+    }
+    
     .searchtxt{
     margin-top:3px;
     width: 90% !important;
@@ -89,14 +96,17 @@
     <div id="screen1">
         <!-- {{appRecordList}} -->
         <!-- <h5 style="margin-right: auto;">Score Card</h5> -->      
-        <div style="text-align:right;display:block;padding-right:67px;font-weight:"bold" >
-            <span style="cursor:pointer" ng-click="showSearchFields()">Search
-            <img src="images/filter.png" class="filter"/> 
+        <div style="text-align:right;display:block;padding-right:70px;font-weight:"bold" >
+            <span style="cursor:pointer" ng-click="showSearchFields()">Filter
+            <img ng-src="images/filter.png" class="filter" title="CLick to filter below record(s)" /> 
             </span>
+            &nbsp;&nbsp;&nbsp;
+            <img ng-src="images/add_icon.ico" class="icon_theme" title="CLick to add a new record" />
         </div>  
-        <table align="center" style='width:95%' class="table table-striped">
+        
+        <table align="center" style='width:98%' class="table table-striped">
             <tr>
-            	<th style='width:5%'>
+            	<th style='width:4%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appId' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appId' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appId'; sortReverse = !sortReverse">ID</a> 
@@ -107,69 +117,69 @@
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appName' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appName' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appName'; sortReverse = !sortReverse">Application Name </a> 
-                  <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Application Name" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
                 </th>
-                <th style='width:14%'>
+                <th style='width:12%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appCategory' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appCategory' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appCategory'; sortReverse = !sortReverse">Category</a>
-                   <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchCategory';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text"  placeholder="Enter Category" ng-show="showSearch==true" ng-model="seachAppName.appCategory" class="searchtxt" />
                 </th>
-                <th style='width:10%'>
+                <th style='width:8%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='supportScope' && sortReverse"></span><span class=arrow-down ng-show="sortType=='supportScope' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'supportScope'; sortReverse = !sortReverse">Support Scope</a>  
-                   <!--  <img src="images/filter.png" class="filter" ng-click="searchType='searchSupportScope';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Scope" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
                 </th>
                 
-                
-                <th style='width:10%'>
+                <th style='width:8%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='bizCriticalityText' && sortReverse"></span><span class=arrow-down ng-show="sortType=='bizCriticalityText' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'bizCriticalityText'; sortReverse = !sortReverse">Biz Criticality</a>
                     <input type="text" placeholder="Enter Criticality" ng-show="showSearch==true" ng-model="seachAppName.bizCriticalityText" class="searchtxt" />
                 </th>
                 
-                
-                
                 <th style='width:11%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appRiskMaintScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appRiskMaintScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appRiskMaintScore'; sortReverse = !sortReverse">App. Maint Risk Score</a> 
-                    <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchMaintRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text"  placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />  
                 </th>
                 <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appInfraRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appInfraRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appInfraRiskScore'; sortReverse = !sortReverse">Infra Risk Score</a> 
-<!--                     <img src="images/filter.png" class="filter" ng-click="searchType='searchInfraRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
                 </th>
                 <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appSecurityRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appSecurityRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appSecurityRiskScore'; sortReverse = !sortReverse">Security Risk Score</a>
-                  <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchSecurityRiskScore';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
                 </th>
                 <th style='width:10%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appPeopleRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appPeopleRiskScore' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appPeopleRiskScore'; sortReverse = !sortReverse">People Risk Score</a> 
-                    <!-- <img src="images/filter.png" class="filter" ng-click="searchType='searchPeopleRiskScore';showSearch = !showSearch;" alt="search"/> -->
                      </font>
                     <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appPeopleRiskScore" class="searchtxt" />
                 </th>                 
+                
+                 <th style='width:3%'>
+                    <font size="2">Edit</font>
+                </th>
+                
+                 <th style='width:3%'>
+                    <font size="2">Remove</font>
+                </th>
+                
             </tr>
             <tbody>              
                 <tr ng-repeat='row in appRecordList | orderBy:sortType:sortReverse | filter:seachAppName'>
                  	<td>
                         <!-- <a href="#" onclick="loadRecalcSection({{$index+1}});"> -->
-                        <a href="#" ng-click="loadAppDetails(row.appId)">
+                        <img class="icon_theme" ng-src="images/calc_icon.ico" width="24px" height="24px" ng-click="loadAppDetails(row.appName)" />
+                        <a href="#" ng-click="loadAppDetails(row.appName)">
                             <font size="2">{{row.appId}}</font>
                         </a>
                     </td>
@@ -204,6 +214,14 @@
                     <td>
                         <font size="2"><img ng-src="images/{{row.appPeopleRiskColor}}.png"> {{row.appPeopleRiskCategory}} {{row.appPeopleRiskScore}}</font>
                     </td>
+                    
+                    <td>
+                        <img class="icon_theme" ng-src="images/edit_icon.ico" />
+                    </td>
+                    
+                    <td>
+                        <img class="icon_theme" ng-src="images/remove_icon.ico" />
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -217,5 +235,8 @@
         <img src="images/gears.gif" class="loader">
     </div>
     
+    <footer id="footer">
+        <img ng-src="images/footerlogo.png" />
+    </header>
 </body>
 </html>
