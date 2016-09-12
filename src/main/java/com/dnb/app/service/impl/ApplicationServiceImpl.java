@@ -29,7 +29,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 		ApplicationModel applicationModel = new ApplicationModel();
 		applicationModel.setAPP_ID(applicationVO.getAppId());
-		ApplicationManager.assignVo2ModelMapper(applicationModel, applicationVO);
+		ApplicationManager.assignVo2ModelMapper(applicationVO, applicationModel);
 		
 		try {
 			applicationRepository.insertApplication(applicationModel);
@@ -51,7 +51,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Transactional
 	public void updateApplication(ApplicationVO applicationVO) throws ServiceException {
 		ApplicationModel applicationModel = applicationRepository.selectApplication(applicationVO.getAppId());
-		ApplicationManager.assignVo2ModelMapper(applicationModel, applicationVO);
+		ApplicationManager.assignVo2ModelMapper(applicationVO, applicationModel);
 		
 		try {
 			applicationRepository.updateApplication(applicationModel);

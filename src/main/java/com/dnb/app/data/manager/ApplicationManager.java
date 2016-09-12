@@ -59,7 +59,7 @@ public class ApplicationManager {
 		return applicationVO;
 	}
 	
-	public static void assignVo2ModelMapper(ApplicationModel applicationModel, ApplicationVO applicationVO){
+	public static void assignVo2ModelMapper(ApplicationVO applicationVO, ApplicationModel applicationModel){
 
 		//applicationModel.setAPP_ID(applicationVO.getAppId());
 		applicationModel.setAPP_NAME(applicationVO.getAppName());
