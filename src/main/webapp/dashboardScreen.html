@@ -106,14 +106,14 @@
         
         <table align="center" style='width:98%' class="table table-striped">
             <tr>
-            	<th style='width:4%'>
+            	<th style='width:6%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appId' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appId' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appId'; sortReverse = !sortReverse">ID</a> 
                   <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
                     <input type="text" placeholder="App.ID" ng-show="showSearch==true" ng-model="seachAppName.appId" class="searchtxt" />
                 </th>
-                <th style='width:20%'>
+                <th style='width:18%'>
                     <font size="2">
                     <span class=arrow-up ng-show="sortType=='appName' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appName' && !sortReverse"></span>
                     <a href="#" ng-click="sortType = 'appName'; sortReverse = !sortReverse">Application Name </a> 
