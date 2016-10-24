@@ -5,7 +5,7 @@
 	<artifactId>erfp</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-
+	
 	<properties>
 
 		<!-- Generic properties -->
@@ -173,8 +173,9 @@
         		<version>2.2.2</version>
         	<scope>compile</scope>
 		</dependency>
-
+		
 	</dependencies>
+	
 	<build>
 		<finalName>erfp</finalName>
 		<plugins>
@@ -186,7 +187,6 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-
 			</plugin>
 		</plugins>
 	</build>
