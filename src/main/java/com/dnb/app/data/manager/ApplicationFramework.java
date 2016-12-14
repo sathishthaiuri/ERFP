@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.dnb.app.util.ERFUtility;
 import com.dnb.app.vo.ApplicationVO;
 
 public class ApplicationFramework {
@@ -11,6 +12,10 @@ public class ApplicationFramework {
 	private static String changeSummary = null; 
 	private static Float defaultFloatValue = 0.0f;
 	private static DecimalFormat decimalFormat1_2;
+	private static final int CONTRIB_RATIO_100 = 100;
+	private static final int CONTRIB_RATIO_40 = 40;
+	private static final int CONTRIB_RATIO_35 = 35;
+	private static final int CONTRIB_RATIO_25 = 25;
 	
 	private static Map<String, Float> appMaintRiskWeightageMap;
 	private static Map<String, Float> appMaintRiskValueRangeMap;
@@ -443,7 +448,7 @@ public class ApplicationFramework {
 	
 	private static float stabilityRiskScoreRecalculation(ApplicationVO applicationVO) {
 
-		float stabilityRiskScore = 0.0f;
+		float stabilityRiskValue = 0.0f;
 
 		Integer noTktsVlmVOVal = applicationVO.getNoTktsVlm();
 		Integer noSev1Sev2VOVal = applicationVO.getNoSev1Sev2();
@@ -452,27 +457,45 @@ public class ApplicationFramework {
 		String manualIntervensionText = applicationVO.getManualIntervension();
 		String noTktRslvVendorText = applicationVO.getNoTktRslvVendor();
 
-		Float noTktsVlmMatrixVal = calculateMatrixRangeScore(stabilityNoTktsVlmMap, noTktsVlmVOVal);
-		Float noSev1Sev2MatrixVal = calculateMatrixRangeScore(stabilityNoSev1Sev2Map, noSev1Sev2VOVal);
-		Float noSrtCountMatrixVal = calculateMatrixRangeScore(stabilityNoSrtCountMap, noSrtCountVOVal);
-		Float noReleaseUbrMatrixVal = calculateMatrixRangeScore(stabilityNoReleaseUbrMap, noReleaseUbrVOVal);
-		Float manualIntervensionVal = stabilityManualIntervensionMap.getOrDefault(manualIntervensionText, defaultFloatValue);
-		Float noTktRslvVendorVal = stabilityNoTktRslvVendorMap.getOrDefault(noTktRslvVendorText, defaultFloatValue);
+		Float noTktsVlmMatrixScore = calculateMatrixRangeScore(stabilityNoTktsVlmMap, noTktsVlmVOVal);
+		Float noSev1Sev2MatrixScore = calculateMatrixRangeScore(stabilityNoSev1Sev2Map, noSev1Sev2VOVal);
+		Float noSrtCountMatrixScore = calculateMatrixRangeScore(stabilityNoSrtCountMap, noSrtCountVOVal);
+		Float noReleaseUbrMatrixScore = calculateMatrixRangeScore(stabilityNoReleaseUbrMap, noReleaseUbrVOVal);
+		Float manualIntervensionScore = stabilityManualIntervensionMap.getOrDefault(manualIntervensionText, defaultFloatValue);
+		Float noTktRslvVendorScore = stabilityNoTktRslvVendorMap.getOrDefault(noTktRslvVendorText, defaultFloatValue);
 
-		stabilityRiskScore = ((noTktsVlmMatrixVal * stabilityNoTktsVlmMap.get("Weightage")) / 100) +
-							 ((noSev1Sev2MatrixVal * stabilityNoSev1Sev2Map.get("Weightage")) / 100) +
-							 ((noSrtCountMatrixVal * stabilityNoSrtCountMap.get("Weightage")) / 100) +
-							 ((noReleaseUbrMatrixVal * stabilityNoReleaseUbrMap.get("Weightage")) / 100) +
-							 ((manualIntervensionVal * stabilityManualIntervensionMap.get("Weightage")) / 100) +
-							 ((noTktRslvVendorVal * stabilityNoTktRslvVendorMap.get("Weightage")) / 100);
+		Float noTktsVlmMatrixVal = (noTktsVlmMatrixScore * stabilityNoTktsVlmMap.get("Weightage")) / 100;
+		Float noSev1Sev2MatrixVal = (noSev1Sev2MatrixScore * stabilityNoSev1Sev2Map.get("Weightage")) / 100;
+		Float noSrtCountMatrixVal = (noSrtCountMatrixScore * stabilityNoSrtCountMap.get("Weightage")) / 100;
+		Float noReleaseUbrMatrixVal = (noReleaseUbrMatrixScore * stabilityNoReleaseUbrMap.get("Weightage")) / 100;
+		Float manualIntervensionVal = (manualIntervensionScore * stabilityManualIntervensionMap.get("Weightage")) / 100;
+		Float noTktRslvVendorVal = (noTktRslvVendorScore * stabilityNoTktRslvVendorMap.get("Weightage")) / 100;
 
-		return stabilityRiskScore;
+		stabilityRiskValue = noTktsVlmMatrixVal + noSev1Sev2MatrixVal + noSrtCountMatrixVal + noReleaseUbrMatrixVal +  manualIntervensionVal + noTktRslvVendorVal;
+		
+		applicationVO.setNoTktsVlmContrb(ERFUtility.returnContribution(noTktsVlmMatrixVal, stabilityRiskValue, CONTRIB_RATIO_40));
+		applicationVO.setNoSev1Sev2Contrb(ERFUtility.returnContribution(noSev1Sev2MatrixVal, stabilityRiskValue, CONTRIB_RATIO_40));
+		applicationVO.setNoSrtCountContrb(ERFUtility.returnContribution(noSrtCountMatrixVal, stabilityRiskValue, CONTRIB_RATIO_40));
+		applicationVO.setNoReleaseUbrContrb(ERFUtility.returnContribution(noReleaseUbrMatrixVal, stabilityRiskValue, CONTRIB_RATIO_40));
+		applicationVO.setManualIntervensionContrb(ERFUtility.returnContribution(manualIntervensionVal, stabilityRiskValue, CONTRIB_RATIO_40));
+		applicationVO.setNoTktRslvVendorContrb(ERFUtility.returnContribution(noTktRslvVendorVal, stabilityRiskValue, CONTRIB_RATIO_40));
+		
+		String textLine = applicationVO.getNoTktsVlmContrb() + " | " + 
+						  applicationVO.getNoSev1Sev2Contrb() + " | " + 
+						  applicationVO.getNoSrtCountContrb() + " | " + 
+						  applicationVO.getNoReleaseUbrContrb() + " | " + 
+						  applicationVO.getManualIntervensionContrb() + " | " + 
+						  applicationVO.getNoTktRslvVendorContrb();
+		
+		System.out.print("Stability Risk = "+textLine);
+
+		return stabilityRiskValue;
 
 	}
 	
 	private static float complexityRiskScoreRecalculation(ApplicationVO applicationVO){
 		
-		float complexityRiskScore = 0.0f;
+		float complexityRiskValue = 0.0f;
 		
 		Integer noInterfacAppVOVal = applicationVO.getNoInterfacApp();
 		String dataVolumeDayText = applicationVO.getDataVolumeDay();
@@ -481,26 +504,44 @@ public class ApplicationFramework {
 		String increaDataVlmYrText = applicationVO.getIncreaDataVlmYr();
 		String regComplianceText = applicationVO.getRegCompliance();
 		
-		Float noInterfacAppMatrixVal = calculateMatrixRangeScore(complexityNoInterfacAppMap, noInterfacAppVOVal);
-		Float dataVolumeDayVal = complexityDataVolumeDayMap.getOrDefault(dataVolumeDayText, defaultFloatValue);
-		Float techSuprtAvlbtVal = complexityTechSuprtAvlbtMap.getOrDefault(techSuprtAvlbtText, defaultFloatValue);
-		Float codeAvlbtVal = complexityCodeAvlbtMap.getOrDefault(codeAvlbtText, defaultFloatValue);
-		Float increaDataVlmYrVal = complexityIncreaDataVlmYrMap.getOrDefault(increaDataVlmYrText, defaultFloatValue);
-		Float regComplianceVal = complexityRegComplianceMap.getOrDefault(regComplianceText, defaultFloatValue);
+		Float noInterfacAppMatrixScore = calculateMatrixRangeScore(complexityNoInterfacAppMap, noInterfacAppVOVal);
+		Float dataVolumeDayScore = complexityDataVolumeDayMap.getOrDefault(dataVolumeDayText, defaultFloatValue);
+		Float techSuprtAvlbtScore = complexityTechSuprtAvlbtMap.getOrDefault(techSuprtAvlbtText, defaultFloatValue);
+		Float codeAvlbtScore = complexityCodeAvlbtMap.getOrDefault(codeAvlbtText, defaultFloatValue);
+		Float increaDataVlmYrScore = complexityIncreaDataVlmYrMap.getOrDefault(increaDataVlmYrText, defaultFloatValue);
+		Float regComplianceScore = complexityRegComplianceMap.getOrDefault(regComplianceText, defaultFloatValue);
 		
-		complexityRiskScore = ((noInterfacAppMatrixVal * complexityNoInterfacAppMap.get("Weightage"))/100) + 
-						 	  ((dataVolumeDayVal * complexityDataVolumeDayMap.get("Weightage"))/100) +  
-						 	  ((techSuprtAvlbtVal * complexityTechSuprtAvlbtMap.get("Weightage"))/100) +
-						 	  ((codeAvlbtVal * complexityCodeAvlbtMap.get("Weightage"))/100) + 
-						 	  ((increaDataVlmYrVal * complexityIncreaDataVlmYrMap.get("Weightage"))/100) +  
-						 	  ((regComplianceVal * complexityRegComplianceMap.get("Weightage"))/100);
+		Float noInterfacAppMatrixValue = (noInterfacAppMatrixScore * complexityNoInterfacAppMap.get("Weightage"))/100;
+		Float dataVolumeDayValue = (dataVolumeDayScore * complexityDataVolumeDayMap.get("Weightage"))/100;
+		Float techSuprtAvlbtValue = (techSuprtAvlbtScore * complexityTechSuprtAvlbtMap.get("Weightage"))/100;
+		Float codeAvlbtValue = (codeAvlbtScore * complexityCodeAvlbtMap.get("Weightage"))/100;
+		Float increaDataVlmYrValue = (increaDataVlmYrScore * complexityIncreaDataVlmYrMap.get("Weightage"))/100;
+		Float regComplianceValue = (regComplianceScore * complexityRegComplianceMap.get("Weightage"))/100;
 		
-		return complexityRiskScore;
+		complexityRiskValue = noInterfacAppMatrixValue + dataVolumeDayValue + techSuprtAvlbtValue + codeAvlbtValue + increaDataVlmYrValue + regComplianceValue;
+		
+		applicationVO.setNoInterfacAppContrb(ERFUtility.returnContribution(noInterfacAppMatrixValue, complexityRiskValue, CONTRIB_RATIO_35));
+		applicationVO.setDataVolumeDayContrb(ERFUtility.returnContribution(dataVolumeDayValue, complexityRiskValue, CONTRIB_RATIO_35));
+		applicationVO.setTechSuprtAvlbtContrb(ERFUtility.returnContribution(techSuprtAvlbtValue, complexityRiskValue, CONTRIB_RATIO_35));
+		applicationVO.setCodeAvlbtContrb(ERFUtility.returnContribution(codeAvlbtValue, complexityRiskValue, CONTRIB_RATIO_35));
+		applicationVO.setIncreaDataVlmYrContrb(ERFUtility.returnContribution(increaDataVlmYrValue, complexityRiskValue, CONTRIB_RATIO_35));
+		applicationVO.setRegComplianceContrb(ERFUtility.returnContribution(regComplianceValue, complexityRiskValue, CONTRIB_RATIO_35));
+		
+		String textLine = applicationVO.getNoInterfacAppContrb() + " | " + 
+						  applicationVO.getDataVolumeDayContrb() + " | " + 
+						  applicationVO.getTechSuprtAvlbtContrb() + " | " + 
+						  applicationVO.getCodeAvlbtContrb() + " | " + 
+						  applicationVO.getIncreaDataVlmYrContrb() + " | " + 
+						  applicationVO.getRegComplianceContrb();
+		
+		System.out.print("Complexity Risk = "+textLine);
+		
+		return complexityRiskValue;
 	}
 	
 	private static float impactRiskScoreRecalculation(ApplicationVO applicationVO){
 		
-		float impactRiskScore = 0.0f;
+		float impactRiskValue = 0.0f;
 		float bizCriticalityTotal = 0.0f;
 		
 		String revImpactText = applicationVO.getRevImpact();
@@ -509,16 +550,32 @@ public class ApplicationFramework {
 		String impactUpDnStreamText = applicationVO.getImpactUpDnStream();
 		String impactBrandImgText = applicationVO.getImpactBrandImg();
 		
-		Float revImpactVal = impactRevImpactMap.getOrDefault(revImpactText, defaultFloatValue);
-		Float impatcToCustomerVal = impactImpatcToCustomerMap.getOrDefault(impatcToCustomerText, defaultFloatValue);
-		Float recoveryDurationVal = impactRecoveryDurationMap.getOrDefault(recoveryDurationText, defaultFloatValue);
-		Float impactUpDnStreamVal = impactUpDownSystemsMap.getOrDefault(impactUpDnStreamText, defaultFloatValue);
-		Float impactBrandImgVal = impactToBrandImageMap.getOrDefault(impactBrandImgText, defaultFloatValue);
+		Float revImpactScore = impactRevImpactMap.getOrDefault(revImpactText, defaultFloatValue);
+		Float impatcToCustomerScore = impactImpatcToCustomerMap.getOrDefault(impatcToCustomerText, defaultFloatValue);
+		Float recoveryDurationScore = impactRecoveryDurationMap.getOrDefault(recoveryDurationText, defaultFloatValue);
+		Float impactUpDnStreamScore = impactUpDownSystemsMap.getOrDefault(impactUpDnStreamText, defaultFloatValue);
+		Float impactBrandImgScore = impactToBrandImageMap.getOrDefault(impactBrandImgText, defaultFloatValue);
 		
-		bizCriticalityTotal = (revImpactVal + 
-									impatcToCustomerVal + 
-										recoveryDurationVal + 
-												impactUpDnStreamVal + impactBrandImgVal);
+		Float revImpactValue = (revImpactScore * impactRevImpactMap.get("Weightage"))/100;
+		Float impatcToCustomerValue = (impatcToCustomerScore * impactImpatcToCustomerMap.get("Weightage"))/100;
+		Float recoveryDurationValue = (recoveryDurationScore * impactRecoveryDurationMap.get("Weightage"))/100;
+		
+		impactRiskValue = revImpactValue + impatcToCustomerValue + recoveryDurationValue;
+		
+		applicationVO.setRevImpactContrb(ERFUtility.returnContribution(revImpactValue, impactRiskValue, CONTRIB_RATIO_25));
+		applicationVO.setImpatcToCustomerContrb(ERFUtility.returnContribution(impatcToCustomerValue, impactRiskValue, CONTRIB_RATIO_25));
+		applicationVO.setRecoveryDurationContrb(ERFUtility.returnContribution(recoveryDurationValue, impactRiskValue, CONTRIB_RATIO_25));
+		
+		String textLine = applicationVO.getRevImpactContrb() + " | " + 
+						  applicationVO.getImpatcToCustomerContrb() + " | " + 
+						  applicationVO.getRecoveryDurationContrb();
+		
+		System.out.println("Impact & Recovery = "+textLine);
+		
+		bizCriticalityTotal = (revImpactScore + 
+									impatcToCustomerScore + 
+										recoveryDurationScore + 
+												impactUpDnStreamScore + impactBrandImgScore);
 		
 		if(bizCriticalityTotal > 25){
 			applicationVO.setBizCriticalityText("High");
@@ -528,16 +585,12 @@ public class ApplicationFramework {
 			applicationVO.setBizCriticalityText("Low");
 		}
 		
-		impactRiskScore = ((revImpactVal * impactRevImpactMap.get("Weightage"))/100) + 
-						  ((impatcToCustomerVal * impactImpatcToCustomerMap.get("Weightage"))/100) +  
-						  ((recoveryDurationVal * impactRecoveryDurationMap.get("Weightage"))/100);
-		
-		return impactRiskScore;
+		return impactRiskValue;
 	}
 	
 	public static void infraRiskScoreRecalculation(ApplicationVO applicationVO){
 		
-		float infraRiskScore;
+		float infraRiskValue;
 
 		String infraCategory = null;
 		String infraRiskColor = null;
@@ -548,30 +601,46 @@ public class ApplicationFramework {
 		String drEnvAvlbtText = applicationVO.getDrEnvAvlbt();
 		String nwInfraIssuePmText = applicationVO.getNwInfraIssuePm();
 		
-		Float infraPerformanceVal = infraPerformanceMap.getOrDefault(appPerfSlaText, defaultFloatValue);
-		Float infraObsoleteInfraVal = infraObsoleteInfraMap.getOrDefault(obsoleteInfraText, defaultFloatValue);
-		Float infraAvlbtOfDREnvVal = infraAvlbtOfDREnvMap.getOrDefault(drEnvAvlbtText, defaultFloatValue);
-		Float infraScalabilityIssuVal = infraScalabilityIssuMap.getOrDefault(scalabilityText, defaultFloatValue);
-		Float infraFrequencyInfraVal = infraFrequencyInfraMap.getOrDefault(nwInfraIssuePmText, defaultFloatValue);
+		Float infraPerformanceScore = infraPerformanceMap.getOrDefault(appPerfSlaText, defaultFloatValue);
+		Float infraObsoleteInfraScore = infraObsoleteInfraMap.getOrDefault(obsoleteInfraText, defaultFloatValue);
+		Float infraAvlbtOfDREnvScore = infraAvlbtOfDREnvMap.getOrDefault(drEnvAvlbtText, defaultFloatValue);
+		Float infraScalabilityIssuScore = infraScalabilityIssuMap.getOrDefault(scalabilityText, defaultFloatValue);
+		Float infraFrequencyInfraScore = infraFrequencyInfraMap.getOrDefault(nwInfraIssuePmText, defaultFloatValue);
 		
-		infraRiskScore = ((infraPerformanceVal * infraPerformanceMap.get("Weightage"))/100) + 
-						 ((infraObsoleteInfraVal * infraObsoleteInfraMap.get("Weightage"))/100) + 
-						 ((infraAvlbtOfDREnvVal * infraAvlbtOfDREnvMap.get("Weightage"))/100) + 
-						 ((infraScalabilityIssuVal * infraScalabilityIssuMap.get("Weightage"))/100) +  
-						 ((infraFrequencyInfraVal * infraFrequencyInfraMap.get("Weightage"))/100);
+		Float infraPerformanceVal = (infraPerformanceScore * infraPerformanceMap.get("Weightage"))/100;
+		Float infraObsoleteInfraVal = (infraObsoleteInfraScore * infraObsoleteInfraMap.get("Weightage"))/100;
+		Float infraAvlbtOfDREnvVal = (infraAvlbtOfDREnvScore * infraAvlbtOfDREnvMap.get("Weightage"))/100;
+		Float infraScalabilityIssuVal = (infraScalabilityIssuScore * infraScalabilityIssuMap.get("Weightage"))/100;
+		Float infraFrequencyInfraVal = (infraFrequencyInfraScore * infraFrequencyInfraMap.get("Weightage"))/100;
 		
-		if( infraRiskScore >= infraRiskValueRangeMap.get("Category-C-Min") && infraRiskScore <= infraRiskValueRangeMap.get("Category-C-Max")){
+		infraRiskValue = infraPerformanceVal + infraObsoleteInfraVal + infraAvlbtOfDREnvVal + infraScalabilityIssuVal + infraFrequencyInfraVal;
+		
+		applicationVO.setAppPerfSlaContrb(ERFUtility.returnContribution(infraPerformanceVal, infraRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setScalabilityContrb(ERFUtility.returnContribution(infraObsoleteInfraVal, infraRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setObsoleteInfraContrb(ERFUtility.returnContribution(infraAvlbtOfDREnvVal, infraRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setDrEnvAvlbtContrb(ERFUtility.returnContribution(infraScalabilityIssuVal, infraRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setNwInfraIssuePmContrb(ERFUtility.returnContribution(infraFrequencyInfraVal, infraRiskValue, CONTRIB_RATIO_100));
+		
+		String textLine = applicationVO.getAppPerfSlaContrb() + " | " + 
+						  applicationVO.getScalabilityContrb() + " | " + 
+						  applicationVO.getObsoleteInfraContrb() + " | " + 
+						  applicationVO.getDrEnvAvlbtContrb() + " | " +
+						  applicationVO.getNwInfraIssuePmContrb();
+		
+		System.out.print("People Risk = "+textLine);
+		
+		if( infraRiskValue >= infraRiskValueRangeMap.get("Category-C-Min") && infraRiskValue <= infraRiskValueRangeMap.get("Category-C-Max")){
 			infraCategory = "C";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
-		}else if( infraRiskScore >= infraRiskValueRangeMap.get("Category-B-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-B-Max")){
+		}else if( infraRiskValue >= infraRiskValueRangeMap.get("Category-B-Min") && infraRiskValue < infraRiskValueRangeMap.get("Category-B-Max")){
 			infraCategory = "B";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
-		}else if( infraRiskScore >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskScore < infraRiskValueRangeMap.get("Category-A-Max")){
+		}else if( infraRiskValue >= infraRiskValueRangeMap.get("Category-A-Min") && infraRiskValue < infraRiskValueRangeMap.get("Category-A-Max")){
 			infraCategory = "A";
 			infraRiskColor = infraRiskCategoryMap.get(infraCategory);
 		}
 		
-		applicationVO.setAppInfraRiskScore(decimalFormat1_2.format(infraRiskScore));
+		applicationVO.setAppInfraRiskScore(decimalFormat1_2.format(infraRiskValue));
 		applicationVO.setAppInfraRiskCategory(infraCategory);
 		applicationVO.setAppInfraRiskColor(infraRiskColor);
 		
@@ -579,7 +648,7 @@ public class ApplicationFramework {
 
 	public static void peopleRiskScoreRecalculation(ApplicationVO applicationVO) {
 		
-		float peopleRiskScore = 0.0f;
+		float peopleRiskValue = 0.0f;
 
 		String peopleCategory = null;
 		String peopleRiskColor = null;
@@ -589,31 +658,45 @@ public class ApplicationFramework {
 		String peopleVendorExpEnsonoText = applicationVO.getVendorExptEnsono();
 		String peopleAvlbtOfBizUsersText = applicationVO.getAvlbtBizUsers();
 		
-		Float peopleSMEAvlbtVal = peopleSMEAvlbtMap.getOrDefault(peopleSMEAvlbtText, defaultFloatValue);
-		Float peopleVendorExpCTSVal = peopleVendorExpCTSMap.getOrDefault(peopleVendorExpEnsonoText, defaultFloatValue);
-		Float peopleVendorExpEnsonoVal = peopleVendorExpEnsonoMap.getOrDefault(peopleAvlbtOfBizUsersText, defaultFloatValue);
-		Float peopleAvlbtOfBizUsersVal = peopleAvlbtOfBizUsersMap.getOrDefault(peopleVendorExpCTSText, defaultFloatValue);
+		Float peopleSMEAvlbtScore = peopleSMEAvlbtMap.getOrDefault(peopleSMEAvlbtText, defaultFloatValue);
+		Float peopleVendorExpCTSScore = peopleVendorExpCTSMap.getOrDefault(peopleVendorExpEnsonoText, defaultFloatValue);
+		Float peopleVendorExpEnsonoScore = peopleVendorExpEnsonoMap.getOrDefault(peopleAvlbtOfBizUsersText, defaultFloatValue);
+		Float peopleAvlbtOfBizUsersScore = peopleAvlbtOfBizUsersMap.getOrDefault(peopleVendorExpCTSText, defaultFloatValue);
 		
-		peopleRiskScore = ((peopleSMEAvlbtVal * peopleSMEAvlbtMap.get("Weightage"))/100) + 
-						  ((peopleVendorExpCTSVal * peopleVendorExpCTSMap.get("Weightage"))/100) + 
-						  ((peopleVendorExpEnsonoVal * peopleVendorExpEnsonoMap.get("Weightage"))/100) +  
-						  ((peopleAvlbtOfBizUsersVal * peopleAvlbtOfBizUsersMap.get("Weightage"))/100);
+		Float peopleSMEAvlbtValue = (peopleSMEAvlbtScore * peopleSMEAvlbtMap.get("Weightage"))/100;
+		Float peopleVendorExpCTSValue = (peopleVendorExpCTSScore * peopleVendorExpCTSMap.get("Weightage"))/100;
+		Float peopleVendorExpEnsonoValue = (peopleVendorExpEnsonoScore * peopleVendorExpEnsonoMap.get("Weightage"))/100;
+		Float peopleAvlbtOfBizUsersValue = (peopleAvlbtOfBizUsersScore * peopleAvlbtOfBizUsersMap.get("Weightage"))/100;
 		
-		if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-D-Min") && peopleRiskScore <= peopleRiskValueRangeMap.get("Category-D-Max")){
+		peopleRiskValue = peopleSMEAvlbtValue + peopleVendorExpCTSValue + peopleVendorExpEnsonoValue + peopleAvlbtOfBizUsersValue;
+		
+		applicationVO.setSmeAvlbtContrb(ERFUtility.returnContribution(peopleSMEAvlbtValue, peopleRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setVendorExptCtsContrb(ERFUtility.returnContribution(peopleVendorExpCTSValue, peopleRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setVendorExptEnsonoContrb(ERFUtility.returnContribution(peopleVendorExpEnsonoValue, peopleRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setAvlbtBizUsersContrb(ERFUtility.returnContribution(peopleAvlbtOfBizUsersValue, peopleRiskValue, CONTRIB_RATIO_100));
+		
+		String textLine = applicationVO.getSmeAvlbtContrb() + " | " + 
+						  applicationVO.getVendorExptCtsContrb() + " | " + 
+						  applicationVO.getVendorExptEnsonoContrb() + " | " + 
+						  applicationVO.getAvlbtBizUsersContrb();
+		
+		System.out.print("People Risk = "+textLine);
+		
+		if( peopleRiskValue >= peopleRiskValueRangeMap.get("Category-D-Min") && peopleRiskValue <= peopleRiskValueRangeMap.get("Category-D-Max")){
 			peopleCategory = "D";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
-		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-C-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-C-Max")){
+		}else if( peopleRiskValue >= peopleRiskValueRangeMap.get("Category-C-Min") && peopleRiskValue < peopleRiskValueRangeMap.get("Category-C-Max")){
 			peopleCategory = "C";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
-		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-B-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-B-Max")){
+		}else if( peopleRiskValue >= peopleRiskValueRangeMap.get("Category-B-Min") && peopleRiskValue < peopleRiskValueRangeMap.get("Category-B-Max")){
 			peopleCategory = "B";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
-		}else if( peopleRiskScore >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskScore < peopleRiskValueRangeMap.get("Category-A-Max")){
+		}else if( peopleRiskValue >= peopleRiskValueRangeMap.get("Category-A-Min") && peopleRiskValue < peopleRiskValueRangeMap.get("Category-A-Max")){
 			peopleCategory = "A";
 			peopleRiskColor = peopleRiskCategoryMap.get(peopleCategory);
 		}
 		
-		applicationVO.setAppPeopleRiskScore(decimalFormat1_2.format(peopleRiskScore));
+		applicationVO.setAppPeopleRiskScore(decimalFormat1_2.format(peopleRiskValue));
 		applicationVO.setAppPeopleRiskCategory(peopleCategory);
 		applicationVO.setAppPeopleRiskColor(peopleRiskColor);
 		
@@ -621,7 +704,7 @@ public class ApplicationFramework {
 	
 	public static void securityRiskScoreRecalculation(ApplicationVO applicationVO) {
 		
-		float securityRiskScore = 0.0f;
+		Float securityRiskValue = 0.0f;
 
 		String securityCategory = null;
 		String securityRiskColor = null;
@@ -630,26 +713,38 @@ public class ApplicationFramework {
 		String secVlnbtyInfraText = applicationVO.getSecVlnbtyInfra();
 		String secCompVlnbltsText = applicationVO.getCompVlnblts();
 		
-		Float secVlnbtyCodeVal = secVlnbtyCodeMap.getOrDefault(secVlnbtyCodeText, defaultFloatValue);
-		Float secVlnbtyInfraVal = secVlnbtyInfraMap.getOrDefault(secVlnbtyInfraText, defaultFloatValue);
-		Float secCompVlnbltsVal = secCompVlnbltsMap.getOrDefault(secCompVlnbltsText, defaultFloatValue);
+		Float secVlnbtyCodeScore = secVlnbtyCodeMap.getOrDefault(secVlnbtyCodeText, defaultFloatValue);
+		Float secVlnbtyInfraScore = secVlnbtyInfraMap.getOrDefault(secVlnbtyInfraText, defaultFloatValue);
+		Float secCompVlnbltsScore = secCompVlnbltsMap.getOrDefault(secCompVlnbltsText, defaultFloatValue);
 		
-		securityRiskScore = ((secVlnbtyCodeVal * secVlnbtyCodeMap.get("Weightage"))/100) + 
-						    ((secVlnbtyInfraVal * secVlnbtyInfraMap.get("Weightage"))/100) +  
-						    ((secCompVlnbltsVal * secCompVlnbltsMap.get("Weightage"))/100);
+		Float secVlnbtyCodeValue = (secVlnbtyCodeScore * secVlnbtyCodeMap.get("Weightage"))/100;
+		Float secVlnbtyInfraValue = (secVlnbtyInfraScore * secVlnbtyInfraMap.get("Weightage"))/100;
+		Float secCompVlnbltsValue = (secCompVlnbltsScore * secCompVlnbltsMap.get("Weightage"))/100;
 		
-		if( securityRiskScore >= secRiskValueRangeMap.get("Category-C-Min") && securityRiskScore <= secRiskValueRangeMap.get("Category-C-Max")){
+		securityRiskValue = secVlnbtyCodeValue + secVlnbtyInfraValue + secCompVlnbltsValue;
+
+		applicationVO.setSecVlnbtyCodeContrb(ERFUtility.returnContribution(secVlnbtyCodeValue, securityRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setSecVlnbtyInfraContrb(ERFUtility.returnContribution(secVlnbtyInfraValue, securityRiskValue, CONTRIB_RATIO_100));
+		applicationVO.setCompVlnbltsContrb(ERFUtility.returnContribution(secCompVlnbltsValue, securityRiskValue, CONTRIB_RATIO_100));
+	
+		String textLine = applicationVO.getSecVlnbtyCodeContrb() + " | " + 
+						  applicationVO.getSecVlnbtyInfraContrb() + " | " + 
+						  applicationVO.getCompVlnbltsContrb();
+		
+		System.out.print("Security Risk = "+textLine);
+		
+		if( securityRiskValue >= secRiskValueRangeMap.get("Category-C-Min") && securityRiskValue <= secRiskValueRangeMap.get("Category-C-Max")){
 			securityCategory = "C";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
-		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-B-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-B-Max")){
+		}else if( securityRiskValue >= secRiskValueRangeMap.get("Category-B-Min") && securityRiskValue < secRiskValueRangeMap.get("Category-B-Max")){
 			securityCategory = "B";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
-		}else if( securityRiskScore >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskScore < secRiskValueRangeMap.get("Category-A-Max")){
+		}else if( securityRiskValue >= secRiskValueRangeMap.get("Category-A-Min") && securityRiskValue < secRiskValueRangeMap.get("Category-A-Max")){
 			securityCategory = "A";
 			securityRiskColor = secRiskCategoryMap.get(securityCategory);
 		}
 		
-		applicationVO.setAppSecurityRiskScore(decimalFormat1_2.format(securityRiskScore));
+		applicationVO.setAppSecurityRiskScore(decimalFormat1_2.format(securityRiskValue));
 		applicationVO.setAppSecurityRiskCategory(securityCategory);
 		applicationVO.setAppSecurityRiskColor(securityRiskColor);
 		
