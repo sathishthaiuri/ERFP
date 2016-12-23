@@ -1,242 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="angularspring">
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7;IE=10;IE=11; IE=EDGE" />
-<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-<META Http-Equiv="Cache-Control" Content="no-cache">
-<META Http-Equiv="Pragma" Content="no-cache">
-<META Http-Equiv="Expires" Content="0">
-<title>Enterprise Risk Framework Portal</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html lang="en" ng-app="myApp" class="no-js">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7;IE=10;IE=11; IE=EDGE" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <META Http-Equiv="Cache-Control" Content="no-cache">
+    <META Http-Equiv="Pragma" Content="no-cache">
+    <META Http-Equiv="Expires" Content="0">
+    <title>Enterprise Risk Framework Portal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="bootstrap/css/style.css" rel="stylesheet" media="screen">
-    <link href="bootstrap/css/app.css" rel="stylesheet" media="screen">     
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>	
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	
-	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.i18n.properties-min-1.0.9.js"></script>
-    <!-- // <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script> -->
-    <script type="text/javascript" src="js/init.js"></script>
-    <script type="text/javascript" src="js/controller.js"></script>
-    <script type="text/javascript" src="js/i18n.js"></script>
-    <script type="text/javascript" src="js/base64.js"></script>
-    <script type="text/javascript" src="js/dirPagination.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    
-    <style type="text/css">
-    .model-overlay {
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 3;
-        top: 0;
-        left: 0;        
-    }
-    
-    .loader {
-        width: 168px;
-        height: 168px;
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-    }
-    
-    .arrow-up {
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #ccc;
-        display:inline-block;
-    }
-    
-    .arrow-down {
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 5px solid #ccc;
-        display:inline-block;
-    }
-    .filter{
-        height:16px;
-        width:16px;
-        cursor:pointer;
-    }
-    
-    .icon_theme{
-        height:24px;
-        width:24px;
-        cursor:pointer;
-    }
-    
-    .searchtxt{
-    margin-top:3px;
-    width: 90% !important;
-    }
-    </style>
-</head>
-
-<body ng-controller="ApplicationController" ng-init="init()"> 
-    <header id="header">
-        <h1><a href="#screen1" onclick="backToHome()"><img src="images/headerlogo.png"></a></h1>
+    <link href="bootstrap/css/style.css" rel="stylesheet" media="screen">
+  </head>
+  <body> 
+    <header id="header" class="header-container">
+      <div class="logo-div pull-left"><img src="images/dnb-logo.png" alt="Dun and Bradstreet" /></div>
+      <h1 class="page-title pull-left">Enterprise Risk Framework Portal - Dashboard</h1>
+      <div class="logout-div pull-right"><form action="login.html" method="post"><button class="btn btn-default" type="submit">Logout</button></form></div>
     </header>
-    
-    <div id="screen1">
-        <!-- {{appRecordList}} -->
-        <!-- <h5 style="margin-right: auto;">Score Card</h5> -->      
-        <div style="text-align:right;display:block;padding-right:70px;font-weight:"bold" >
-            <span style="cursor:pointer" ng-click="showSearchFields()">Filter
-            <img ng-src="images/filter.png" class="filter" title="CLick to filter below record(s)" /> 
-            </span>
-            &nbsp;&nbsp;&nbsp;
-            <img ng-src="images/add_icon.ico" class="icon_theme" title="CLick to add a new record" />
-        </div>  
-        
-        <table align="center" style='width:98%' class="table table-striped">
-            <tr>
-            	<th style='width:6%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appId' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appId' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appId'; sortReverse = !sortReverse">ID</a> 
-                  <!--   <img src="images/filter.png" class="filter" ng-click="searchType='searchAppName';showSearch = !showSearch;" alt="search"/> --></font> 
-                    <input type="text" placeholder="App.ID" ng-show="showSearch==true" ng-model="seachAppName.appId" class="searchtxt" />
-                </th>
-                <th style='width:18%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appName' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appName' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appName'; sortReverse = !sortReverse">Application Name </a> 
-                    <input type="text" placeholder="Enter Application Name" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
-                </th>
-                <th style='width:12%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appCategory' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appCategory' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appCategory'; sortReverse = !sortReverse">Category</a>
-                    <input type="text"  placeholder="Enter Category" ng-show="showSearch==true" ng-model="seachAppName.appCategory" class="searchtxt" />
-                </th>
-                <th style='width:8%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='supportScope' && sortReverse"></span><span class=arrow-down ng-show="sortType=='supportScope' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'supportScope'; sortReverse = !sortReverse">Support Scope</a>  
-                    <input type="text" placeholder="Enter Scope" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
-                </th>
-                
-                <th style='width:8%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='bizCriticalityText' && sortReverse"></span><span class=arrow-down ng-show="sortType=='bizCriticalityText' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'bizCriticalityText'; sortReverse = !sortReverse">Biz Criticality</a>
-                    <input type="text" placeholder="Enter Criticality" ng-show="showSearch==true" ng-model="seachAppName.bizCriticalityText" class="searchtxt" />
-                </th>
-                
-                <th style='width:11%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appRiskMaintScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appRiskMaintScore' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appRiskMaintScore'; sortReverse = !sortReverse">App. Maint Risk Score</a> 
-                    <input type="text"  placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />  
-                </th>
-                <th style='width:10%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appInfraRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appInfraRiskScore' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appInfraRiskScore'; sortReverse = !sortReverse">Infra Risk Score</a> 
-                    <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
-                </th>
-                <th style='width:10%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appSecurityRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appSecurityRiskScore' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appSecurityRiskScore'; sortReverse = !sortReverse">Security Risk Score</a>
-                    <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
-                </th>
-                <th style='width:10%'>
-                    <font size="2">
-                    <span class=arrow-up ng-show="sortType=='appPeopleRiskScore' && sortReverse"></span><span class=arrow-down ng-show="sortType=='appPeopleRiskScore' && !sortReverse"></span>
-                    <a href="#" ng-click="sortType = 'appPeopleRiskScore'; sortReverse = !sortReverse">People Risk Score</a> 
-                     </font>
-                    <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appPeopleRiskScore" class="searchtxt" />
-                </th>                 
-                
-                 <th style='width:3%'>
-                    <font size="2">Edit</font>
-                </th>
-                
-                 <th style='width:3%'>
-                    <font size="2">Remove</font>
-                </th>
-                
-            </tr>
-            <tbody>              
-                <tr ng-repeat='row in appRecordList | orderBy:sortType:sortReverse | filter:seachAppName'>
-                 	<td>
-                        <!-- <a href="#" onclick="loadRecalcSection({{$index+1}});"> -->
-                        <img class="icon_theme" ng-src="images/calc_icon.ico" width="24px" height="24px" ng-click="loadAppDetails(row.appName)" />
-                        <a href="#" ng-click="loadAppDetails(row.appName)">
-                            <font size="2">{{row.appId}}</font>
-                        </a>
-                    </td>
-                    <td>
-                        <!-- <a href="#" onclick="loadRecalcSection({{$index+1}});"> -->
-                        <a href="#" ng-click="loadAppDetails(row.appName)">
-                            <font size="2">{{row.appName}}</font>
-                        </a>
-                    </td>
-                    <td>
-                        <font size="2">{{row.appCategory}}</font>
-                    </td>
-                    <td>
-                        <font size="2">{{row.supportScope}}</font>
-                    </td>
-                    
-                    
-                    <td>
-                   		<font size="2"><img ng-src="images/{{row.bizCriticalityText}}.png"> {{row.bizCriticalityText}} </font>
-                    </td>
-                    
-                    
-                    <td>
-                        <font size="2"><img ng-src="images/{{row.appRiskMaintColor}}.png"> {{row.appRiskMaintCategory}} {{row.appRiskMaintScore}}</font>
-                    </td>
-                    <td>
-                        <font size="2"><img ng-src="images/{{row.appInfraRiskColor}}.png"> {{row.appInfraRiskCategory}} {{row.appInfraRiskScore}}</font>
-                    </td>
-                    <td>
-                        <font size="2"><img ng-src="images/{{row.appSecurityRiskColor}}.png"> {{row.appSecurityRiskCategory}} {{row.appSecurityRiskScore}}</font>
-                    </td>
-                    <td>
-                        <font size="2"><img ng-src="images/{{row.appPeopleRiskColor}}.png"> {{row.appPeopleRiskCategory}} {{row.appPeopleRiskScore}}</font>
-                    </td>
-                    
-                    <td>
-                        <img class="icon_theme" ng-src="images/edit_icon.ico" />
-                    </td>
-                    
-                    <td>
-                        <img class="icon_theme" ng-src="images/remove_icon.ico" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="inner" style='display:none'></div>
-    </div>
-    <div style="width:100%;" id="screen2">
-        <div id="screen2Left" style="float:left; width:55%;"></div>
-        <div id="screen2Right" style="float:right; width:45%;"></div>
-    </div>
+    <div ng-view></div>
     <div class="model-overlay" ng-show="isModel" id="modelWindow">
-        <img src="images/gears.gif" class="loader">
+      <img src="images/gears.gif" class="loader">
     </div>
-    
-    <footer id="footer">
-        <img ng-src="images/footerlogo.png" />
-    </header>
-</body>
+    <script type="text/javascript" src="js/vendors/angular.js"></script>
+    <script type="text/javascript" src="js/vendors/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/vendors/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/vendors/ui-bootstrap-tpls-2.0.0.min.js"></script>	
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/services.js"></script>
+  </body>
 </html>

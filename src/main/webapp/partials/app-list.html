@@ -1,0 +1,75 @@
+    <div class="screen1">
+      <div class="pull-right filter-div">
+        Filter
+        <a ng-click="showSearchFields()" class="glyphicon glyphicon-filter" tooltip data-placement="left" title="Click to filter below record(s)"></a>
+        <a class="glyphicon glyphicon-plus" tooltip data-placement="left" title="Click to add a new record"></a>
+      </div>  
+      <table class="table table-striped">
+        <tr>
+          <th>
+            <a ng-click="sortBy('appId')">ID<span class="sortorder" ng-show="sortType === 'appId'" ng-class="{reverse: reverse}"></span></a> 
+            <input type="text" placeholder="App.ID" ng-show="showSearch==true" ng-model="seachAppName.appId" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('appName')">Application Name<span class="sortorder" ng-show="sortType === 'appName'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text" placeholder="Enter Application Name" ng-show="showSearch==true" ng-model="seachAppName.appName" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('appCategory')">Category<span class="sortorder" ng-show="sortType === 'appCategory'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text"  placeholder="Enter Category" ng-show="showSearch==true" ng-model="seachAppName.appCategory" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('supportScope')">Support Scope<span class="sortorder" ng-show="sortType === 'supportScope'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text" placeholder="Enter Scope" ng-show="showSearch==true" ng-model="seachAppName.supportScope" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('bizCriticalityText')">Biz Criticality<span class="sortorder" ng-show="sortType === 'bizCriticalityText'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text" placeholder="Enter Criticality" ng-show="showSearch==true" ng-model="seachAppName.bizCriticalityText" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('appRiskMaintScore')">App. Maint Risk Score<span class="sortorder" ng-show="sortType === 'appRiskMaintScore'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text"  placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appRiskMaintScore" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('appInfraRiskScore')">Infra Risk Score<span class="sortorder" ng-show="sortType === 'appInfraRiskScore'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appInfraRiskScore" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('appSecurityRiskScore')">Security Risk Score<span class="sortorder" ng-show="sortType === 'appSecurityRiskScore'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appSecurityRiskScore" class="searchtxt" />
+          </th>
+          <th>
+            <a ng-click="sortBy('appPeopleRiskScore')">People Risk Score<span class="sortorder" ng-show="sortType === 'appPeopleRiskScore'" ng-class="{reverse: reverse}"></span></a>
+            <input type="text" placeholder="Enter Score Value" ng-show="showSearch==true" ng-model="seachAppName.appPeopleRiskScore" class="searchtxt" />
+          </th>
+        </tr>
+        <tbody>
+          <tr ng-repeat='row in appRecordLists | orderBy:sortType:reverse | filter:seachAppName'>
+            <td>
+              <a href="#!/appDetails/{{row.appId}}"><img class="icon_theme" ng-src="images/calc_icon.ico" />{{row.appId}}</a>
+            </td>
+            <td>
+              <a href="#!/appDetails/{{row.appId}}">{{row.appName}}</a>
+            </td>
+            <td>{{row.appCategory}}</td>
+            <td>{{row.supportScope}}</td>
+            <td class="text-center">
+              <img ng-src="images/{{row.bizCriticalityText}}.png" tooltip-placement="right" uib-tooltip="{{row.bizCriticalityText}}">
+            </td>
+            <td class="text-center">
+              <img ng-src="images/{{row.appRiskMaintColor}}.png" tooltip-placement="right" uib-tooltip="{{row.appRiskMaintCategory}} {{row.appRiskMaintScore}}">
+            </td>
+            <td class="text-center">
+              <img ng-src="images/{{row.appInfraRiskColor}}.png" tooltip-placement="right" uib-tooltip="{{row.appInfraRiskCategory}} {{row.appInfraRiskScore}}">
+            </td>
+            <td class="text-center">
+              <img ng-src="images/{{row.appSecurityRiskColor}}.png" tooltip-placement="right" uib-tooltip="&gt; {{row.appSecurityRiskCategory}} {{row.appSecurityRiskScore}}">
+            </td>
+            <td class="text-center">
+              <img ng-src="images/{{row.appPeopleRiskColor}}.png" tooltip-placement="left" uib-tooltip="{{row.appPeopleRiskCategory}} {{row.appPeopleRiskScore}}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="inner" style='display:none'></div>
+    </div>
