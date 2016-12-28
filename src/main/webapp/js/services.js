@@ -23,11 +23,11 @@ myApp.factory('myAppSrvc',['$http', '$rootScope',
             },
             reCalRiskScoreSrvc:function ($scope){
                 $rootScope.isModel = true;
-                var jsonText=JSON.stringify($('#riskScoreform').serialize());
+                //var jsonText=JSON.stringify($('#riskScoreform').serialize());
                 return $http({
                     method: "POST",
                     url: "scoreRecalculation",
-                    data: jsonText,
+                    data: $scope.appData,
                     headers: {
                         'Content-Type': 'application/json'
                     }

@@ -69,8 +69,8 @@
         </div>
       </div>
       <div class="row tab-row"><form id="riskScoreform">
-      <div class="recalscore-btn"><button class="btn btn-recalscore" ng-click="reCalculateRiskScore();">Calculate</button></div>
-      <uib-tabset active="active">
+        <div class="recalscore-btn"><button class="btn btn-recalscore" ng-click="reCalculateRiskScore();">Calculate</button></div>
+        <uib-tabset active="active">
         <uib-tab index="0" heading="App. Maint">
             <div class="tab-table yellow">
               <p class="tab-title">Application Stability Index</p>
@@ -81,48 +81,36 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">Application Age</div>
-                <div class="col-xs-3">
-                  <select name="ageInYears">
-                    <option selected="selected">{{appData.ageInYears}}</option>
-                    <option>&gt; 2 years</option>
-                    <option>&gt; 5 years</option>
-                    <option>&gt; 10 years</option>
-                    <option>&gt; 15 years</option>
-                    <option>&gt; 25 years</option>
-                  </select>
-                </div>
-                
+                <div class="col-xs-3"><input type="text" ng-model="appData.ageInYears"></div>                
               </div>
               <div class="row">
                 <div class="col-xs-6">Number of Releases/UBR</div>
-                <div class="col-xs-3"><input name="noReleaseUbr" id="noReleaseUbr" type="number" value="{{appData.noReleaseUbr}}"></div>
+                <div class="col-xs-3"><input type="number" ng-model="appData.noReleaseUbr"></div>
                 <div class="col-xs-3">{{appData.noReleaseUbrContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Number of Tickets Volume</div>
-                <div class="col-xs-3"><input name="noTktsVlm" type="number" id="noTktsVlm" value="{{appData.noTktsVlm}}"></div>
+                <div class="col-xs-3"><input type="number"  ng-model="appData.noTktsVlm"></div>
                 <div class="col-xs-3">{{appData.noTktsVlmContrb}}</div>
               </div>
               <div class="row">
-                <div class="col-xs-6">Number of Sev1Sev2</div>
-                <div class="col-xs-3"><input name="noSev1Sev2" type="number" id="noSev1Sev2" value="{{appData.noSev1Sev2}}"></div>
+                <div class="col-xs-6">Number of Sev1\Sev2</div>
+                <div class="col-xs-3"><input type="number" ng-model="appData.noSev1Sev2"></div>
                 <div class="col-xs-3">{{appData.noSev1Sev2Contrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Number of Incident Tickets</div>
-                <div class="col-xs-3"><input name="noIncTkt" id="noIncTkt" type="number" value="{{appData.noIncTkt}}"></div>
-                
+                <div class="col-xs-3"><input type="number" ng-model="appData.noIncTkt"></div>
               </div>
               <div class="row">
-                <div class="col-xs-6">No. Of SRT"s Issue Bridges directly attributed to Application</div>
-                <div class="col-xs-3"><input name="noSrtCount" type="number" id="noSrtCount" value="{{appData.noSrtCount}}"></div>
+                <div class="col-xs-6">No. Of SRT"s\Issue Bridges directly attributed to Application</div>
+                <div class="col-xs-3"><input type="number" ng-model="appData.noSrtCount"></div>
                 <div class="col-xs-3">{{appData.noSrtCountContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">No. of Tickets resolved with Vendor support (3rd Party like Axway etc)</div>
                 <div class="col-xs-3">
-                  <select name="noTktRslvVendor" id="noTktRslvVendor">
-                    <option selected="selected">{{appData.noTktRslvVendor}}</option>
+                  <select ng-model="appData.noTktRslvVendor">
                     <option>No</option>
                     <option>Medium &lt; 5 Tickets/Year</option>
                     <option>High &gt; 5 Tickets/Year</option>
@@ -133,8 +121,7 @@
               <div class="row">
                 <div class="col-xs-6">Manual Intervention/Production Support in Effort/Day</div>
                 <div class="col-xs-3">
-                  <select name="manualIntervension" id="manualIntervension">
-                    <option selected="selected">{{appData.manualIntervension}}</option>
+                  <select ng-model="appData.manualIntervension">
                     <option>Low &lt; 2 Hours/Day</option>
                     <option>Medium &lt;4 Hours/Day</option>
                     <option>High &gt;4 Hours/Day</option>
@@ -144,7 +131,7 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">Number of Out of Office Hour callouts (2015)</div>
-                <div class="col-xs-3"><input name="noOutofoffCallouts" type="number" id="noOutofoffCallouts" value="{{appData.noOutofoffCallouts}}"></div>
+                <div class="col-xs-3"><input type="number" ng-model="appData.noOutofoffCallouts"></div>
                 
               </div>
             </div>
@@ -157,14 +144,13 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">Number of Interfacing applications</div>
-                <div class="col-xs-3"><input name="noInterfacApp" id="noInterfacApp" type="number" value="{{appData.noInterfacApp}}"></div>
+                <div class="col-xs-3"><input type="number" ng-model="appData.noInterfacApp"></div>
                 <div class="col-xs-3">{{appData.noInterfacAppContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Data Volume /Transaction per day</div>
                 <div class="col-xs-3">
-                  <select name="dataVolumeDay" id="dataVolumeDay">
-                    <option selected="selected">{{appData.dataVolumeDay}}</option>
+                  <select ng-model="appData.dataVolumeDay">
                     <option>Low &lt; 50K Txns</option>
                     <option>Medium &gt; 50K Txns to 1 Mn Txns</option>
                     <option>High &gt;1M Txns</option>
@@ -174,8 +160,7 @@
               <div class="row">
                 <div class="col-xs-6">Technology and Support Availability</div>
                 <div class="col-xs-3">
-                  <select name="techSuprtAvlbt" id="techSuprtAvlbt">
-                    <option selected="selected">{{appData.techSuprtAvlbt}}</option>
+                  <select ng-model="appData.techSuprtAvlbt">
                     <option>Web &amp; Support Available</option>
                     <option>Web &amp; Support Unavailable</option>
                     <option>Legacy &amp; Support Available</option>
@@ -189,8 +174,7 @@
               <div class="row">
                 <div class="col-xs-6">Code Availability</div>
                 <div class="col-xs-3">
-                  <select name="codeAvlbt" id="codeAvlbt">
-                    <option selected="selected">{{appData.codeAvlbt}}</option>
+                  <select ng-model="appData.codeAvlbt">
                     <option>Partial</option>
                     <option>Yes</option>
                     <option>No</option>
@@ -200,12 +184,23 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">% Increase in data volume/Year</div>
-                <div class="col-xs-3"><select name="increaDataVlmYr" id="increaDataVlmYr"><option selected="selected">{{appData.increaDataVlmYr}}</option><option>Low &lt; 3%</option><option>Medium 3% to 8%</option><option>High &gt; 8%</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.increaDataVlmYr">
+                    <option>Low &lt; 3%</option>
+                    <option>Medium 3% to 8%</option>
+                    <option>High &gt; 8%</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.increaDataVlmYrContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Regulatory Compliance</div>
-                <div class="col-xs-3"><select name="regCompliance" id="regCompliance"><option selected="selected">{{appData.regCompliance}}</option><option>Yes</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.regCompliance">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.regComplianceContrb}}</div>
               </div>
             </div>
@@ -218,28 +213,56 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">Revenue Impact</div>
-                <div class="col-xs-3"><select name="revImpact" id="revImpact"><option selected="selected">{{appData.revImpact}}</option><option>Direct &amp; Immediate Revenue Impact</option><option>Indirect Revenue Impact</option><option>No Revenue Impact</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.revImpact">
+                    <option>Direct &amp; Immediate Revenue Impact</option>
+                    <option>Direct but not immediate Revenue Impact</option>
+                    <option>Indirect Revenue Impact</option>
+                    <option>No Revenue Impact</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.revImpactContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Impact to Customer</div>
-                <div class="col-xs-3"><select name="impatcToCustomer" id="impatcToCustomer"><option selected="selected">{{appData.impatcToCustomer}}</option><option>High &gt; 50 Users</option><option>Medium - 10 to 50 users</option><option>Low &lt; 10 users</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.impatcToCustomer">
+                    <option>High &gt; 50 Users</option>
+                    <option>Medium - 10 to 50 users</option>
+                    <option>Low &lt; 10 users</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.impatcToCustomerContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Recovery Duration (App./SW/Infra.)</div>
-                <div class="col-xs-3"><select name="recoveryDuration" id="recoveryDuration"><option selected="selected">{{appData.recoveryDuration}}</option><option>4 to 12 Hours</option><option>12 Hours to 1 Day</option><option>&gt; 1 Day</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.recoveryDuration">
+                    <option>&lt; 4 Hours</option>
+                    <option>4 to 12 Hours</option>
+                    <option>12 Hours to 1 Day</option>
+                    <option>&gt; 1 Day</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.recoveryDurationContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Impact to Upstream / Downstream Apps</div>
-                <div class="col-xs-3"><select name="impactUpDnStream" id="impactUpDnStream"><option selected="selected">{{appData.impactUpDnStream}}</option><option>&gt; 5 systems</option><option>&lt; 5 systems</option></select></div>
-                
+                <div class="col-xs-3">
+                  <select ng-model="appData.impactUpDnStream">
+                    <option>&gt; 5 systems</option>
+                    <option>&lt; 5 systems</option>
+                  </select>
+                </div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Impact to Brand Image</div>
-                <div class="col-xs-3"><select name="impactBrandImg" id="impactBrandImg"><option selected="selected">{{appData.impactBrandImg}}</option><option>Yes</option><option>No</option></select></div>
-                
+                <div class="col-xs-3">
+                  <select ng-model="appData.impactBrandImg">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
               </div>
             </div>
             <div class="legend-row">
@@ -260,27 +283,56 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">Application Performance SLA</div>
-                <div class="col-xs-3"><select name="appPerfSla" id="appPerfSla"><option selected="selected">{{appData.appPerfSla}}</option><option>Above defined SLA</option><option>Below SLA</option><option>Met SLA</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.appPerfSla">
+                    <option>Above defined SLA</option>
+                    <option>Below SLA</option>
+                    <option>Met SLA</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.appPerfSlaContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Scalability/Capacity Related Issues</div>
-                <div class="col-xs-3"><select name="scalability" id="scalability"><option selected="selected">{{appData.scalability}}</option><option>Yes</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.scalability">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.scalabilityContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Obsolete Infrastructure</div>
-                <div class="col-xs-3"><select name="obsoleteInfra" id="obsoleteInfra"><option selected="selected">{{appData.obsoleteInfra}}</option><option>Yes</option><option>No</option><option>Partial</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.obsoleteInfra">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Partial</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.obsoleteInfraContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">DR Environment Availability</div>
-                <div class="col-xs-3"><select name="drEnvAvlbt" id="drEnvAvlbt"><option selected="selected">{{appData.drEnvAvlbt}}</option><option>Yes</option><option>No</option><option>Partial</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.drEnvAvlbt">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Partial</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.drEnvAvlbtContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Network / Infrastructure issues per month</div>
-                <div class="col-xs-3"><select name="nwInfraIssuePm" id="nwInfraIssuePm"><option selected="selected">{{appData.nwInfraIssuePm}}</option><option>&gt; 5</option><option>&gt; 2 and &lt; 5</option><option>&lt; 2</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.nwInfraIssuePm">
+                    <option>&gt; 5</option>
+                    <option>&gt; 2 and &lt; 5</option>
+                    <option>&lt; 2</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.nwInfraIssuePmContrb}}</div>
               </div>
             </div>
@@ -301,23 +353,46 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">Security Vulnerability (Code)</div>
-                <div class="col-xs-3"><select name="secVlnbtyCode" id="secVlnbtyCode"><option selected="selected">{{appData.secVlnbtyCode}}</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.secVlnbtyCode">
+                    <option>Yes - High Priority issues</option>
+                    <option>Yes - Medium/Low Priority issues</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.secVlnbtyCodeContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Security Vulnerability (Infra)</div>
-                <div class="col-xs-3"><select name="secVlnbtyInfra" id="secVlnbtyInfra"><option selected="selected">{{appData.secVlnbtyInfra}}</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.secVlnbtyInfra">
+                    <option>Yes - High Priority issues</option>
+                    <option>Yes - Medium/Low Priority issues</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.secVlnbtyInfraContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Compliance Related Vulnerabilities</div>
-                <div class="col-xs-3"><select name="compVlnblts" id="compVlnblts"><option selected="selected">{{appData.compVlnblts}}</option><option>Yes - High Priority issues</option><option>Yes - Medium/Low Priority issues</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.compVlnblts">
+                    <option>Yes - High Priority issues</option>
+                    <option>Yes - Medium/Low Priority issues</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.compVlnbltsContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Conf. Mgmt Availability</div>
-                <div class="col-xs-3"><select name="confMgtVlnbty" id="confMgtVlnbty"><option selected="selected">{{appData.confMgtVlnbty}}</option><option>Yes</option><option>No</option><option>Partial</option></select></div>
-                
+                <div class="col-xs-3">
+                  <select ng-model="appData.confMgtVlnbty">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Partial</option>
+                  </select>
+                </div>
               </div>
             </div>
             <div class="legend-row">
@@ -337,22 +412,42 @@
               </div>
               <div class="row">
                 <div class="col-xs-6">SME Availability</div>
-                <div class="col-xs-3"><select name="smeAvlbt"><option selected="selected">{{appData.smeAvlbt}}</option><option>Yes - 1 SME</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.smeAvlbt">
+                    <option>Yes - 1 SME</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.smeAvlbtContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Vendor Expertise(Cognizant Availability)</div>
-                <div class="col-xs-3"><select name="vendorExptCts"><option selected="selected">{{appData.vendorExptCts}}</option><option>Yes</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.vendorExptCts">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.vendorExptCtsContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Vendor Expertise(Ensono Availability)</div>
-                <div class="col-xs-3"><select name="vendorExptEnsono"><option selected="selected">{{appData.vendorExptEnsono}}</option><option>Yes</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.vendorExptEnsono">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.vendorExptEnsonoContrb}}</div>
               </div>
               <div class="row">
                 <div class="col-xs-6">Availability Business Users</div>
-                <div class="col-xs-3"><select name="avlbtBizUsers"><option selected="selected">{{appData.avlbtBizUsers}}</option><option>Yes</option><option>No</option></select></div>
+                <div class="col-xs-3">
+                  <select ng-model="appData.avlbtBizUsers">
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
                 <div class="col-xs-3">{{appData.avlbtBizUsersContrb}}</div>
               </div>
             </div>
@@ -364,6 +459,6 @@
                 <span class="legend-tab">&gt;= 8 <span class="red">D</span>  &lt;= 10</span>
             </div>
         </uib-tab>
-      </uib-tabset>
+        </uib-tabset>
       </form></div> 
     </div>
